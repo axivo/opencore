@@ -1,5 +1,5 @@
 # Install Instructions
-This OpenCore installer sample contains hardware components and settings that might not be compatible with your system. It is presented as a learning tool, allowing you to quickly generate and experiment with various OpenCore configurations and components. To use your own system configuration, clone or fork this repo and add your settings.
+This OpenCore installer sample contains hardware components and settings that might not be compatible with your system. It is presented as a learning tool, allowing you to quickly generate and experiment with various OpenCore configurations and components. To use your own system configuration, clone this repo and add your settings.
 
 The installer configuration demos the following customizations:
 - macOS Catalina updates enabled
@@ -25,7 +25,7 @@ The following components are installed:
 - [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg)
     - [OcBinaryData](https://github.com/acidanthera/OcBinaryData), needed for OpenCanopy
 
-After you cloned or forked the repo, open a terminal and run:
+After you cloned the repo, open a terminal and run:
 ```
 $ python tree.py
 * OpenCore 0.5.8

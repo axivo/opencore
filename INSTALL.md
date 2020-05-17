@@ -16,34 +16,6 @@ $ python --version
 Python 2.7.16
 ```
 
-### Repo Clone
-The `config.py` ASCII preference list generator contains a `DeviceProperties` code sample which is invalid with your system:
-```
-device_properties = {
-    'Add': {
-        'PciRoot(0x0)/Pci(0x3,0x0)/Pci(0x0,0x0)': {
-            'agdpmod': Data('pikera\0'),
-            'rebuild-device-tree': Data('\x00'),
-            'shikigva': Data('\x50')
-        },
-        'PciRoot(0x0)/Pci(0x7,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)': {
-            'built-in': Data('\x00')
-        },
-        'PciRoot(0x0)/Pci(0x7,0x0)/Pci(0x0,0x0)/Pci(0x8,0x0)/Pci(0x0,0x0)': {
-            'built-in': Data('\x00')
-        }
-    },
-    'Block': {}
-}
-```
-
-Open a terminal and run:
-```
-$ git clone https://github.com/axivo/opencore.git
-```
-
-Next, adjust `config.py` to match your needs.
-
 ### Components Tree
 The following components are installed:
 - [AppleMCEReporterDisabler](https://github.com/acidanthera/bugtracker/issues/424#issuecomment-535624313) (optional, for dual processors)
@@ -53,7 +25,7 @@ The following components are installed:
 - [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg)
     - [OcBinaryData](https://github.com/acidanthera/OcBinaryData), needed for OpenCanopy
 
-Open a terminal and run:
+After you cloned or forked the repo, open a terminal and run:
 ```
 $ python tree.py
 * OpenCore 0.5.8

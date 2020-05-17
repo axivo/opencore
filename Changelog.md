@@ -1,4 +1,8 @@
 # Changelog
+### 1.0.1
+- Added the choice to generate only the `config.plist` file
+- Improved documentation
+
 ### 1.0.0
 - Initial release
 - Added latest software dependencies

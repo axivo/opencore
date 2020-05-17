@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from multiprocessing import cpu_count
-from os.path import isdir
+from os import makedirs, path
 from plistlib import Data, writePlist
 
 
@@ -288,7 +288,6 @@ def root_directory(directory='Volumes/EFI'):
 
 if __name__ == '__main__':
     directory = '{}/EFI/OC'.format(root_directory())
-    if isdir(directory):
-        main(directory)
-    else:
-        print('Invalid or missing directory: {}'.format(directory))
+    if not path.isdir(directory):
+        makedirs(directory)
+    main(directory)

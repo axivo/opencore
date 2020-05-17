@@ -16,7 +16,13 @@ $ python --version
 Python 2.7.16
 ```
 
-### Components Tree
+Once you cloned the repo, you can run:
+- `python tree.py` to generate the components directory tree with all required files, or
+- `python config.py` to generate only the Preference List configuration file
+
+Running the components tree builder will always delete the `config.plist` file, make sure you run `python config.py` after.
+
+### Components Directory Tree
 The following components are installed:
 - [AppleMCEReporterDisabler](https://github.com/acidanthera/bugtracker/issues/424#issuecomment-535624313) (optional, for dual processors)
 - [Lilu](https://github.com/acidanthera/Lilu)
@@ -25,7 +31,7 @@ The following components are installed:
 - [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg)
     - [OcBinaryData](https://github.com/acidanthera/OcBinaryData), needed for OpenCanopy
 
-After you cloned the repo, open a terminal and run:
+Open a terminal and run:
 ```
 $ python tree.py
 * OpenCore 0.5.8
@@ -80,7 +86,7 @@ Volumes
 
 Please note the `AppleMCEReporterDisabler` kext will be installed only if you have dual processors installed in your Mac.
 
-### Preference List File
+### Preference List Configuration File
 To generate the ASCII `config.plist` file, run:
 ```
 $ python config.py

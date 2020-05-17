@@ -17,7 +17,7 @@ Python 2.7.16
 ```
 
 ### Repo Clone
-The `config.py` ASCII preference list generator contains a `DeviceProperties` code sample which are invalid with your system:
+The `config.py` ASCII preference list generator contains a `DeviceProperties` code sample which is invalid with your system:
 ```
 device_properties = {
     'Add': {

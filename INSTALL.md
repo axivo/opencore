@@ -1,5 +1,5 @@
 # Install Instructions
-This OpenCore installer sample contains hardware components and settings that might not be compatible with your system. It is presented as a learning tool, allowing you to quickly generate and experiment with various OpenCore configurations and components. To use your own system configuration, fork this repo and add your settings.
+This OpenCore installer sample contains hardware components and settings that might not be compatible with your system. It is presented as a learning tool, allowing you to quickly generate and experiment with various OpenCore configurations and components. To use your own system configuration, clone or fork this repo and add your settings.
 
 The installer configuration demos the following customizations:
 - macOS Catalina updates enabled
@@ -16,7 +16,35 @@ $ python --version
 Python 2.7.16
 ```
 
-### Required Components
+### Repo Clone
+The `config.py` ASCII preference list generator contains a `DeviceProperties` code sample which are invalid with your system:
+```
+device_properties = {
+    'Add': {
+        'PciRoot(0x0)/Pci(0x3,0x0)/Pci(0x0,0x0)': {
+            'agdpmod': Data('pikera\0'),
+            'rebuild-device-tree': Data('\x00'),
+            'shikigva': Data('\x50')
+        },
+        'PciRoot(0x0)/Pci(0x7,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)': {
+            'built-in': Data('\x00')
+        },
+        'PciRoot(0x0)/Pci(0x7,0x0)/Pci(0x0,0x0)/Pci(0x8,0x0)/Pci(0x0,0x0)': {
+            'built-in': Data('\x00')
+        }
+    },
+    'Block': {}
+}
+```
+
+Open a terminal and run:
+```
+$ git clone https://github.com/axivo/opencore.git
+```
+
+Next, adjust `config.py` to match your needs.
+
+### Components Tree
 The following components are installed:
 - [AppleMCEReporterDisabler](https://github.com/acidanthera/bugtracker/issues/424#issuecomment-535624313) (optional, for dual processors)
 - [Lilu](https://github.com/acidanthera/Lilu)

@@ -147,4 +147,4 @@ def run_post_install_tasks(directory):
 
 
 if __name__ == '__main__':
-     main(root_directory())
+    main(root_directory())

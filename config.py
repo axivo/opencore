@@ -260,7 +260,7 @@ def main(directory):
         },
         'Quirks': {
             'DeduplicateBootOrder': False,
-            'ExitBootServicesDelay': 3000,
+            'ExitBootServicesDelay': 0,
             'IgnoreInvalidFlexRatio': False,
             'ReleaseUsbOwnership': False,
             'RequestBootVarFallback': False,

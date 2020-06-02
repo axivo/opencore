@@ -6,9 +6,9 @@ from plistlib import Data, writePlist
 
 
 def main(directory):
-    acpi = {
+    ACPI = {
         'Add': [],
-        'Block': [],
+        'Delete': [],
         'Patch': [],
         'Quirks': {
             'FadtEnableReset': False,
@@ -19,7 +19,7 @@ def main(directory):
         }
     }
 
-    booter = {
+    Booter = {
         'MmioWhitelist': [],
         'Quirks': {
             'AvoidRuntimeDefrag': False,
@@ -41,7 +41,7 @@ def main(directory):
         }
     }
 
-    device_properties = {
+    DeviceProperties = {
         'Add': {
             'PciRoot(0x0)/Pci(0x3,0x0)/Pci(0x0,0x0)': {
                 'agdpmod': Data('pikera\0'),
@@ -55,10 +55,10 @@ def main(directory):
                 'built-in': Data('\x00')
             }
         },
-        'Block': {}
+        'Delete': {}
     }
 
-    kernel = {
+    Kernel = {
         'Add': [
             {
                 'BundlePath': 'Lilu.kext',
@@ -113,7 +113,7 @@ def main(directory):
         }
     }
     if cpu_count > 15:
-        kernel['Add'].append(
+        Kernel['Add'].append(
             {
                 'BundlePath': 'AppleMCEReporterDisabler.kext',
                 'Comment': '',
@@ -125,13 +125,12 @@ def main(directory):
             }
         )
 
-    misc = {
+    Misc = {
         'BlessOverride': [],
         'Boot': {
             'ConsoleAttributes': 0,
             'HibernateMode': 'None',
             'HideAuxiliary': True,
-            'HideSelf': True,
             'PickerAttributes': 1,
             'PickerAudioAssist': False,
             'PickerMode': 'External',
@@ -142,9 +141,11 @@ def main(directory):
         },
         'Debug': {
             'AppleDebug': False,
+            'ApplePanic': False,
             'DisableWatchDog': False,
             'DisplayDelay': 0,
             'DisplayLevel': 0,
+            'SysReport': False,
             'Target': 0
         },
         'Entries': [],
@@ -152,6 +153,7 @@ def main(directory):
             'AllowNvramReset': False,
             'AllowSetDefault': False,
             'AuthRestart': False,
+            'BlacklistAppleUpdate': False,
             'BootProtect': 'None',
             'ExposeSensitiveData': 2,
             'HaltLevel': 2147483648,
@@ -161,14 +163,14 @@ def main(directory):
         'Tools': []
     }
 
-    nvram = {
+    NVRAM = {
         'Add': {
             '4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14': {
                 'DefaultBackgroundColor': Data('\x00\x00\x00\x00'),
                 'UIScale': Data('\x02')
             }
         },
-        'Block': {
+        'Delete': {
             '4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14': [
                 'DefaultBackgroundColor',
                 'UIScale',
@@ -180,7 +182,7 @@ def main(directory):
         'WriteFlash': False
     }
 
-    platform_info = {
+    PlatformInfo = {
         'Automatic': False,
         'DataHub': {},
         'Generic': {},
@@ -194,7 +196,7 @@ def main(directory):
         'UpdateSMBIOSMode': 'Create'
     }
 
-    uefi = {
+    UEFI = {
         'APFS': {
             'EnableJumpstart': False,
             'HideVerbose': False,
@@ -230,7 +232,6 @@ def main(directory):
         'Output': {
             'ClearScreenOnModeSwitch': False,
             'ConsoleMode': '',
-            'DirectGopCacheMode': '',
             'DirectGopRendering': False,
             'IgnoreTextInGraphics': False,
             'ProvideConsoleGop': True,
@@ -258,25 +259,27 @@ def main(directory):
             'UnicodeCollation': False
         },
         'Quirks': {
+            'DeduplicateBootOrder': False,
             'ExitBootServicesDelay': 0,
             'IgnoreInvalidFlexRatio': False,
             'ReleaseUsbOwnership': False,
             'RequestBootVarFallback': False,
             'RequestBootVarRouting': True,
+            'TscSyncTimeout': 0,
             'UnblockFsConnect': False
         },
         'ReservedMemory': []
     }
 
     plist = {
-        'ACPI': acpi,
-        'Booter': booter,
-        'DeviceProperties': device_properties,
-        'Kernel': kernel,
-        'Misc': misc,
-        'NVRAM': nvram,
-        'PlatformInfo': platform_info,
-        'UEFI': uefi
+        'ACPI': ACPI,
+        'Booter': Booter,
+        'DeviceProperties': DeviceProperties,
+        'Kernel': Kernel,
+        'Misc': Misc,
+        'NVRAM': NVRAM,
+        'PlatformInfo': PlatformInfo,
+        'UEFI': UEFI
     }
     writePlist(plist, '{}/config.plist'.format(directory))
 

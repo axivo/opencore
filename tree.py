@@ -10,10 +10,10 @@ from zipfile import BadZipfile, ZipFile
 
 
 def main(directory):
-    install_opencore('0.5.8', directory)
-    install_lilu('1.4.4', '{}/EFI/OC/Kexts'.format(directory))
+    install_opencore('0.5.9', directory)
+    install_lilu('1.4.5', '{}/EFI/OC/Kexts'.format(directory))
     install_night_shift_enabler('1.0.0', '{}/EFI/OC/Kexts'.format(directory))
-    install_whatevergreen('1.3.9', '{}/EFI/OC/Kexts'.format(directory))
+    install_whatevergreen('1.4.0', '{}/EFI/OC/Kexts'.format(directory))
     run_post_install_tasks(directory)
 
 
@@ -103,7 +103,6 @@ def install_opencore(version, directory, debug=False):
     destination = '{}/EFI/OC'.format(directory)
     print('  - copying OcBinaryData files...'),
     check_output(['git', 'submodule', 'update', '--init', '--remote', '--merge'])
-    copytree('{}/Drivers'.format(source), '{}/Drivers'.format(destination))
     copytree('{}/Resources'.format(source), '{}/Resources'.format(destination))
     print('OK')
 

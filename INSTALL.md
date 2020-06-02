@@ -41,19 +41,19 @@ Open a terminal and run:
 
 ```commandline
 $ python tree.py
-* OpenCore 0.5.8
+* OpenCore 0.5.9
   - cleaning directory... OK
   - downloading component... OK
   - building files structure... OK
   - installing AppleMCEReporterDisabler... OK
   - copying OcBinaryData files... OK
-* Lilu 1.4.4
+* Lilu 1.4.5
   - downloading component... OK
   - building files structure... OK
 * NightShiftEnabler 1.0.0
   - downloading component... OK
   - building files structure... OK
-* WhateverGreen 1.3.9
+* WhateverGreen 1.4.0
   - downloading component... OK
   - building files structure... OK
 * Miscellaneous

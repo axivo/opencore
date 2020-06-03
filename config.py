@@ -131,7 +131,7 @@ def main(directory):
             'ConsoleAttributes': 0,
             'HibernateMode': 'None',
             'HideAuxiliary': True,
-            'PickerAttributes': 1,
+            'PickerAttributes': 0,
             'PickerAudioAssist': False,
             'PickerMode': 'External',
             'PollAppleHotKeys': True,
@@ -263,7 +263,6 @@ def main(directory):
             'ExitBootServicesDelay': 0,
             'IgnoreInvalidFlexRatio': False,
             'ReleaseUsbOwnership': False,
-            'RequestBootVarFallback': False,
             'RequestBootVarRouting': True,
             'TscSyncTimeout': 0,
             'UnblockFsConnect': False

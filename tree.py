@@ -103,6 +103,7 @@ def install_opencore(version, directory, debug=False):
     destination = '{}/EFI/OC'.format(directory)
     print('  - copying OcBinaryData files...'),
     check_output(['git', 'submodule', 'update', '--init', '--remote', '--merge'])
+    copytree('{}/Drivers'.format(source), '{}/Drivers'.format(destination))
     copytree('{}/Resources'.format(source), '{}/Resources'.format(destination))
     print('OK')
 

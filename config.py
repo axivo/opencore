@@ -215,6 +215,7 @@ def main(directory):
         },
         'ConnectDrivers': True,
         'Drivers': [
+            'ExFatDxeLegacy.efi',
             'OpenCanopy.efi',
             'OpenRuntime.efi'
         ],

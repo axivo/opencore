@@ -167,7 +167,7 @@ def main(directory):
         'Add': {
             '4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14': {
                 'DefaultBackgroundColor': Data('\x00\x00\x00\x00'),
-                'UIScale': Data('\x02')
+                'UIScale': Data('\x01')
             }
         },
         'Delete': {

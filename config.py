@@ -34,6 +34,7 @@ def main(directory):
             'ProtectSecureBoot': True,
             'ProtectUefiServices': False,
             'ProvideCustomSlide': False,
+            'ProvideMaxSlide': 0,
             'RebuildAppleMemoryMap': False,
             'SetupVirtualMap': False,
             'SignalAppleOS': False,
@@ -153,7 +154,6 @@ def main(directory):
             'AllowNvramReset': False,
             'AllowSetDefault': False,
             'AuthRestart': False,
-            'BlacklistAppleUpdate': False,
             'BootProtect': 'None',
             'ExposeSensitiveData': 2,
             'HaltLevel': 2147483648,
@@ -199,6 +199,7 @@ def main(directory):
     UEFI = {
         'APFS': {
             'EnableJumpstart': False,
+            'GlobalConnect': False,
             'HideVerbose': False,
             'JumpstartHotPlug': False,
             'MinDate': 0,
@@ -240,13 +241,15 @@ def main(directory):
             'ReplaceTabWithSpace': False,
             'Resolution': 'Max',
             'SanitiseClearScreen': False,
-            'TextRenderer': 'BuiltinGraphics'
+            'TextRenderer': 'BuiltinGraphics',
+            'UgaPassThrough': False
         },
         'ProtocolOverrides': {
             'AppleAudio': False,
             'AppleBootPolicy': True,
             'AppleDebugLog': False,
             'AppleEvent': False,
+            'AppleFramebufferInfo': False,
             'AppleImageConversion': False,
             'AppleKeyMap': False,
             'AppleRtcRam': False,

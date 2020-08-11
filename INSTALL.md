@@ -14,7 +14,7 @@ OpenCanopy is a graphical OpenCore user interface that runs in `External PickerM
 
 The installer was tested on a classic Mac Pro 5,1 with Python 2.7:
 
-```commandline
+```sh
 $ python --version
 Python 2.7.16
 ```
@@ -39,21 +39,21 @@ The following components are installed:
 
 Open a terminal and run:
 
-```commandline
+```sh
 $ python tree.py
-* OpenCore 0.5.9
+* OpenCore 0.6.0
   - cleaning directory... OK
   - downloading component... OK
   - building files structure... OK
   - installing AppleMCEReporterDisabler... OK
   - copying OcBinaryData files... OK
-* Lilu 1.4.5
+* Lilu 1.4.6
   - downloading component... OK
   - building files structure... OK
 * NightShiftEnabler 1.0.0
   - downloading component... OK
   - building files structure... OK
-* WhateverGreen 1.4.0
+* WhateverGreen 1.4.1
   - downloading component... OK
   - building files structure... OK
 * Miscellaneous
@@ -98,7 +98,7 @@ Please note the `AppleMCEReporterDisabler` kext will be installed only if you ha
 
 To generate the ASCII `config.plist` file, run:
 
-```commandline
+```sh
 $ python config.py
 ```
 
@@ -115,7 +115,7 @@ Volumes
 
 You can use [gfxutil](https://github.com/acidanthera/gfxutil) or [Hackintool](https://github.com/headkaze/Hackintool) to extract the device path of your video card:
 
-```commandline
+```sh
 $ gfxutil -f display
 05:00.0 1002:67df /PCI0@0/IOU0@3/GFX0@0 = PciRoot(0x0)/Pci(0x3,0x0)/Pci(0x0,0x0)
 ```

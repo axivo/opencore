@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.0.3
+
+- OpenCore 0.6.0
+- Lilu 1.4.6
+- WhateverGreen 1.4.1
+
 ### 1.0.2
 
 - OpenCore 0.5.9

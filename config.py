@@ -94,6 +94,7 @@ def main(directory):
             'Cpuid1Data': Data('\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x80\x00\x00\x00\x00'),
             'Cpuid1Mask': Data('\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x80\x00\x00\x00\x00')
         },
+        'Force': [],
         'Patch': [],
         'Quirks': {
             'AppleCpuPmCfgLock': False,
@@ -102,6 +103,7 @@ def main(directory):
             'AppleXcpmForceBoost': False,
             'CustomSMBIOSGuid': False,
             'DisableIoMapper': False,
+            'DisableLinkeditJettison': False,
             'DisableRtcChecksum': False,
             'DummyPowerManagement': False,
             'ExternalDiskIcons': False,
@@ -111,6 +113,11 @@ def main(directory):
             'PowerTimeoutKernelPanic': False,
             'ThirdPartyDrives': False,
             'XhciPortLimit': False
+        },
+        'Scheme': {
+            'FuzzyMatch': False,
+            'KernelArch': 'x86_64',
+            'KernelCache': 'Auto'
         }
     }
     if cpu_count > 15:
@@ -146,6 +153,7 @@ def main(directory):
             'DisableWatchDog': False,
             'DisplayDelay': 0,
             'DisplayLevel': 0,
+            'SerialInit': False,
             'SysReport': False,
             'Target': 0
         },
@@ -153,11 +161,17 @@ def main(directory):
         'Security': {
             'AllowNvramReset': False,
             'AllowSetDefault': False,
+            'ApECID': 0,
             'AuthRestart': False,
             'BootProtect': 'None',
+            'DmgLoading': 'Signed',
+            'EnablePassword': False,
             'ExposeSensitiveData': 2,
             'HaltLevel': 2147483648,
+            'PasswordHash': Data(''),
+            'PasswordSalt': Data(''),
             'ScanPolicy': 0,
+            'SecureBootModel': 'Vault',
             'Vault': 'Optional'
         },
         'Tools': []
@@ -251,8 +265,10 @@ def main(directory):
             'AppleEvent': False,
             'AppleFramebufferInfo': False,
             'AppleImageConversion': False,
+            'AppleImg4Verification': False,
             'AppleKeyMap': False,
             'AppleRtcRam': False,
+            'AppleSecureBoot': False,
             'AppleSmcIo': False,
             'AppleUserInterfaceTheme': True,
             'DataHub': False,

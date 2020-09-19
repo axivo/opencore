@@ -62,6 +62,7 @@ def main(directory):
     Kernel = {
         'Add': [
             {
+                'Arch': 'x86_64',
                 'BundlePath': 'Lilu.kext',
                 'Comment': '',
                 'Enabled': True,
@@ -71,6 +72,7 @@ def main(directory):
                 'PlistPath': 'Contents/Info.plist'
             },
             {
+                'Arch': 'x86_64',
                 'BundlePath': 'NightShiftEnabler.kext',
                 'Comment': '',
                 'Enabled': True,
@@ -80,6 +82,7 @@ def main(directory):
                 'PlistPath': 'Contents/Info.plist'
             },
             {
+                'Arch': 'x86_64',
                 'BundlePath': 'WhateverGreen.kext',
                 'Comment': '',
                 'Enabled': True,
@@ -123,6 +126,7 @@ def main(directory):
     if cpu_count > 15:
         Kernel['Add'].append(
             {
+                'Arch': 'x86_64',
                 'BundlePath': 'AppleMCEReporterDisabler.kext',
                 'Comment': '',
                 'Enabled': True,
@@ -171,7 +175,7 @@ def main(directory):
             'PasswordHash': Data(''),
             'PasswordSalt': Data(''),
             'ScanPolicy': 0,
-            'SecureBootModel': 'Vault',
+            'SecureBootModel': 'Default',
             'Vault': 'Optional'
         },
         'Tools': []
@@ -182,12 +186,18 @@ def main(directory):
             '4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14': {
                 'DefaultBackgroundColor': Data('\x00\x00\x00\x00'),
                 'UIScale': Data('\x01')
+            },
+            '7C436110-AB2A-4BBB-A880-FE41995C9F82': {
+                'run-efi-updater': 'No'
             }
         },
         'Delete': {
             '4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14': [
                 'DefaultBackgroundColor',
                 'UIScale',
+            ],
+            '7C436110-AB2A-4BBB-A880-FE41995C9F82': [
+                'run-efi-updater'
             ]
         },
         'LegacyEnable': False,

@@ -24,13 +24,13 @@ Python 2.7.16
 To clone the repository, run:
 
 ```sh
-$ git clone https://github.com/axivo/opencore.git
+~$ git clone https://github.com/axivo/opencore.git
 ```
 
 To clone a specific release, run:
 
 ```sh
-$ git clone -b <release tag> --single-branch https://github.com/axivo/opencore.git
+~$ git clone -b <release tag> --single-branch https://github.com/axivo/opencore.git
 ```
 
 The `<release tag>` can be [1.0.3](/../..//releases/tag/1.0.3), for example.
@@ -56,7 +56,7 @@ The following components are installed:
 Open a terminal and run:
 
 ```sh
-$ python tree.py
+~$ python tree.py
 * OpenCore 0.6.0
   - cleaning directory... OK
   - downloading component... OK
@@ -115,7 +115,7 @@ Please note the `AppleMCEReporterDisabler` kext will be installed only if you ha
 To generate the ASCII `config.plist` file, run:
 
 ```sh
-$ python config.py
+~$ python config.py
 ```
 
 The `config.py` command will create and insert the preference file into:
@@ -132,7 +132,7 @@ Volumes
 You can use [gfxutil](https://github.com/acidanthera/gfxutil) or [Hackintool](https://github.com/headkaze/Hackintool) to extract the device path of your video card:
 
 ```sh
-$ gfxutil -f display
+~$ gfxutil -f display
 05:00.0 1002:67df /PCI0@0/IOU0@3/GFX0@0 = PciRoot(0x0)/Pci(0x3,0x0)/Pci(0x0,0x0)
 ```
 

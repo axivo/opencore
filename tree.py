@@ -10,10 +10,10 @@ from zipfile import BadZipfile, ZipFile
 
 
 def main(directory):
-    install_opencore('0.6.0', directory)
-    install_lilu('1.4.6', '{}/EFI/OC/Kexts'.format(directory))
+    install_opencore('0.6.1', directory)
+    install_lilu('1.4.7', '{}/EFI/OC/Kexts'.format(directory))
     install_night_shift_enabler('1.0.0', '{}/EFI/OC/Kexts'.format(directory))
-    install_whatevergreen('1.4.1', '{}/EFI/OC/Kexts'.format(directory))
+    install_whatevergreen('1.4.2', '{}/EFI/OC/Kexts'.format(directory))
     run_post_install_tasks(directory)
 
 

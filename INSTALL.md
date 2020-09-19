@@ -19,6 +19,22 @@ $ python --version
 Python 2.7.16
 ```
 
+## Repo Clone
+
+To clone the repository, run:
+
+```sh
+~$ git clone https://github.com/axivo/opencore.git
+```
+
+To clone a specific release, run:
+
+```sh
+~$ git clone -b <release tag> --single-branch https://github.com/axivo/opencore.git
+```
+
+The `<release tag>` can be [1.0.3](/../..//releases/tag/1.0.3), for example.
+
 Once you cloned the repo, you can run:
 
 - `python tree.py` to generate the components directory tree with all required files, or
@@ -26,7 +42,7 @@ Once you cloned the repo, you can run:
 
 Running the components tree builder will always delete the `config.plist` file, make sure you run `python config.py` after.
 
-### Components Directory Tree
+## Components Directory Tree
 
 The following components are installed:
 
@@ -40,20 +56,20 @@ The following components are installed:
 Open a terminal and run:
 
 ```sh
-$ python tree.py
-* OpenCore 0.6.0
+~$ python tree.py
+* OpenCore 0.6.1
   - cleaning directory... OK
   - downloading component... OK
   - building files structure... OK
   - installing AppleMCEReporterDisabler... OK
   - copying OcBinaryData files... OK
-* Lilu 1.4.6
+* Lilu 1.4.7
   - downloading component... OK
   - building files structure... OK
 * NightShiftEnabler 1.0.0
   - downloading component... OK
   - building files structure... OK
-* WhateverGreen 1.4.1
+* WhateverGreen 1.4.2
   - downloading component... OK
   - building files structure... OK
 * Miscellaneous
@@ -94,12 +110,12 @@ Volumes
 
 Please note the `AppleMCEReporterDisabler` kext will be installed only if you have dual processors installed in your Mac.
 
-### Preference List Configuration File
+## Preference List Configuration File
 
 To generate the ASCII `config.plist` file, run:
 
 ```sh
-$ python config.py
+~$ python config.py
 ```
 
 The `config.py` command will create and insert the preference file into:
@@ -116,7 +132,7 @@ Volumes
 You can use [gfxutil](https://github.com/acidanthera/gfxutil) or [Hackintool](https://github.com/headkaze/Hackintool) to extract the device path of your video card:
 
 ```sh
-$ gfxutil -f display
+~$ gfxutil -f display
 05:00.0 1002:67df /PCI0@0/IOU0@3/GFX0@0 = PciRoot(0x0)/Pci(0x3,0x0)/Pci(0x0,0x0)
 ```
 
@@ -139,6 +155,6 @@ DeviceProperties = {
 }
 ```
 
-### Issues
+## Issues
 
 If you experience any Python related problems, please [create an issue](/../../issues). For any technical questions related to [OC configuration](https://github.com/acidanthera/OpenCorePkg/tree/master/Docs), please read the manual or ask your questions in the [MacRumors forums](https://forums.macrumors.com/threads/2207814/).

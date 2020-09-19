@@ -19,6 +19,22 @@ $ python --version
 Python 2.7.16
 ```
 
+## Repo Clone
+
+To clone the repository, run:
+
+```sh
+$ git clone https://github.com/axivo/opencore.git
+```
+
+To clone a specific release, run:
+
+```sh
+$ git clone -b <release tag> --single-branch https://github.com/axivo/opencore.git
+```
+
+The `<release tag>` can be [1.0.3](/../..//releases/tag/1.0.3), for example.
+
 Once you cloned the repo, you can run:
 
 - `python tree.py` to generate the components directory tree with all required files, or
@@ -26,7 +42,7 @@ Once you cloned the repo, you can run:
 
 Running the components tree builder will always delete the `config.plist` file, make sure you run `python config.py` after.
 
-### Components Directory Tree
+## Components Directory Tree
 
 The following components are installed:
 
@@ -94,7 +110,7 @@ Volumes
 
 Please note the `AppleMCEReporterDisabler` kext will be installed only if you have dual processors installed in your Mac.
 
-### Preference List Configuration File
+## Preference List Configuration File
 
 To generate the ASCII `config.plist` file, run:
 
@@ -139,6 +155,6 @@ DeviceProperties = {
 }
 ```
 
-### Issues
+## Issues
 
 If you experience any Python related problems, please [create an issue](/../../issues). For any technical questions related to [OC configuration](https://github.com/acidanthera/OpenCorePkg/tree/master/Docs), please read the manual or ask your questions in the [MacRumors forums](https://forums.macrumors.com/threads/2207814/).

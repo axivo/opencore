@@ -25,6 +25,7 @@ To clone the repository, run:
 
 ```sh
 ~$ git clone https://github.com/axivo/opencore.git
+~$ cd opencore
 ```
 
 To clone a specific release, run:
@@ -52,6 +53,8 @@ The following components are installed:
   - [WhateverGreen](https://github.com/acidanthera/WhateverGreen)
 - [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg)
   - [OcBinaryData](https://github.com/acidanthera/OcBinaryData), needed for OpenCanopy
+
+### Tree Generator
 
 Open a terminal and run:
 
@@ -112,6 +115,42 @@ Please note the `AppleMCEReporterDisabler` kext will be installed only if you ha
 
 ## Preference List Configuration File
 
+Any configuration changes should be performed only into `config.py` file. The configuration includes a code example which you will need to either modify or remove.
+
+### DeviceProperties Example
+
+This is an example for a `DeviceProperties` dictionary with one GPU device path and two NVMe external disks displayed as internal disks. `Data()` will convert your values to required `Base64` values:
+
+```python
+DeviceProperties = {
+    'Add': {
+        'PciRoot(0x0)/Pci(0x3,0x0)/Pci(0x0,0x0)': {
+            'agdpmod': Data('pikera\0'),
+            'rebuild-device-tree': Data('\x00'),
+            'shikigva': Data('\x50')
+        },
+        'PciRoot(0x0)/Pci(0x7,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)': {
+            'built-in': Data('\x00')
+        },
+        'PciRoot(0x0)/Pci(0x7,0x0)/Pci(0x0,0x0)/Pci(0x8,0x0)/Pci(0x0,0x0)': {
+            'built-in': Data('\x00')
+        }
+    },
+    'Delete': {}
+}
+```
+
+You can use [gfxutil](https://github.com/acidanthera/gfxutil) or [Hackintool](https://github.com/headkaze/Hackintool) to extract the device path of your video card:
+
+```sh
+~$ gfxutil -f display
+05:00.0 1002:67df /PCI0@0/IOU0@3/GFX0@0 = PciRoot(0x0)/Pci(0x3,0x0)/Pci(0x0,0x0)
+```
+
+![Hackintool](./images/hackintool.png)
+
+### Configuration Generator
+
 To generate the ASCII `config.plist` file, run:
 
 ```sh
@@ -129,31 +168,7 @@ Volumes
             └── config.plist
 ```
 
-You can use [gfxutil](https://github.com/acidanthera/gfxutil) or [Hackintool](https://github.com/headkaze/Hackintool) to extract the device path of your video card:
-
-```sh
-~$ gfxutil -f display
-05:00.0 1002:67df /PCI0@0/IOU0@3/GFX0@0 = PciRoot(0x0)/Pci(0x3,0x0)/Pci(0x0,0x0)
-```
-
-![Hackintool](./images/hackintool.png)
-
 It is important not to manually edit the generated `config.plist` file. Instead, take advantage of building your custom configuration with Apple's Python `plistlib` library.
-
-Any configuration changes should be performed only into `config.py` file. Example for a `DeviceProperties` dictionary with GPU device path, `Data()` will convert your values to required `Base64` values:
-
-```python
-DeviceProperties = {
-    'Add': {
-        'PciRoot(0x0)/Pci(0x3,0x0)/Pci(0x0,0x0)': {
-            'agdpmod': Data('pikera\0'),
-            'rebuild-device-tree': Data('\x00'),
-            'shikigva': Data('\x50')
-        }
-    },
-    'Delete': {}
-}
-```
 
 ## Issues
 

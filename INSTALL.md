@@ -119,7 +119,7 @@ Any configuration changes should be performed only into `config.py` file. The co
 
 ### DeviceProperties Example
 
-This is an example for a `DeviceProperties` dictionary with one GPU device path and two NVMe external disks displayed as internal disks. `Data()` will convert your values to required `Base64` values:
+This is an example for a `DeviceProperties` dictionary with one GPU and two NVMe external disks displayed as internal disks. `Data()` will convert your values to required `Base64` values:
 
 ```python
 DeviceProperties = {

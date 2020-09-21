@@ -2,11 +2,13 @@
 
 This OpenCore installer sample contains hardware components and settings that might not be compatible with your system. It is presented as a learning tool, allowing you to quickly generate and experiment with various OpenCore configurations and components. To use your own system configuration, clone this repo and add your settings.
 
+## Synopsis
+
 The installer configuration demos the following customizations:
 
 - macOS Catalina updates enabled
-- Pulse RX580 GPU hardware acceleration support, through iMacPro hybridization (system specific device path)
 - OpenCanopy implementation on a black boot screen
+- Pulse RX580 GPU hardware acceleration support, through iMacPro hybridization (system specific device path)
 - NVMe external disks displayed as internal disks (system specific device path)
 - Night Shift enabled
 
@@ -53,8 +55,6 @@ The following components are installed:
   - [WhateverGreen](https://github.com/acidanthera/WhateverGreen)
 - [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg)
   - [OcBinaryData](https://github.com/acidanthera/OcBinaryData), needed for OpenCanopy
-
-### Tree Generator
 
 Open a terminal and run:
 
@@ -115,11 +115,32 @@ Please note the `AppleMCEReporterDisabler` kext will be installed only if you ha
 
 ## Preference List Configuration File
 
-Any configuration changes should be performed only into `config.py` file. The configuration includes a code example which you will need to either modify or remove.
+To generate the ASCII `config.plist` file, open a terminal and run:
 
-### DeviceProperties Example
+```sh
+~$ python config.py
+```
 
-This is an example for a `DeviceProperties` dictionary with one Radeon RX580 GPU and two NVMe external disks displayed as internal. `Data()` will convert your values to required `Base64` values:
+The `config.py` command will create and insert the preference list file into:
+
+```text
+Volumes
+└── EFI
+    └── EFI
+        ├── BOOT
+        └── OC
+            └── config.plist
+```
+
+Any configuration changes should be performed only into `config.py` file. It is important not to manually edit the generated `config.plist` file. Instead, take advantage of building your custom configuration with Apple's Python `plistlib` library.
+
+### Configuration Examples
+
+ As detailed into synopsis and to get you familiarized with `plistlib` library, the configuration includes several code examples which you will need to either modify or remove.
+
+#### DeviceProperties
+
+This is an example for a `DeviceProperties` dictionary with one Pulse RX580 GPU and two NVMe external disks displayed as internal. `Data()` will convert your values to required `Base64` values:
 
 ```python
 DeviceProperties = {
@@ -135,8 +156,7 @@ DeviceProperties = {
         'PciRoot(0x0)/Pci(0x7,0x0)/Pci(0x0,0x0)/Pci(0x8,0x0)/Pci(0x0,0x0)': {
             'built-in': Data('\x00')
         }
-    },
-    'Delete': {}
+    }
 }
 ```
 
@@ -149,26 +169,19 @@ You can use [gfxutil](https://github.com/acidanthera/gfxutil) or [Hackintool](ht
 
 ![Hackintool](./images/hackintool.png)
 
-### Configuration Generator
+#### Misc Boot
 
-To generate the ASCII `config.plist` file, run:
+This is an example of a `Boot` dictionary with the OpenCanopy bootpicker showing only when `Esc` key is pressed, on a black screen:
 
-```sh
-~$ python config.py
+```python
+Misc = {
+    'Boot': {
+        'ConsoleAttributes': 0,
+        'PickerMode': 'External',
+        'ShowPicker': False
+    }
+}
 ```
-
-The `config.py` command will create and insert the preference file into:
-
-```text
-Volumes
-└── EFI
-    └── EFI
-        ├── BOOT
-        └── OC
-            └── config.plist
-```
-
-It is important not to manually edit the generated `config.plist` file. Instead, take advantage of building your custom configuration with Apple's Python `plistlib` library.
 
 ## Issues
 

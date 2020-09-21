@@ -138,9 +138,9 @@ Any configuration changes should be performed only into `config.py` file. It is 
 
  As detailed into synopsis and to get you familiarized with `plistlib` library, the configuration includes several code examples which you will need to either modify or remove.
 
-#### DeviceProperties
+#### DeviceProperties Add
 
-This is an example for a `DeviceProperties` dictionary with one Pulse RX580 GPU and two NVMe external disks displayed as internal. `Data()` will convert your values to required `Base64` values:
+This is an example for a `DeviceProperties Add` dictionary with one Pulse RX580 GPU and two NVMe external disks displayed as internal. `Data()` will convert your values to required `Base64` values:
 
 ```python
 DeviceProperties = {
@@ -171,7 +171,7 @@ You can use [gfxutil](https://github.com/acidanthera/gfxutil) or [Hackintool](ht
 
 #### Misc Boot
 
-This is an example of a `Boot` dictionary with the OpenCanopy bootpicker showing only when `Esc` key is pressed, on a black screen:
+This is an example of a `Misc Boot` dictionary with OpenCanopy bootpicker showing only when `Esc` key is pressed, on a black screen:
 
 ```python
 Misc = {

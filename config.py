@@ -175,7 +175,7 @@ def main(directory):
             'PasswordHash': Data(''),
             'PasswordSalt': Data(''),
             'ScanPolicy': 0,
-            'SecureBootModel': 'Default',
+            'SecureBootModel': 'Disabled',
             'Vault': 'Optional'
         },
         'Tools': []

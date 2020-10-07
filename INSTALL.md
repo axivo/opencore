@@ -36,7 +36,7 @@ To clone a specific release, run:
 ~$ git clone -b <release tag> --single-branch https://github.com/axivo/opencore.git
 ```
 
-The `<release tag>` can be [1.0.3](/../..//releases/tag/1.0.3), for example.
+The `<release tag>` can be [1.0.5](/../..//releases/tag/1.0.5), for example.
 
 Once you cloned the repo, you can run:
 
@@ -60,19 +60,19 @@ Open a terminal and run:
 
 ```sh
 ~$ python tree.py
-* OpenCore 0.6.1
+* OpenCore 0.6.2
   - cleaning directory... OK
   - downloading component... OK
   - building files structure... OK
   - installing AppleMCEReporterDisabler... OK
   - copying OcBinaryData files... OK
-* Lilu 1.4.7
+* Lilu 1.4.8
   - downloading component... OK
   - building files structure... OK
 * NightShiftEnabler 1.0.0
   - downloading component... OK
   - building files structure... OK
-* WhateverGreen 1.4.2
+* WhateverGreen 1.4.3
   - downloading component... OK
   - building files structure... OK
 * Miscellaneous
@@ -111,7 +111,7 @@ Volumes
             └── Tools
 ```
 
-Please note the `AppleMCEReporterDisabler` kext will be installed only if you have dual processors installed in your Mac.
+Please note the `AppleMCEReporterDisabler` kext will be installed only if you have dual processors in your Mac.
 
 ## Preference List Configuration File
 

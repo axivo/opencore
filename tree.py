@@ -89,7 +89,10 @@ def install_opencore(version, directory, debug=False):
         rmtree(directory)
         print('OK')
     extract_files(file, directory)
-    for i in ['Docs', 'Utilities']:
+    source = '{}/X64/EFI'.format(directory)
+    destination = '{}/EFI'.format(directory)
+    copytree(source, destination)
+    for i in ['Docs', 'IA32', 'Utilities', 'X64']:
         rmtree('{}/{}'.format(directory, i))
 
     if cpu_count() > 15:

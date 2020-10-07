@@ -61,9 +61,9 @@ Open a terminal and run:
 ```sh
 ~$ python tree.py
 * OpenCore 0.6.2
-  - cleaning directory... OK
   - downloading component... OK
   - building files structure... OK
+  - cleaning directory... OK
   - installing AppleMCEReporterDisabler... OK
   - copying OcBinaryData files... OK
 * Lilu 1.4.8

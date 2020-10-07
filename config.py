@@ -95,7 +95,10 @@ def main(directory):
         'Block': [],
         'Emulate': {
             'Cpuid1Data': Data('\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x80\x00\x00\x00\x00'),
-            'Cpuid1Mask': Data('\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x80\x00\x00\x00\x00')
+            'Cpuid1Mask': Data('\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x80\x00\x00\x00\x00'),
+            'DummyPowerManagement': False,
+            'MaxKernel': '',
+            'MinKernel': ''
         },
         'Force': [],
         'Patch': [],
@@ -108,10 +111,11 @@ def main(directory):
             'DisableIoMapper': False,
             'DisableLinkeditJettison': False,
             'DisableRtcChecksum': False,
-            'DummyPowerManagement': False,
+            'ExtendBTFeatureFlags': False,
             'ExternalDiskIcons': False,
             'IncreasePciBarSize': False,
             'LapicKernelPanic': False,
+            'LegacyCommpage': False,
             'PanicNoKextDump': False,
             'PowerTimeoutKernelPanic': False,
             'ThirdPartyDrives': False,

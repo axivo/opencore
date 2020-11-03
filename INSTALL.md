@@ -60,19 +60,19 @@ Open a terminal and run:
 
 ```sh
 ~$ python tree.py
-* OpenCore 0.6.2
+* OpenCore 0.6.3
   - downloading component... OK
   - building files structure... OK
   - cleaning directory... OK
   - installing AppleMCEReporterDisabler... OK
   - copying OcBinaryData files... OK
-* Lilu 1.4.8
+* Lilu 1.4.9
   - downloading component... OK
   - building files structure... OK
 * NightShiftEnabler 1.0.0
   - downloading component... OK
   - building files structure... OK
-* WhateverGreen 1.4.3
+* WhateverGreen 1.4.4
   - downloading component... OK
   - building files structure... OK
 * Miscellaneous

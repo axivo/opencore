@@ -113,6 +113,7 @@ def main(directory):
             'DisableRtcChecksum': False,
             'ExtendBTFeatureFlags': False,
             'ExternalDiskIcons': False,
+            'ForceSecureBootScheme': False,
             'IncreasePciBarSize': False,
             'LapicKernelPanic': False,
             'LegacyCommpage': False,
@@ -212,8 +213,10 @@ def main(directory):
 
     PlatformInfo = {
         'Automatic': False,
+        'CustomMemory': False,
         'DataHub': {},
         'Generic': {},
+        'Memory': {},
         'PlatformNVRAM': {},
         'SMBIOS': {
             'BoardProduct': 'Mac-7BA5B2D9E42DDD94'
@@ -263,6 +266,7 @@ def main(directory):
             'ClearScreenOnModeSwitch': False,
             'ConsoleMode': '',
             'DirectGopRendering': False,
+            'ForceResolution': False,
             'IgnoreTextInGraphics': False,
             'ProvideConsoleGop': True,
             'ReconnectOnResChange': False,

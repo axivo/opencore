@@ -219,7 +219,9 @@ def main(directory):
         'Memory': {},
         'PlatformNVRAM': {},
         'SMBIOS': {
-            'BoardProduct': 'Mac-7BA5B2D9E42DDD94'
+            'BoardProduct': 'Mac-7BA5B2D9E42DDD94',
+            'FirmwareFeatures': Data('\x03\x54\x0C\xE0'),
+            'FirmwareFeaturesMask': Data('\x3F\xFF\x1F\xFF')
         },
         'UpdateDataHub': False,
         'UpdateNVRAM': False,

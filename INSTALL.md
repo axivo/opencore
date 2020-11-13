@@ -6,7 +6,6 @@ This OpenCore installer sample contains hardware components and settings that mi
 
 The installer configuration demos the following customizations:
 
-- macOS Catalina updates enabled
 - OpenCanopy implementation on a black boot screen
 - Pulse RX580 GPU hardware acceleration support, through iMacPro hybridization (system specific device path)
 - NVMe external disks displayed as internal disks (system specific device path)

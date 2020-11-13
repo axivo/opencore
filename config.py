@@ -95,7 +95,7 @@ def main(directory):
         'Block': [],
         'Emulate': {
             'Cpuid1Data': Data('\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x80\x00\x00\x00\x00'),
-            'Cpuid1Mask': Data('\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x80\x00\x00\x00\x00'),
+            'Cpuid1Mask': Data('\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'),
             'DummyPowerManagement': False,
             'MaxKernel': '',
             'MinKernel': ''

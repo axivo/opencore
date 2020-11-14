@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+from glob import glob
 from io import BytesIO
 from multiprocessing import cpu_count
 from os import chmod, listdir, makedirs, path, remove, stat, walk
@@ -11,9 +12,9 @@ from zipfile import BadZipfile, ZipFile
 
 def main(directory):
     install_opencore('0.6.3', directory)
-    install_lilu('1.4.9', '{}/EFI/OC/Kexts'.format(directory))
-    install_night_shift_enabler('1.0.0', '{}/EFI/OC/Kexts'.format(directory))
-    install_whatevergreen('1.4.4', '{}/EFI/OC/Kexts'.format(directory))
+    install_kext('acidanthera', 'Lilu', '1.4.9', directory)
+    install_kext('acidanthera', 'WhateverGreen', '1.4.4', directory)
+    install_kext('cdf', 'NightShiftEnabler', '1.0.0', directory)
     run_post_install_tasks(directory)
 
 
@@ -52,36 +53,28 @@ def extract_files(file, directory):
     print('OK')
 
 
-def install_lilu(version, directory, debug=False):
-    """ Builds the Lilu files structure. """
+def install_kext(repo, project, version, directory, debug=False):
+    """ Builds the kext files structure. """
+    directory = '{}/EFI/OC/Kexts'.format(directory)
     release_type = 'DEBUG' if debug else 'RELEASE'
-    release = 'Lilu-{}-{}.zip'.format(version, release_type)
-    repo = 'https://github.com/acidanthera/Lilu/releases'
-    file = '{}/download/{}/{}'.format(repo, version, release)
-
-    print_bold('* Lilu {}'.format(version))
+    release = '{}-{}-{}.zip'.format(project, version, release_type)
+    url = 'https://github.com/{}/{}/releases'.format(repo, project)
+    file = '{}/download/{}/{}'.format(url, version, release)
+    print_bold('* {} {}'.format(project, version))
     extract_files(file, directory)
-    rmtree('{}/{}'.format(directory, 'Lilu.kext.dSYM'))
-
-
-def install_night_shift_enabler(version, directory, debug=False):
-    """ Builds the NightShiftEnabler plugin files structure. """
-    release_type = 'DEBUG' if debug else 'RELEASE'
-    release = 'NightShiftEnabler-{}-{}.zip'.format(version, release_type)
-    repo = 'https://github.com/cdf/NightShiftEnabler/releases'
-    file = '{}/download/{}/{}'.format(repo, version, release)
-
-    print_bold('* NightShiftEnabler {}'.format(version))
-    extract_files(file, directory)
-    rmtree('{}/{}'.format(directory, 'NightShiftEnabler.kext.dSYM'))
+    rmtree('{}/{}'.format(directory, '{}.kext.dSYM'.format(project)))
+    if project == 'WhateverGreen':
+        for i in glob('{}/*.dsl'.format(directory)):
+            remove(i)
+        rmtree('{}/WhateverName.app'.format(directory))
 
 
 def install_opencore(version, directory, debug=False):
     """ Builds the OpenCore files structure. """
     release_type = 'DEBUG' if debug else 'RELEASE'
     release = 'OpenCore-{}-{}.zip'.format(version, release_type)
-    repo = 'https://github.com/acidanthera/OpenCorePkg/releases'
-    file = '{}/download/{}/{}'.format(repo, version, release)
+    url = 'https://github.com/acidanthera/OpenCorePkg/releases'
+    file = '{}/download/{}/{}'.format(url, version, release)
 
     print_bold('* OpenCore {}'.format(version))
     if path.isdir(directory):
@@ -111,20 +104,6 @@ def install_opencore(version, directory, debug=False):
     copytree('{}/Drivers'.format(source), '{}/Drivers'.format(destination))
     copytree('{}/Resources'.format(source), '{}/Resources'.format(destination))
     print('OK')
-
-
-def install_whatevergreen(version, directory, debug=False):
-    """ Builds the WhateverGreen files structure. """
-    release_type = 'DEBUG' if debug else 'RELEASE'
-    release = 'WhateverGreen-{}-{}.zip'.format(version, release_type)
-    repo = 'https://github.com/acidanthera/WhateverGreen/releases'
-    file = '{}/download/{}/{}'.format(repo, version, release)
-
-    print_bold('* WhateverGreen {}'.format(version))
-    extract_files(file, directory)
-    for i in ['WhateverGreen.kext.dSYM', 'WhateverName.app']:
-        rmtree('{}/{}'.format(directory, i))
-    remove('{}/{}'.format(directory, 'SSDT-PNLF.dsl'))
 
 
 def print_bold(string):

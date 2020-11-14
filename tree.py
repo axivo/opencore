@@ -10,7 +10,7 @@ from zipfile import BadZipfile, ZipFile
 
 
 def main(directory):
-    install_opencore('0.6.3', directory)
+    install_open_core('0.6.3', directory)
     install_lilu('1.4.9', '{}/EFI/OC/Kexts'.format(directory))
     install_night_shift_enabler('1.0.0', '{}/EFI/OC/Kexts'.format(directory))
     install_whatevergreen('1.4.4', '{}/EFI/OC/Kexts'.format(directory))
@@ -90,7 +90,7 @@ def install_night_shift_enabler(version, directory, debug=False):
     rmtree('{}/{}'.format(directory, 'NightShiftEnabler.kext.dSYM'))
 
 
-def install_opencore(version, directory, debug=False):
+def install_open_core(version, directory, debug=False):
     """ Builds the OpenCore files structure. """
     release_type = 'DEBUG' if debug else 'RELEASE'
     release = 'OpenCore-{}-{}.zip'.format(version, release_type)

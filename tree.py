@@ -11,7 +11,7 @@ from zipfile import BadZipfile, ZipFile
 
 
 def main(directory):
-    install_open_core('0.6.3', directory)
+    install_opencore('0.6.3', directory)
     install_kext('acidanthera', 'Lilu', '1.4.9', directory)
     install_kext('acidanthera', 'WhateverGreen', '1.4.4', directory)
     install_kext('cdf', 'NightShiftEnabler', '1.0.0', directory)
@@ -69,7 +69,7 @@ def install_kext(repo, project, version, directory, debug=False):
         rmtree('{}/WhateverName.app'.format(directory))
 
 
-def install_open_core(version, directory, debug=False):
+def install_opencore(version, directory, debug=False):
     """ Builds the OpenCore files structure. """
     release_type = 'DEBUG' if debug else 'RELEASE'
     release = 'OpenCore-{}-{}.zip'.format(version, release_type)

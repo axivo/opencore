@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+from glob import glob
 from io import BytesIO
 from multiprocessing import cpu_count
 from os import chmod, listdir, makedirs, path, remove, stat, walk
@@ -63,8 +64,9 @@ def install_kext(repo, project, version, directory, debug=False):
     extract_files(file, directory)
     rmtree('{}/{}'.format(directory, '{}.kext.dSYM'.format(project)))
     if project == 'WhateverGreen':
-        remove('{}/{}'.format(directory, 'SSDT-PNLF.dsl'))
-        rmtree('{}/{}'.format(directory, 'WhateverName.app'))
+        for i in glob('{}/*.dsl'.format(directory)):
+            remove(i)
+        rmtree('{}/WhateverName.app'.format(directory))
 
 
 def install_open_core(version, directory, debug=False):

@@ -52,6 +52,20 @@ def extract_files(file, directory):
     print('OK')
 
 
+def install_extension(name, version, directory, debug=False):
+    """ Builds the extension files structure. """
+    release_type = 'DEBUG' if debug else 'RELEASE'
+    release = '{}-{}-{}.zip'.format(name, version, release_type)
+    repo = 'https://github.com/acidanthera/{}/releases'.format(name)
+    file = '{}/download/{}/{}'.format(repo, version, release)
+    print_bold('* {} {}'.format(name, version))
+    extract_files(file, directory)
+    rmtree('{}/{}'.format(directory, '{}.kext.dSYM'.format(name)))
+    if name == 'WhateverGreen':
+        remove('{}/{}'.format(directory, 'SSDT-PNLF.dsl'))
+        rmtree('{}/{}'.format(directory, 'WhateverName.app'))
+
+
 def install_lilu(version, directory, debug=False):
     """ Builds the Lilu files structure. """
     release_type = 'DEBUG' if debug else 'RELEASE'

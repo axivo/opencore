@@ -62,11 +62,11 @@ def install_kext(repo, project, version, directory, debug=False):
     file = '{}/download/{}/{}'.format(url, version, release)
     print_bold('* {} {}'.format(project, version))
     extract_files(file, directory)
-    rmtree('{}/{}'.format(directory, '{}.kext.dSYM'.format(project)))
-    if project == 'WhateverGreen':
-        for i in glob('{}/*.dsl'.format(directory)):
-            remove(i)
-        rmtree('{}/WhateverName.app'.format(directory))
+    for i in ['app', 'dsl', 'dSYM']:
+        files = glob('{}/*.{}'.format(directory, i))
+        if files:
+            for j in files:
+                remove(j) if i == 'dsl' else rmtree(j)
 
 
 def install_opencore(version, directory, debug=False):

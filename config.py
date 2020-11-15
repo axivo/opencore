@@ -131,7 +131,7 @@ def main(directory):
             'PickerAudioAssist': False,
             'PickerMode': 'External',
             'PollAppleHotKeys': True,
-            'ShowPicker': False,
+            'ShowPicker': True,
             'TakeoffDelay': 0,
             'Timeout': 10
         },

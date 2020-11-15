@@ -59,39 +59,31 @@ def main(directory):
         'Delete': {}
     }
 
+    kernel_kexts = []
+    kexts = [
+        'Lilu',
+        'NightShiftEnabler',
+        'WhateverGreen'
+    ]
+    if cpu_count > 15:
+        kexts.insert(0, 'AppleMCEReporterDisabler')
+    for i in kexts:
+        kext = {
+            'Arch': 'x86_64',
+            'BundlePath': '{}.kext'.format(i),
+            'Comment': '',
+            'Enabled': True,
+            'ExecutablePath': 'Contents/MacOS/{}'.format(i),
+            'MaxKernel': '',
+            'MinKernel': '',
+            'PlistPath': 'Contents/Info.plist'
+        }
+        if i == 'AppleMCEReporterDisabler':
+            kext['ExecutablePath'] = ''
+        kernel_kexts.append(dict(kext))
+
     Kernel = {
-        'Add': [
-            {
-                'Arch': 'x86_64',
-                'BundlePath': 'Lilu.kext',
-                'Comment': '',
-                'Enabled': True,
-                'ExecutablePath': 'Contents/MacOS/Lilu',
-                'MaxKernel': '',
-                'MinKernel': '',
-                'PlistPath': 'Contents/Info.plist'
-            },
-            {
-                'Arch': 'x86_64',
-                'BundlePath': 'NightShiftEnabler.kext',
-                'Comment': '',
-                'Enabled': True,
-                'ExecutablePath': 'Contents/MacOS/NightShiftEnabler',
-                'MaxKernel': '',
-                'MinKernel': '',
-                'PlistPath': 'Contents/Info.plist'
-            },
-            {
-                'Arch': 'x86_64',
-                'BundlePath': 'WhateverGreen.kext',
-                'Comment': '',
-                'Enabled': True,
-                'ExecutablePath': 'Contents/MacOS/WhateverGreen',
-                'MaxKernel': '',
-                'MinKernel': '',
-                'PlistPath': 'Contents/Info.plist'
-            }
-        ],
+        'Add': kernel_kexts,
         'Block': [],
         'Emulate': {
             'Cpuid1Data': Data('\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x80\x00\x00\x00\x00'),
@@ -128,19 +120,6 @@ def main(directory):
             'KernelCache': 'Auto'
         }
     }
-    if cpu_count > 15:
-        Kernel['Add'].append(
-            {
-                'Arch': 'x86_64',
-                'BundlePath': 'AppleMCEReporterDisabler.kext',
-                'Comment': '',
-                'Enabled': True,
-                'ExecutablePath': '',
-                'MaxKernel': '',
-                'MinKernel': '',
-                'PlistPath': 'Contents/Info.plist'
-            }
-        )
 
     Misc = {
         'BlessOverride': [],

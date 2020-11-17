@@ -6,7 +6,7 @@ from multiprocessing import cpu_count
 from os import chmod, listdir, makedirs, path, remove, stat, walk
 from shutil import copy2, rmtree
 from subprocess import check_output
-from urllib2 import HTTPError, urlopen
+from urllib2 import URLError, urlopen
 from zipfile import BadZipfile, ZipFile
 
 
@@ -37,8 +37,8 @@ def extract_files(file, directory):
     try:
         print('  - downloading component...'),
         response = urlopen(file)
-    except HTTPError as e:
-        print('Failed with {} error code'.format(e.code))
+    except URLError as e:
+        print(e.reason)
 
     try:
         print('OK')
@@ -60,12 +60,13 @@ def install_kext(repo, project, version, directory, debug=False):
     release = '{}-{}-{}.zip'.format(project, version, release_type)
     url = 'https://github.com/{}/{}/releases'.format(repo, project)
     file = '{}/download/{}/{}'.format(url, version, release)
+
     print_bold('* {} {}'.format(project, version))
     extract_files(file, directory)
     for i in ['app', 'dsl', 'dSYM']:
         try:
             files = glob('{}/*.{}'.format(directory, i))
-        except OSError as e:
+        except OSError:
             raise
         else:
             for j in files:

@@ -49,12 +49,6 @@ def main(directory):
                 'agdpmod': unhexlify_data('70 69 6B 65 72 61 00'),
                 'rebuild-device-tree': unhexlify_data('00'),
                 'shikigva': unhexlify_data('50')
-            },
-            'PciRoot(0x0)/Pci(0x7,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)': {
-                'built-in': unhexlify_data('00')
-            },
-            'PciRoot(0x0)/Pci(0x7,0x0)/Pci(0x0,0x0)/Pci(0x8,0x0)/Pci(0x0,0x0)': {
-                'built-in': unhexlify_data('00')
             }
         },
         'Delete': {}
@@ -72,11 +66,8 @@ def main(directory):
         kext = {
             'Arch': 'x86_64',
             'BundlePath': '{}.kext'.format(i),
-            'Comment': '',
             'Enabled': True,
             'ExecutablePath': 'Contents/MacOS/{}'.format(i),
-            'MaxKernel': '',
-            'MinKernel': '',
             'PlistPath': 'Contents/Info.plist'
         }
         if i == 'AppleMCEReporterDisabler':
@@ -89,12 +80,18 @@ def main(directory):
         'Emulate': {
             'Cpuid1Data': unhexlify_data('00 00 00 00 00 00 00 00 00 00 00 80 00 00 00 00'),
             'Cpuid1Mask': unhexlify_data('00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00'),
-            'DummyPowerManagement': False,
-            'MaxKernel': '',
-            'MinKernel': ''
+            'DummyPowerManagement': False
         },
         'Force': [],
-        'Patch': [],
+        'Patch': [
+            {
+                'Comment': 'Set external NVMe drive as internal',
+                'Enabled': True,
+                'Find': unhexlify_data('45 78 74 65 72 6E 61 6C'),
+                'Identifier': 'com.apple.iokit.IONVMeFamily',
+                'Replace': unhexlify_data('49 6E 74 65 72 6E 61 6C')
+            }
+        ],
         'Quirks': {
             'AppleCpuPmCfgLock': False,
             'AppleXcpmCfgLock': False,

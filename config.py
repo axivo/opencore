@@ -46,7 +46,7 @@ def main(directory):
     DeviceProperties = {
         'Add': {
             'PciRoot(0x0)/Pci(0x3,0x0)/Pci(0x0,0x0)': {
-                'agdpmod': Data('pikera\0'),
+                'agdpmod': unhexlify_data('70 69 6B 65 72 61 00'),
                 'rebuild-device-tree': unhexlify_data('00'),
                 'shikigva': unhexlify_data('50')
             },

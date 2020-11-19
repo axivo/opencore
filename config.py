@@ -157,8 +157,8 @@ def main(directory):
             'EnablePassword': False,
             'ExposeSensitiveData': 2,
             'HaltLevel': 2147483648,
-            'PasswordHash': Data(''),
-            'PasswordSalt': Data(''),
+            'PasswordHash': unhexlify_data(''),
+            'PasswordSalt': unhexlify_data(''),
             'ScanPolicy': 0,
             'SecureBootModel': 'Disabled',
             'Vault': 'Optional'

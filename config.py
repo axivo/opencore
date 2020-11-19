@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+from binascii import Error, unhexlify
 from multiprocessing import cpu_count
 from os import makedirs, path
 from plistlib import Data, writePlist
@@ -46,14 +47,14 @@ def main(directory):
         'Add': {
             'PciRoot(0x0)/Pci(0x3,0x0)/Pci(0x0,0x0)': {
                 'agdpmod': Data('pikera\0'),
-                'rebuild-device-tree': Data('\x00'),
-                'shikigva': Data('\x50')
+                'rebuild-device-tree': unhexlify_data('00'),
+                'shikigva': unhexlify_data('50')
             },
             'PciRoot(0x0)/Pci(0x7,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)': {
-                'built-in': Data('\x00')
+                'built-in': unhexlify_data('00')
             },
             'PciRoot(0x0)/Pci(0x7,0x0)/Pci(0x0,0x0)/Pci(0x8,0x0)/Pci(0x0,0x0)': {
-                'built-in': Data('\x00')
+                'built-in': unhexlify_data('00')
             }
         },
         'Delete': {}
@@ -86,8 +87,8 @@ def main(directory):
         'Add': kernel_kexts,
         'Block': [],
         'Emulate': {
-            'Cpuid1Data': Data('\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x80\x00\x00\x00\x00'),
-            'Cpuid1Mask': Data('\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'),
+            'Cpuid1Data': unhexlify_data('00 00 00 00 00 00 00 00 00 00 00 80 00 00 00 00'),
+            'Cpuid1Mask': unhexlify_data('00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00'),
             'DummyPowerManagement': False,
             'MaxKernel': '',
             'MinKernel': ''
@@ -168,8 +169,8 @@ def main(directory):
     NVRAM = {
         'Add': {
             '4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14': {
-                'DefaultBackgroundColor': Data('\x00\x00\x00\x00'),
-                'UIScale': Data('\x01')
+                'DefaultBackgroundColor': unhexlify_data('00 00 00 00'),
+                'UIScale': unhexlify_data('01')
             },
             '7C436110-AB2A-4BBB-A880-FE41995C9F82': {
                 'run-efi-updater': 'No'
@@ -199,8 +200,8 @@ def main(directory):
         'PlatformNVRAM': {},
         'SMBIOS': {
             'BoardProduct': 'Mac-7BA5B2D9E42DDD94',
-            'FirmwareFeatures': Data('\x03\x54\x0C\xE0'),
-            'FirmwareFeaturesMask': Data('\x3F\xFF\x1F\xFF')
+            'FirmwareFeatures': unhexlify_data('03 54 0C E0'),
+            'FirmwareFeaturesMask': unhexlify_data('3F FF 1F FF')
         },
         'UpdateDataHub': False,
         'UpdateNVRAM': False,
@@ -305,6 +306,16 @@ def main(directory):
 def root_directory(directory='Volumes/EFI'):
     """ Defines the default root directory. """
     return directory
+
+
+def unhexlify_data(string):
+    """ Transforms the binary data represented by the hexadecimal string. """
+    try:
+        result = unhexlify(''.join(string.split()))
+    except Error:
+        raise
+
+    return Data(result)
 
 
 if __name__ == '__main__':

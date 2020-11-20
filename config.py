@@ -84,8 +84,11 @@ def set_configuration():
         kext = {
             'Arch': 'x86_64',
             'BundlePath': '{}.kext'.format(i),
+            'Comment': '',
             'Enabled': True,
             'ExecutablePath': 'Contents/MacOS/{}'.format(i),
+            'MaxKernel': '',
+            'MinKernel': '',
             'PlistPath': 'Contents/Info.plist'
         }
         if i == 'AppleMCEReporterDisabler':
@@ -98,7 +101,9 @@ def set_configuration():
         'Emulate': {
             'Cpuid1Data': unhexlify_data('00 00 00 00 00 00 00 00 00 00 00 80 00 00 00 00'),
             'Cpuid1Mask': unhexlify_data('00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00'),
-            'DummyPowerManagement': False
+            'DummyPowerManagement': False,
+            'MaxKernel': '',
+            'MinKernel': ''
         },
         'Force': [],
         'Patch': [],

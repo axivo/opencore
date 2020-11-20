@@ -7,7 +7,16 @@ from plistlib import Data, writePlist
 
 
 def main(directory):
-    ACPI = {
+    config = set_configuration()
+    writePlist(config, '{}/config.plist'.format(directory))
+
+
+def set_configuration():
+    """ Sets the OpenCore configuration file format """
+    config = {}
+
+    """ Discover and configure computer hardware """
+    config['ACPI'] = {
         'Add': [],
         'Delete': [],
         'Patch': [],
@@ -20,7 +29,8 @@ def main(directory):
         }
     }
 
-    Booter = {
+    """ Apply different kinds of UEFI modifications on Apple bootloader """
+    config['Booter'] = {
         'MmioWhitelist': [],
         'Quirks': {
             'AvoidRuntimeDefrag': False,
@@ -43,17 +53,25 @@ def main(directory):
         }
     }
 
-    DeviceProperties = {
+    """ Device properties are part of the IODeviceTree plane """
+    config['DeviceProperties'] = {
         'Add': {
             'PciRoot(0x0)/Pci(0x3,0x0)/Pci(0x0,0x0)': {
                 'agdpmod': unhexlify_data('70 69 6B 65 72 61 00'),
                 'rebuild-device-tree': unhexlify_data('00'),
                 'shikigva': unhexlify_data('50')
+            },
+            'PciRoot(0x0)/Pci(0x7,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)': {
+                'built-in': unhexlify_data('00')
+            },
+            'PciRoot(0x0)/Pci(0x7,0x0)/Pci(0x0,0x0)/Pci(0x8,0x0)/Pci(0x0,0x0)': {
+                'built-in': unhexlify_data('00')
             }
         },
         'Delete': {}
     }
 
+    """ Apply different kinds of kernelspace modifications on Apple Kernel """
     kernel_kexts = []
     kexts = [
         'Lilu',
@@ -74,7 +92,7 @@ def main(directory):
             kext['ExecutablePath'] = ''
         kernel_kexts.append(dict(kext))
 
-    Kernel = {
+    config['Kernel'] = {
         'Add': kernel_kexts,
         'Block': [],
         'Emulate': {
@@ -83,15 +101,7 @@ def main(directory):
             'DummyPowerManagement': False
         },
         'Force': [],
-        'Patch': [
-            {
-                'Comment': 'Set external NVMe drive as internal',
-                'Enabled': True,
-                'Find': unhexlify_data('45 78 74 65 72 6E 61 6C'),
-                'Identifier': 'com.apple.iokit.IONVMeFamily',
-                'Replace': unhexlify_data('49 6E 74 65 72 6E 61 6C')
-            }
-        ],
+        'Patch': [],
         'Quirks': {
             'AppleCpuPmCfgLock': False,
             'AppleXcpmCfgLock': False,
@@ -119,7 +129,8 @@ def main(directory):
         }
     }
 
-    Misc = {
+    """ Miscellaneous configuration affecting OpenCore loading behaviour """
+    config['Misc'] = {
         'BlessOverride': [],
         'Boot': {
             'ConsoleAttributes': 0,
@@ -163,7 +174,8 @@ def main(directory):
         'Tools': []
     }
 
-    NVRAM = {
+    """ Set volatile UEFI variables """
+    config['NVRAM'] = {
         'Add': {
             '4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14': {
                 'DefaultBackgroundColor': unhexlify_data('00 00 00 00'),
@@ -188,7 +200,8 @@ def main(directory):
         'WriteFlash': False
     }
 
-    PlatformInfo = {
+    """ Identification fields compatible with macOS services """
+    config['PlatformInfo'] = {
         'Automatic': False,
         'CustomMemory': False,
         'DataHub': {},
@@ -206,7 +219,8 @@ def main(directory):
         'UpdateSMBIOSMode': 'Create'
     }
 
-    UEFI = {
+    """ Allows to load additional UEFI modules and/or apply tweaks to onboard firmware """
+    config['UEFI'] = {
         'APFS': {
             'EnableJumpstart': False,
             'GlobalConnect': False,
@@ -287,17 +301,7 @@ def main(directory):
         'ReservedMemory': []
     }
 
-    plist = {
-        'ACPI': ACPI,
-        'Booter': Booter,
-        'DeviceProperties': DeviceProperties,
-        'Kernel': Kernel,
-        'Misc': Misc,
-        'NVRAM': NVRAM,
-        'PlatformInfo': PlatformInfo,
-        'UEFI': UEFI
-    }
-    writePlist(plist, '{}/config.plist'.format(directory))
+    return config
 
 
 def root_directory(directory='Volumes/EFI'):

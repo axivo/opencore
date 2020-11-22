@@ -16,4 +16,4 @@ Acidanthera provides a very comprehensive [manual](https://github.com/acidanther
 
 ## Install Instructions
 
-All necessary steps to automate your OC install or upgrade process are provided in the [install instructions](/INSTALL.md).
+All necessary steps to automate your OC install or upgrade process are provided in the [wiki](/../../wiki).

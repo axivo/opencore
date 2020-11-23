@@ -92,11 +92,11 @@ class OpenCoreBuild:
                 'Boot': {
                     'ConsoleAttributes': 0,
                     'HibernateMode': 'None',
-                    'HideAuxiliary': False,
+                    'HideAuxiliary': True,
                     'PickerAttributes': 0,
                     'PickerAudioAssist': False,
                     'PickerMode': 'Builtin',
-                    'PollAppleHotKeys': False,
+                    'PollAppleHotKeys': True,
                     'ShowPicker': False,
                     'TakeoffDelay': 0,
                     'Timeout': 0
@@ -120,13 +120,13 @@ class OpenCoreBuild:
                     'BootProtect': 'None',
                     'DmgLoading': 'Signed',
                     'EnablePassword': False,
-                    'ExposeSensitiveData': 6,
+                    'ExposeSensitiveData': 2,
                     'HaltLevel': 2147483648,
                     'PasswordHash': Data(''),
                     'PasswordSalt': Data(''),
                     'ScanPolicy': 0,
-                    'SecureBootModel': 'Default',
-                    'Vault': 'Secure'
+                    'SecureBootModel': 'Disabled',
+                    'Vault': 'Optional'
                 },
                 'Tools': []
             },

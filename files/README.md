@@ -5,7 +5,7 @@ The following file references are used:
 - [AppleMCEReporterDisabler.kext](https://github.com/acidanthera/bugtracker/issues/424#issuecomment-535624313)
 - [OcBinaryData](https://github.com/acidanthera/OcBinaryData)
 
-OcBinaryData files are automatically refreshed, when `install_opencore()` function is executed. The commands listed below are detailed for general learning purpose only, they are part of the Python function.
+OcBinaryData files are automatically refreshed, when `install_opencore()` function is executed. The commands listed below are detailed for general learning purpose only, they are automatically executed as part of the `OpenCoreBuild` class.
 
 To import a Git repo as submodule into your repo, run the OcBinaryData import:
 

@@ -14,7 +14,16 @@ from zipfile import BadZipfile, ZipFile
 
 
 class OpenCoreBuild:
+    """
+    OpenCoreBuild generates the EFI tree and config.plist file.
+    """
     def __init__(self, directory):
+        """
+        Constructs a new 'OpenCoreBuild' object.
+
+        :param directory: Path of the build directory
+        :return: Nothing
+        """
         self.directory = directory
         self.settings = {
             'ACPI': {
@@ -236,7 +245,12 @@ class OpenCoreBuild:
 
 
     def configure_kexts(self, kexts=[]):
-        """ Configures the kext settings. """
+        """
+        Configures the kext settings.
+
+        :param kexts: List of kexts to be configured
+        :return: Kext dictionaries
+        """
         result = []
         if cpu_count > 15:
             kexts.append('AppleMCEReporterDisabler')
@@ -260,7 +274,13 @@ class OpenCoreBuild:
 
 
     def copy_tree(self, source, destination):
-        """ Copies directories and files recursively. """
+        """
+        Copies directories and files recursively.
+
+        :param source: Source path
+        :param destination: Destination path
+        :return: Nothing
+        """
         if not path.exists(destination):
             makedirs(destination)
         for item in listdir(source):
@@ -274,7 +294,13 @@ class OpenCoreBuild:
 
 
     def extract_files(self, file, directory):
-        """ Extracts the contents of a zip file directly from Internet. """
+        """
+        Extracts the contents of a zip file directly from Internet.
+
+        :param file: File name
+        :param directory: Directory name where file will be extracted
+        :return: Nothing
+        """
         try:
             print('  - downloading component...'),
             response = urlopen(file)
@@ -295,7 +321,15 @@ class OpenCoreBuild:
 
 
     def install_kext(self, repo, project, version, debug=False):
-        """ Builds the kext files structure. """
+        """
+        Builds the kext files structure.
+
+        :param repo: Repo name
+        :param project: Project name
+        :param version: Project version
+        :param debug: Install DEBUG release
+        :return: Nothing
+        """
         directory = '{}/EFI/OC/Kexts'.format(self.directory)
         release_type = 'DEBUG' if debug else 'RELEASE'
         release = '{}-{}-{}.zip'.format(project, version, release_type)
@@ -315,7 +349,12 @@ class OpenCoreBuild:
 
 
     def install_opencore(self, version, debug=False):
-        """ Builds the OpenCore files structure. """
+        """
+        Builds the OpenCore files structure.
+
+        :param version: Project version
+        :return: Nothing
+        """
         release_type = 'DEBUG' if debug else 'RELEASE'
         release = 'OpenCore-{}-{}.zip'.format(version, release_type)
         url = 'https://github.com/acidanthera/OpenCorePkg/releases'
@@ -352,12 +391,21 @@ class OpenCoreBuild:
 
 
     def print_bold(self, string):
-        """ Prints bold text. """
+        """
+        Prints bold text.
+
+        :param string: String to print in bold
+        :return: Nothing
+        """
         print('\033[1m{}\033[0m'.format(string))
 
 
     def run_misc_tasks(self):
-        """ Runs miscellaneous post install tasks. """
+        """
+        Runs miscellaneous post install tasks.
+
+        :return: Nothing
+        """
         self.print_bold('* Miscellaneous')
         print('  - fixing file permissions...'),
         for root, directories, files in walk(self.directory):
@@ -371,7 +419,12 @@ class OpenCoreBuild:
 
 
     def unhexlify(self, string):
-        """ Transforms the binary data represented by the hexadecimal string. """
+        """
+        Transforms the binary data represented by the hexadecimal string.
+
+        :param string: String to transform
+        :return: Base64 data
+        """
         try:
             result = unhexlify(''.join(string.split()))
         except Error:
@@ -381,7 +434,13 @@ class OpenCoreBuild:
 
 
     def update_settings(self, result, settings):
-        """ Updates existing settings with new settings. """
+        """
+        Updates existing settings with new settings.
+
+        :param result: Default settings
+        :param settings: Settings to update
+        :return: Dictionary of settings
+        """
         for key, value in settings.iteritems():
             if isinstance(value, Mapping):
                 result[key] = self.update_settings(result.get(key, {}), value)
@@ -392,7 +451,12 @@ class OpenCoreBuild:
 
 
     def write_plist(self, settings):
-        """ Generates the OpenCore configuration file. """
+        """
+        Generates the OpenCore configuration file.
+
+        :param settings: Settings to update
+        :return: Nothing
+        """
         try:
             self.update_settings(self.settings, settings)
         except KeyError:
@@ -408,7 +472,12 @@ class OpenCoreBuild:
 
 
     def write_tree(self, kexts):
-        """ Generates the OpenCore files structure. """
+        """
+        Generates the OpenCore files structure.
+
+        :param kexts: List of kexts to be installed
+        :return: Nothing
+        """
         self.install_opencore(self.version)
         for i in kexts:
             self.install_kext(i['repo'], i['project'], i['version'])

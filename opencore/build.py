@@ -365,6 +365,7 @@ class OpenCoreBuild:
         Builds the OpenCore files structure.
 
         :param version: Project version
+        :param debug: Install DEBUG release
         :return: Nothing
         """
         release_type = 'DEBUG' if debug else 'RELEASE'
@@ -487,13 +488,14 @@ class OpenCoreBuild:
             print('OK')
 
 
-    def write_tree(self, kexts):
+    def write_tree(self, kexts, debug=False):
         """
         Generates the OpenCore files structure.
 
         :param kexts: List of kexts to be installed
+        :param debug: Install DEBUG release
         :return: Nothing
         """
-        self.install_opencore(self.version)
+        self.install_opencore(self.version, debug)
         for i in kexts:
-            self.install_kext(i['repo'], i['project'], i['version'])
+            self.install_kext(i['repo'], i['project'], i['version'], debug)

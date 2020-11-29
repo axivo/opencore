@@ -241,7 +241,7 @@ class OpenCoreBuild:
                 'ReservedMemory': []
             }
         }
-        self.version = '0.6.3'
+        self.version = '0.6.4'
 
 
     def configure_kexts(self, kexts=[]):
@@ -293,31 +293,39 @@ class OpenCoreBuild:
                     copy2(s, d)
 
 
-    def extract_files(self, file, directory):
+    def extract_files(self, file, directory, local=False):
         """
         Extracts the contents of a zip file directly from Internet.
 
         :param file: File name
         :param directory: Directory name where file will be extracted
+        :param local: Local file will be extracted
         :return: Nothing
         """
-        try:
-            print('  - downloading component...'),
-            response = urlopen(file)
-        except URLError as e:
-            print(e.reason)
+        if local:
+            try:
+                response = open(file)
+            except IOError:
+                raise
+        else:
+            try:
+                print('  - downloading component...'),
+                response = urlopen(file)
+            except URLError:
+                raise
+            else:
+                print('OK')
 
         try:
-            print('OK')
             print('  - building files structure...'),
             zipfile = ZipFile(BytesIO(response.read()))
-        except BadZipfile as e:
-            print(e)
-    
-        for i in zipfile.namelist():
-            zipfile.extract(i, directory)
-        zipfile.close()
-        print('OK')
+        except BadZipfile:
+            raise
+        else:
+            for i in zipfile.namelist():
+                zipfile.extract(i, directory)
+            zipfile.close()
+            print('OK')
 
 
     def install_kext(self, repo, project, version, debug=False):
@@ -334,10 +342,14 @@ class OpenCoreBuild:
         release_type = 'DEBUG' if debug else 'RELEASE'
         release = '{}-{}-{}.zip'.format(project, version, release_type)
         url = 'https://github.com/{}/{}/releases'.format(repo, project)
-        file = '{}/download/{}/{}'.format(url, version, release)
+        file = 'files/{}'.format(release)
+        local = True
+        if not path.isfile(file):
+            file = '{}/download/{}/{}'.format(url, version, release)
+            local = False
 
         self.print_bold('* {} {}'.format(project, version))
-        self.extract_files(file, directory)
+        self.extract_files(file, directory, local)
         for i in ['app', 'dsl', 'dSYM']:
             try:
                 files = glob('{}/*.{}'.format(directory, i))
@@ -358,14 +370,18 @@ class OpenCoreBuild:
         release_type = 'DEBUG' if debug else 'RELEASE'
         release = 'OpenCore-{}-{}.zip'.format(version, release_type)
         url = 'https://github.com/acidanthera/OpenCorePkg/releases'
-        file = '{}/download/{}/{}'.format(url, version, release)
+        file = 'files/{}'.format(release)
+        local = True
+        if not path.isfile(file):
+            file = '{}/download/{}/{}'.format(url, version, release)
+            local = False
 
         self.print_bold('* OpenCore {}'.format(version))
         if path.isdir(self.directory):
             print('  - cleaning directory...'),
             rmtree(self.directory)
             print('OK')
-        self.extract_files(file, self.directory)
+        self.extract_files(file, self.directory, local)
         print('  - cleaning directory...'),
         source = '{}/X64/EFI'.format(self.directory)
         destination = '{}/EFI'.format(self.directory)

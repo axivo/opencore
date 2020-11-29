@@ -1,8 +1,8 @@
 # OpenCore Installer
 
-This repo provides an [OpenCore](/../../../acidanthera/OpenCorePkg) components and ASCII preference list generator based on Apple's Python `plistlib` library and is not a substitute to OpenCore [documentation](/../../../acidanthera/OpenCorePkg/tree/master/Docs). Its purpose is to automate your current OC knowledge through Python and should be considered a learning example.
+This repo provides an [OpenCore](../../../../acidanthera/OpenCorePkg) components and ASCII preference list generator based on Apple's Python `plistlib` library and is not a substitute to OpenCore [documentation](../../../../acidanthera/OpenCorePkg/tree/master/Docs). Its purpose is to automate your current OC knowledge through Python and should be considered a learning example.
 
-Acidanthera provides a very comprehensive [manual](/../../../acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) for configuring OpenCore. To get the most out of OpenCore, it is important to read the manual and understand its settings. As a learning example, this tool adheres to that philosophy.
+Acidanthera provides a very comprehensive [manual](../../../../acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf) for configuring OpenCore. To get the most out of OpenCore, it is important to read the manual and understand its settings. As a learning example, this tool adheres to that philosophy.
 
 ## Discussion
 
@@ -16,4 +16,4 @@ Acidanthera provides a very comprehensive [manual](/../../../acidanthera/OpenCor
 
 ## Install Instructions
 
-All necessary steps to automate your OC install or upgrade process are provided in the [wiki](/../../wiki).
+All necessary steps to automate your OC install or upgrade process are provided in the [wiki](../../wiki).

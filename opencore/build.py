@@ -123,7 +123,7 @@ class OpenCoreBuild:
                 'Entries': [],
                 'Security': {
                     'AllowNvramReset': False,
-                    'AllowSetDefault': False,
+                    'AllowSetDefault': True,
                     'ApECID': 0,
                     'AuthRestart': False,
                     'BootProtect': 'None',

@@ -40,7 +40,9 @@ class OpenCoreBuild:
             },
             'Booter': {
                 'MmioWhitelist': [],
+                'Patch': [],
                 'Quirks': {
+                    'AllowRelocationBlock': False,
                     'AvoidRuntimeDefrag': False,
                     'DevirtualiseMmio': False,
                     'DisableSingleUser': False,
@@ -126,6 +128,7 @@ class OpenCoreBuild:
                     'AllowSetDefault': True,
                     'ApECID': 0,
                     'AuthRestart': False,
+                    'BlacklistAppleUpdate': True,
                     'BootProtect': 'None',
                     'DmgLoading': 'Signed',
                     'EnablePassword': False,
@@ -175,7 +178,7 @@ class OpenCoreBuild:
                     'AudioOut': 0,
                     'AudioSupport': False,
                     'MinimumVolume': 0,
-                    'PlayChime': False,
+                    'PlayChime': 'Disabled',
                     'VolumeAmplifier': 0
                 },
                 'ConnectDrivers': True,
@@ -241,7 +244,7 @@ class OpenCoreBuild:
                 'ReservedMemory': []
             }
         }
-        self.version = '0.6.3'
+        self.version = '0.6.4'
 
 
     def configure_kexts(self, kexts=[]):

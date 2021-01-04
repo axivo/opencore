@@ -79,7 +79,7 @@ class OpenCoreBuild:
                     'AppleXcpmForceBoost': False,
                     'CustomSMBIOSGuid': False,
                     'DisableIoMapper': False,
-                    'DisableLinkeditJettison': False,
+                    'DisableLinkeditJettison': True,
                     'DisableRtcChecksum': False,
                     'ExtendBTFeatureFlags': False,
                     'ExternalDiskIcons': False,
@@ -107,6 +107,7 @@ class OpenCoreBuild:
                     'PickerAttributes': 0,
                     'PickerAudioAssist': False,
                     'PickerMode': 'Builtin',
+                    'PickerVariant': 'Auto',
                     'PollAppleHotKeys': True,
                     'ShowPicker': False,
                     'TakeoffDelay': 0,
@@ -179,6 +180,7 @@ class OpenCoreBuild:
                     'AudioSupport': False,
                     'MinimumVolume': 0,
                     'PlayChime': 'Disabled',
+                    'SetupDelay': 0,
                     'VolumeAmplifier': 0
                 },
                 'ConnectDrivers': True,
@@ -192,7 +194,7 @@ class OpenCoreBuild:
                     'KeyForgetThreshold': 0,
                     'KeyMergeThreshold': 0,
                     'KeySupport': False,
-                    'KeySupportMode': '',
+                    'KeySupportMode': 'Auto',
                     'KeySwap': False,
                     'PointerSupport': False,
                     'PointerSupportMode': '',
@@ -233,7 +235,6 @@ class OpenCoreBuild:
                     'UnicodeCollation': False
                 },
                 'Quirks': {
-                    'DeduplicateBootOrder': False,
                     'ExitBootServicesDelay': 0,
                     'IgnoreInvalidFlexRatio': False,
                     'ReleaseUsbOwnership': False,
@@ -244,7 +245,7 @@ class OpenCoreBuild:
                 'ReservedMemory': []
             }
         }
-        self.version = '0.6.4'
+        self.version = '0.6.5'
 
 
     def configure_kexts(self, kexts=[]):

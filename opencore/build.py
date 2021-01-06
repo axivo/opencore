@@ -17,14 +17,16 @@ class OpenCoreBuild:
     """
     OpenCoreBuild generates the EFI tree and config.plist file.
     """
-    def __init__(self, directory):
+    def __init__(self, directory, kexts=[]):
         """
         Constructs a new 'OpenCoreBuild' object.
 
         :param directory: Path of the build directory
+        :param kexts: List of kexts to be installed
         :return: Nothing
         """
         self.directory = directory
+        self.kexts = kexts
         self.settings = {
             'ACPI': {
                 'Add': [],
@@ -67,7 +69,7 @@ class OpenCoreBuild:
                 'Delete': {}
             },
             'Kernel': {
-                'Add': [],
+                'Add': self.configure_kexts([i['project'] for i in self.kexts]),
                 'Block': [],
                 'Emulate': {},
                 'Force': [],
@@ -396,7 +398,7 @@ class OpenCoreBuild:
         print('OK')
 
         if cpu_count() > 15:
-            print('  - installing AppleMCEReporterDisabler...'),
+            print('  - installing AppleMCEReporterDisabler kext...'),
             source = 'files/AppleMCEReporterDisabler.kext'
             destination = '{}/EFI/OC/Kexts/AppleMCEReporterDisabler.kext'.format(self.directory)
             self.copy_tree(source, destination)
@@ -475,7 +477,7 @@ class OpenCoreBuild:
         """
         Generates the OpenCore configuration file.
 
-        :param settings: Settings to update
+        :param settings: Settings to be updated
         :return: Nothing
         """
         try:
@@ -492,14 +494,13 @@ class OpenCoreBuild:
             print('OK')
 
 
-    def write_tree(self, kexts, debug=False):
+    def write_tree(self, debug=False):
         """
         Generates the OpenCore files structure.
 
-        :param kexts: List of kexts to be installed
         :param debug: Install DEBUG release
         :return: Nothing
         """
         self.install_opencore(self.version, debug)
-        for i in kexts:
+        for i in self.kexts:
             self.install_kext(i['repo'], i['project'], i['version'], debug)

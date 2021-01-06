@@ -17,7 +17,7 @@ class OpenCoreBuild:
     """
     OpenCoreBuild generates the EFI tree and config.plist file.
     """
-    def __init__(self, directory, kexts):
+    def __init__(self, directory, kexts=[]):
         """
         Constructs a new 'OpenCoreBuild' object.
 

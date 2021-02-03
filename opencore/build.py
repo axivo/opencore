@@ -137,7 +137,7 @@ class OpenCoreBuild:
                     'BlacklistAppleUpdate': True,
                     'DmgLoading': 'Signed',
                     'EnablePassword': False,
-                    'ExposeSensitiveData': 2,
+                    'ExposeSensitiveData': 3,
                     'HaltLevel': 2147483648,
                     'PasswordHash': Data(''),
                     'PasswordSalt': Data(''),

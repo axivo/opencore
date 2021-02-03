@@ -91,6 +91,7 @@ class OpenCoreBuild:
                     'LegacyCommpage': False,
                     'PanicNoKextDump': False,
                     'PowerTimeoutKernelPanic': False,
+                    'SetApfsTrimTimeout': 9999999,
                     'ThirdPartyDrives': False,
                     'XhciPortLimit': False
                 },
@@ -106,6 +107,8 @@ class OpenCoreBuild:
                     'ConsoleAttributes': 0,
                     'HibernateMode': 'None',
                     'HideAuxiliary': True,
+                    'LauncherOption': 'Disabled',
+                    'LauncherPath': 'Default',
                     'PickerAttributes': 0,
                     'PickerAudioAssist': False,
                     'PickerMode': 'Builtin',
@@ -132,7 +135,6 @@ class OpenCoreBuild:
                     'ApECID': 0,
                     'AuthRestart': False,
                     'BlacklistAppleUpdate': True,
-                    'BootProtect': 'None',
                     'DmgLoading': 'Signed',
                     'EnablePassword': False,
                     'ExposeSensitiveData': 2,
@@ -164,7 +166,8 @@ class OpenCoreBuild:
                 'UpdateDataHub': False,
                 'UpdateNVRAM': False,
                 'UpdateSMBIOS': False,
-                'UpdateSMBIOSMode': 'Create'
+                'UpdateSMBIOSMode': 'Create',
+                'UseRawUuidEncoding': False
             },
             'UEFI': {
                 'APFS': {
@@ -237,6 +240,7 @@ class OpenCoreBuild:
                     'UnicodeCollation': False
                 },
                 'Quirks': {
+                    'DisableSecurityPolicy': False,
                     'ExitBootServicesDelay': 0,
                     'IgnoreInvalidFlexRatio': False,
                     'ReleaseUsbOwnership': False,
@@ -247,7 +251,7 @@ class OpenCoreBuild:
                 'ReservedMemory': []
             }
         }
-        self.version = '0.6.5'
+        self.version = '0.6.6'
 
 
     def configure_kexts(self, kexts=[]):

@@ -6,7 +6,7 @@ Acidanthera provides a very comprehensive [manual](../../../../acidanthera/OpenC
 
 ## Discussion
 
-- [MacRumors.com](https://forums.macrumors.com/threads/2207814/), legacy Apple hardware
+- [MacRumors.com](https://forums.macrumors.com/threads/2283200/), legacy Apple hardware
 
 ## Requirements
 
@@ -20,4 +20,4 @@ All necessary steps to automate your OC install or upgrade process are provided 
 
 ## Issues
 
-If you experience any Python related problems, please [create an issue](/../../issues). For any technical questions related to [OC configuration](../../../../acidanthera/OpenCorePkg/blob/master/Docs), please read the manual or ask your questions in the [MacRumors forums](https://forums.macrumors.com/threads/2207814/).
+If you experience any Python related problems, please [create an issue](/../../issues). For any technical questions related to [OC configuration](../../../../acidanthera/OpenCorePkg/blob/master/Docs), please read the manual or ask your questions in the [MacRumors forums](https://forums.macrumors.com/threads/2283200/).

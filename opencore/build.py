@@ -54,7 +54,7 @@ class OpenCoreBuild:
                     'EnableWriteUnprotector': False,
                     'ForceExitBootServices': False,
                     'ProtectMemoryRegions': False,
-                    'ProtectSecureBoot': True,
+                    'ProtectSecureBoot': False,
                     'ProtectUefiServices': False,
                     'ProvideCustomSlide': False,
                     'ProvideMaxSlide': 0,
@@ -87,7 +87,7 @@ class OpenCoreBuild:
                     'AppleXcpmForceBoost': False,
                     'CustomSMBIOSGuid': False,
                     'DisableIoMapper': False,
-                    'DisableLinkeditJettison': True,
+                    'DisableLinkeditJettison': False,
                     'DisableRtcChecksum': False,
                     'ExtendBTFeatureFlags': False,
                     'ExternalDiskIcons': False,
@@ -97,7 +97,7 @@ class OpenCoreBuild:
                     'LegacyCommpage': False,
                     'PanicNoKextDump': False,
                     'PowerTimeoutKernelPanic': False,
-                    'SetApfsTrimTimeout': 9999999,
+                    'SetApfsTrimTimeout': -1,
                     'ThirdPartyDrives': False,
                     'XhciPortLimit': False
                 },
@@ -112,17 +112,17 @@ class OpenCoreBuild:
                 'Boot': {
                     'ConsoleAttributes': 0,
                     'HibernateMode': 'None',
-                    'HideAuxiliary': True,
+                    'HideAuxiliary': False,
                     'LauncherOption': 'Disabled',
                     'LauncherPath': 'Default',
                     'PickerAttributes': 0,
                     'PickerAudioAssist': False,
-                    'PickerMode': 'External',
+                    'PickerMode': 'Builtin',
                     'PickerVariant': 'Auto',
-                    'PollAppleHotKeys': True,
-                    'ShowPicker': False,
+                    'PollAppleHotKeys': False,
+                    'ShowPicker': True,
                     'TakeoffDelay': 0,
-                    'Timeout': 0
+                    'Timeout': 5
                 },
                 'Debug': {
                     'AppleDebug': False,
@@ -137,19 +137,19 @@ class OpenCoreBuild:
                 'Entries': [],
                 'Security': {
                     'AllowNvramReset': False,
-                    'AllowSetDefault': True,
+                    'AllowSetDefault': False,
                     'ApECID': 0,
                     'AuthRestart': False,
-                    'BlacklistAppleUpdate': True,
+                    'BlacklistAppleUpdate': False,
                     'DmgLoading': 'Signed',
                     'EnablePassword': False,
-                    'ExposeSensitiveData': 3,
+                    'ExposeSensitiveData': 6,
                     'HaltLevel': 2147483648,
                     'PasswordHash': Data(''),
                     'PasswordSalt': Data(''),
-                    'ScanPolicy': 0,
-                    'SecureBootModel': 'Disabled',
-                    'Vault': 'Optional'
+                    'ScanPolicy': 17760515,
+                    'SecureBootModel': 'Default',
+                    'Vault': 'Secure'
                 },
                 'Tools': []
             },
@@ -192,7 +192,16 @@ class OpenCoreBuild:
                     'SystemSerialNumber': '',
                     'SystemUUID': ''
                 },
-                'Memory': {},
+                'Memory': {
+                    'DataWidth': 0,
+                    'Devices': [],
+                    'ErrorCorrection': 3,
+                    'FormFactor': 2,
+                    'MaxCapacity': 0,
+                    'TotalWidth': 0,
+                    'Type': 2,
+                    'TypeDetail': 4
+                },
                 'PlatformNVRAM': {
                     'BID': '',
                     'FirmwareFeatures': Data(''),
@@ -230,9 +239,9 @@ class OpenCoreBuild:
                     'SystemUUID': '',
                     'SystemVersion': ''
                 },
-                'UpdateDataHub': False,
-                'UpdateNVRAM': False,
-                'UpdateSMBIOS': False,
+                'UpdateDataHub': True,
+                'UpdateNVRAM': True,
+                'UpdateSMBIOS': True,
                 'UpdateSMBIOSMode': 'Create',
                 'UseRawUuidEncoding': False
             },
@@ -251,16 +260,12 @@ class OpenCoreBuild:
                     'AudioOut': 0,
                     'AudioSupport': False,
                     'MinimumVolume': 0,
-                    'PlayChime': 'Disabled',
+                    'PlayChime': 'Auto',
                     'SetupDelay': 0,
                     'VolumeAmplifier': 0
                 },
-                'ConnectDrivers': True,
-                'Drivers': [
-                    'ExFatDxeLegacy.efi',
-                    'OpenCanopy.efi',
-                    'OpenRuntime.efi'
-                ],
+                'ConnectDrivers': False,
+                'Drivers': [],
                 'Input': {
                     'KeyFiltering': False,
                     'KeyForgetThreshold': 0,
@@ -278,17 +283,17 @@ class OpenCoreBuild:
                     'DirectGopRendering': False,
                     'ForceResolution': False,
                     'IgnoreTextInGraphics': False,
-                    'ProvideConsoleGop': True,
+                    'ProvideConsoleGop': False,
                     'ReconnectOnResChange': False,
                     'ReplaceTabWithSpace': False,
-                    'Resolution': 'Max',
+                    'Resolution': '',
                     'SanitiseClearScreen': False,
                     'TextRenderer': 'BuiltinGraphics',
                     'UgaPassThrough': False
                 },
                 'ProtocolOverrides': {
                     'AppleAudio': False,
-                    'AppleBootPolicy': True,
+                    'AppleBootPolicy': False,
                     'AppleDebugLog': False,
                     'AppleEvent': False,
                     'AppleFramebufferInfo': False,
@@ -298,7 +303,7 @@ class OpenCoreBuild:
                     'AppleRtcRam': False,
                     'AppleSecureBoot': False,
                     'AppleSmcIo': False,
-                    'AppleUserInterfaceTheme': True,
+                    'AppleUserInterfaceTheme': False,
                     'DataHub': False,
                     'DeviceProperties': False,
                     'FirmwareVolume': False,
@@ -311,7 +316,7 @@ class OpenCoreBuild:
                     'ExitBootServicesDelay': 0,
                     'IgnoreInvalidFlexRatio': False,
                     'ReleaseUsbOwnership': False,
-                    'RequestBootVarRouting': True,
+                    'RequestBootVarRouting': False,
                     'TscSyncTimeout': 0,
                     'UnblockFsConnect': False
                 },
@@ -502,7 +507,7 @@ class OpenCoreBuild:
 
         :return: Nothing
         """
-        self.print_bold('* Miscellaneous')
+        self.print_bold('* Miscellaneous Tasks')
         print('  - fixing file permissions...'),
         for root, directories, files in walk(self.directory):
             for i in directories:
@@ -514,7 +519,7 @@ class OpenCoreBuild:
         print('OK')
         directory = '{}/EFI/OC'.format(self.directory)
         print('  - validating config.plist...')
-        call('./ocvalidate {}/config.plist | grep -v Memory'.format(directory), shell = True)
+        call('./ocvalidate {}/config.plist'.format(directory), shell = True)
 
 
     def unhexlify(self, string):

@@ -25,6 +25,11 @@ if __name__ == '__main__':
     build.write_tree()
 
     settings = {
+        'Booter': {
+            'Quirks': {
+                'ProtectSecureBoot': True
+            }
+        },
         'DeviceProperties': {
             'Add': {
                 'PciRoot(0x0)/Pci(0x3,0x0)/Pci(0x0,0x0)': {
@@ -45,6 +50,29 @@ if __name__ == '__main__':
             'Emulate': {
                 'Cpuid1Data': build.unhexlify('00 00 00 00 00 00 00 00 00 00 00 80 00 00 00 00'),
                 'Cpuid1Mask': build.unhexlify('00 00 00 00 00 00 00 00 00 00 00 80 00 00 00 00')
+            },
+            'Quirks': {
+                'DisableLinkeditJettison': True,
+                'SetApfsTrimTimeout': 9999999
+            },
+            'Scheme': {
+                'KernelArch': 'x86_64'
+            }
+        },
+        'Misc': {
+            'Boot': {
+                'ConsoleAttributes': 15,
+                'HideAuxiliary': True,
+                'PollAppleHotKeys': True,
+                'PickerMode': 'External',
+                'ShowPicker': False
+            },
+            'Security': {
+                'BlacklistAppleUpdate': True,
+                'ExposeSensitiveData': 3,
+                'ScanPolicy': 0,
+                'SecureBootModel': 'Disabled',
+                'Vault': 'Optional'
             }
         },
         'NVRAM': {
@@ -66,7 +94,28 @@ if __name__ == '__main__':
                 'BIOSVersion': '9999.0.0.0.0',
                 'BoardProduct': 'Mac-7BA5B2D9E42DDD94'
             },
-            'UpdateSMBIOS': True
+            'UpdateDataHub': False,
+            'UpdateNVRAM': False
+        },
+        'UEFI': {
+            'ConnectDrivers': True,
+            'Drivers': [
+                'ExFatDxeLegacy.efi',
+                'OpenCanopy.efi',
+                'OpenRuntime.efi'
+            ],
+            'Output': {
+                'DirectGopRendering': True,
+                'ProvideConsoleGop': True,
+                'Resolution': 'Max'
+            },
+            'ProtocolOverrides': {
+                'AppleBootPolicy': True,
+                'AppleUserInterfaceTheme': True
+            },
+            'Quirks': {
+                'RequestBootVarRouting': True
+            }
         }
     }
     build.write_plist(settings)

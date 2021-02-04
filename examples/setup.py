@@ -45,7 +45,9 @@ if __name__ == '__main__':
             'Emulate': {
                 'Cpuid1Data': build.unhexlify('00 00 00 00 00 00 00 00 00 00 00 80 00 00 00 00'),
                 'Cpuid1Mask': build.unhexlify('00 00 00 00 00 00 00 00 00 00 00 80 00 00 00 00'),
-                'DummyPowerManagement': False
+                'DummyPowerManagement': False,
+                'MaxKernel': '',
+                'MinKernel': ''
             }
         },
         'Misc': {

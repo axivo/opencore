@@ -397,6 +397,8 @@ class OpenCoreBuild:
         source = '{}/X64/EFI'.format(self.directory)
         destination = '{}/EFI'.format(self.directory)
         self.copy_tree(source, destination)
+        copy2('{}/Utilities//ocvalidate/ocvalidate'.format(self.directory), './')
+        chmod('./ocvalidate', 0o755)
         for i in ['Docs', 'IA32', 'Utilities', 'X64']:
             rmtree('{}/{}'.format(self.directory, i))
         print('OK')

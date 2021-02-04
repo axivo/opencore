@@ -8,7 +8,7 @@ from multiprocessing import cpu_count
 from os import chmod, listdir, makedirs, path, remove, stat, walk
 from plistlib import Data, writePlist
 from shutil import copy2, rmtree
-from subprocess import check_output
+from subprocess import call, check_output
 from urllib2 import URLError, urlopen
 from zipfile import BadZipfile, ZipFile
 
@@ -71,7 +71,13 @@ class OpenCoreBuild:
             'Kernel': {
                 'Add': self.configure_kexts([i['project'] for i in self.kexts]),
                 'Block': [],
-                'Emulate': {},
+                'Emulate': {
+                    'Cpuid1Data': Data(''),
+                    'Cpuid1Mask': Data(''),
+                    'DummyPowerManagement': False,
+                    'MaxKernel': '',
+                    'MinKernel': ''
+                },
                 'Force': [],
                 'Patch': [],
                 'Quirks': {
@@ -111,7 +117,7 @@ class OpenCoreBuild:
                     'LauncherPath': 'Default',
                     'PickerAttributes': 0,
                     'PickerAudioAssist': False,
-                    'PickerMode': 'Builtin',
+                    'PickerMode': 'External',
                     'PickerVariant': 'Auto',
                     'PollAppleHotKeys': True,
                     'ShowPicker': False,
@@ -158,11 +164,72 @@ class OpenCoreBuild:
             'PlatformInfo': {
                 'Automatic': False,
                 'CustomMemory': False,
-                'DataHub': {},
-                'Generic': {},
+                'DataHub': {
+                    'ARTFrequency': 0,
+                    'BoardProduct': '',
+                    'BoardRevision': Data(''),
+                    'DevicePathsSupported': 0,
+                    'FSBFrequency': 0,
+                    'InitialTSC': 0,
+                    'PlatformName': '',
+                    'SmcBranch': Data(''),
+                    'SmcPlatform': Data(''),
+                    'SmcRevision': Data(''),
+                    'StartupPowerEvents': 0,
+                    'SystemProductName': '',
+                    'SystemSerialNumber': '',
+                    'SystemUUID': ''
+                },
+                'Generic': {
+                    'AdviseWindows': False,
+                    'MaxBIOSVersion': False,
+                    'MLB': '',
+                    'ProcessorType': 0,
+                    'ROM': Data(''),
+                    'SpoofVendor': False,
+                    'SystemMemoryStatus': 'Auto',
+                    'SystemProductName': '',
+                    'SystemSerialNumber': '',
+                    'SystemUUID': ''
+                },
                 'Memory': {},
-                'PlatformNVRAM': {},
-                'SMBIOS': {},
+                'PlatformNVRAM': {
+                    'BID': '',
+                    'FirmwareFeatures': Data(''),
+                    'FirmwareFeaturesMask': Data(''),
+                    'MLB': '',
+                    'ROM': Data(''),
+                    'SystemUUID': ''
+                },
+                'SMBIOS': {
+                    'BIOSReleaseDate': '',
+                    'BIOSVendor': '',
+                    'BIOSVersion': '',
+                    'BoardAssetTag': '',
+                    'BoardLocationInChassis': '',
+                    'BoardManufacturer': '',
+                    'BoardProduct': '',
+                    'BoardSerialNumber': '',
+                    'BoardType': 0,
+                    'BoardVersion': '',
+                    'ChassisAssetTag': '',
+                    'ChassisManufacturer': '',
+                    'ChassisSerialNumber': '',
+                    'ChassisType': 0,
+                    'ChassisVersion': '',
+                    'FirmwareFeatures': Data(''),
+                    'FirmwareFeaturesMask': Data(''),
+                    'PlatformFeature': 0,
+                    'ProcessorType': 0,
+                    'SmcVersion': Data(''),
+                    'SystemFamily': '',
+                    'SystemManufacturer': '',
+                    'SystemProductName': '',
+                    'SystemSKUNumber': '',
+                    'SystemSerialNumber': '',
+                    'SystemUUID': '',
+                    'SystemVersion': ''
+                },
                 'UpdateDataHub': False,
                 'UpdateNVRAM': False,
                 'UpdateSMBIOS': False,
@@ -445,6 +512,9 @@ class OpenCoreBuild:
                     remove(path.join(root, j))
                 chmod(path.join(root, j), 0o644)
         print('OK')
+        directory = '{}/EFI/OC'.format(self.directory)
+        print('  - validating config.plist...')
+        call('./ocvalidate {}/config.plist'.format(directory), shell = True)
 
 
     def unhexlify(self, string):

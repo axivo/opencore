@@ -514,7 +514,7 @@ class OpenCoreBuild:
         print('OK')
         directory = '{}/EFI/OC'.format(self.directory)
         print('  - validating config.plist...')
-        call('./ocvalidate {}/config.plist'.format(directory), shell = True)
+        call('./ocvalidate {}/config.plist | grep -v Memory'.format(directory), shell = True)
 
 
     def unhexlify(self, string):

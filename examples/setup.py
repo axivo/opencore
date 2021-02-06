@@ -94,8 +94,7 @@ if __name__ == '__main__':
                 'BIOSVersion': '9999.0.0.0.0',
                 'BoardProduct': 'Mac-7BA5B2D9E42DDD94'
             },
-            'UpdateDataHub': False,
-            'UpdateNVRAM': False
+            'UpdateSMBIOS': True
         },
         'UEFI': {
             'ConnectDrivers': True,

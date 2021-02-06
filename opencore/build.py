@@ -239,9 +239,9 @@ class OpenCoreBuild:
                     'SystemUUID': '',
                     'SystemVersion': ''
                 },
-                'UpdateDataHub': True,
-                'UpdateNVRAM': True,
-                'UpdateSMBIOS': True,
+                'UpdateDataHub': False,
+                'UpdateNVRAM': False,
+                'UpdateSMBIOS': False,
                 'UpdateSMBIOSMode': 'Create',
                 'UseRawUuidEncoding': False
             },

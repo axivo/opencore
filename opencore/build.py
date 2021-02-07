@@ -516,6 +516,7 @@ class OpenCoreBuild:
                 if j == '.DS_Store':
                     remove(path.join(root, j))
                 chmod(path.join(root, j), 0o644)
+        call('xattr -rc {}'.format(self.directory), shell = True)
         print('OK')
         directory = '{}/EFI/OC'.format(self.directory)
         print('  - validating config.plist...')

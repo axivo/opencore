@@ -520,6 +520,7 @@ class OpenCoreBuild:
         print('OK')
         directory = '{}/EFI/OC'.format(self.directory)
         print('  - validating config.plist...')
+        call('plutil -convert xml1 {}/config.plist'.format(directory), shell = True)
         call('./ocvalidate {}/config.plist'.format(directory), shell = True)
 
 

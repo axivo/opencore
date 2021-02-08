@@ -518,8 +518,8 @@ class OpenCoreBuild:
                 chmod(path.join(root, j), 0o644)
         call('xattr -rc {}'.format(self.directory), shell = True)
         print('OK')
-        directory = '{}/EFI/OC'.format(self.directory)
         print('  - validating config.plist...')
+        directory = '{}/EFI/OC'.format(self.directory)
         call('plutil -convert xml1 {}/config.plist'.format(directory), shell = True)
         call('./ocvalidate {}/config.plist'.format(directory), shell = True)
 

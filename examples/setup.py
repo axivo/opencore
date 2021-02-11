@@ -54,9 +54,6 @@ if __name__ == '__main__':
             'Quirks': {
                 'DisableLinkeditJettison': True,
                 'SetApfsTrimTimeout': 9999999
-            },
-            'Scheme': {
-                'KernelArch': 'x86_64'
             }
         },
         'Misc': {
@@ -92,7 +89,9 @@ if __name__ == '__main__':
         'PlatformInfo': {
             'SMBIOS': {
                 'BIOSVersion': '9999.0.0.0.0',
-                'BoardProduct': 'Mac-7BA5B2D9E42DDD94'
+                'BoardProduct': 'Mac-7BA5B2D9E42DDD94',
+                'FirmwareFeatures': build.unhexlify('03 54 0C E0'),
+                'FirmwareFeaturesMask': build.unhexlify('3F FF 1F FF')
             },
             'UpdateSMBIOS': True
         },

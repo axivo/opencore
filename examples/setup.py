@@ -54,9 +54,6 @@ if __name__ == '__main__':
             'Quirks': {
                 'DisableLinkeditJettison': True,
                 'SetApfsTrimTimeout': 9999999
-            },
-            'Scheme': {
-                'KernelArch': 'x86_64'
             }
         },
         'Misc': {

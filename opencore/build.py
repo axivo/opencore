@@ -2,8 +2,8 @@
 
 from binascii import Error, unhexlify
 from collections import Mapping
-from glob import glob
 from distutils.version import LooseVersion
+from glob import glob
 from io import BytesIO
 from multiprocessing import cpu_count
 from os import chmod, listdir, makedirs, path, remove, stat, walk

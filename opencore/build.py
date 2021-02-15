@@ -519,11 +519,10 @@ class OpenCoreBuild:
                 chmod(path.join(root, j), 0o644)
         call('xattr -rc {}'.format(self.directory), shell = True)
         print('OK')
-        if LooseVersion(self.version) > LooseVersion('0.6.5'):
+        file = '{}/EFI/OC/config.plist'.format(self.directory)
+        if path.isfile(file) and LooseVersion(self.version) > LooseVersion('0.6.5'):
             print('  - validating config.plist...')
-            directory = '{}/EFI/OC'.format(self.directory)
-            call('plutil -convert xml1 {}/config.plist'.format(directory), shell = True)
-            call('./ocvalidate {}/config.plist'.format(directory), shell = True)
+            call('./ocvalidate {}'.format(file), shell = True)
 
 
     def unhexlify(self, string):
@@ -576,6 +575,7 @@ class OpenCoreBuild:
             if not path.isdir(directory):
                 makedirs(directory)
             writePlist(self.settings, '{}/config.plist'.format(directory))
+            call('plutil -convert xml1 {}/config.plist'.format(directory), shell = True)
             print('OK')
 
 

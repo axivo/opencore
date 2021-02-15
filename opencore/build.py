@@ -3,6 +3,7 @@
 from binascii import Error, unhexlify
 from collections import Mapping
 from glob import glob
+from distutils.version import LooseVersion
 from io import BytesIO
 from multiprocessing import cpu_count
 from os import chmod, listdir, makedirs, path, remove, stat, walk
@@ -518,10 +519,11 @@ class OpenCoreBuild:
                 chmod(path.join(root, j), 0o644)
         call('xattr -rc {}'.format(self.directory), shell = True)
         print('OK')
-        print('  - validating config.plist...')
-        directory = '{}/EFI/OC'.format(self.directory)
-        call('plutil -convert xml1 {}/config.plist'.format(directory), shell = True)
-        call('./ocvalidate {}/config.plist'.format(directory), shell = True)
+        if LooseVersion(self.version) > LooseVersion('0.6.5'):
+            print('  - validating config.plist...')
+            directory = '{}/EFI/OC'.format(self.directory)
+            call('plutil -convert xml1 {}/config.plist'.format(directory), shell = True)
+            call('./ocvalidate {}/config.plist'.format(directory), shell = True)
 
 
     def unhexlify(self, string):

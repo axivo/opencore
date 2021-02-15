@@ -25,11 +25,6 @@ if __name__ == '__main__':
     build.write_tree()
 
     settings = {
-        'Booter': {
-            'Quirks': {
-                'ProtectSecureBoot': True
-            }
-        },
         'DeviceProperties': {
             'Add': {
                 'PciRoot(0x0)/Pci(0x3,0x0)/Pci(0x0,0x0)': {

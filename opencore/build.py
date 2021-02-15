@@ -55,7 +55,7 @@ class OpenCoreBuild:
                     'EnableWriteUnprotector': False,
                     'ForceExitBootServices': False,
                     'ProtectMemoryRegions': False,
-                    'ProtectSecureBoot': False,
+                    'ProtectSecureBoot': True,
                     'ProtectUefiServices': False,
                     'ProvideCustomSlide': False,
                     'ProvideMaxSlide': 0,

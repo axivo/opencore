@@ -73,8 +73,8 @@ class OpenCoreBuild:
                 'Add': self.configure_kexts([i['project'] for i in self.kexts]),
                 'Block': [],
                 'Emulate': {
-                    'Cpuid1Data': Data(''),
-                    'Cpuid1Mask': Data(''),
+                    'Cpuid1Data': self.unhexlify('00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00'),
+                    'Cpuid1Mask': self.unhexlify('00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00'),
                     'DummyPowerManagement': False,
                     'MaxKernel': '',
                     'MinKernel': ''

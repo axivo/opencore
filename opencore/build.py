@@ -483,9 +483,9 @@ class OpenCoreBuild:
             self.copy_tree(source, destination)
             print('OK')
 
+        print('  - copying OcBinaryData files...'),
         source = 'files/OcBinaryData'
         destination = '{}/EFI/OC'.format(self.directory)
-        print('  - copying OcBinaryData files...'),
         check_output(['git', 'submodule', 'update', '--init', '--remote', '--merge'])
         self.copy_tree('{}/Drivers'.format(source), '{}/Drivers'.format(destination))
         self.copy_tree('{}/Resources'.format(source), '{}/Resources'.format(destination))

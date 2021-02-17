@@ -9,7 +9,7 @@ from multiprocessing import cpu_count
 from os import chmod, listdir, makedirs, path, remove, stat, walk
 from plistlib import Data, writePlist
 from shutil import copy2, rmtree
-from subprocess import call, check_output
+from subprocess import check_output
 from urllib2 import URLError, urlopen
 from zipfile import BadZipfile, ZipFile
 
@@ -517,12 +517,12 @@ class OpenCoreBuild:
                 if j == '.DS_Store':
                     remove(path.join(root, j))
                 chmod(path.join(root, j), 0o644)
-        call('xattr -rc {}'.format(self.directory), shell = True)
+        check_output(['xattr', '-rc', self.directory])
         print('OK')
         file = '{}/EFI/OC/config.plist'.format(self.directory)
         if path.isfile(file) and LooseVersion(self.version) > LooseVersion('0.6.5'):
             print('  - validating config.plist...')
-            call('./ocvalidate {}'.format(file), shell = True)
+            check_output(['./ocvalidate', file])
 
 
     def unhexlify(self, string):
@@ -575,7 +575,7 @@ class OpenCoreBuild:
             if not path.isdir(directory):
                 makedirs(directory)
             writePlist(self.settings, '{}/config.plist'.format(directory))
-            call('plutil -convert xml1 {}/config.plist'.format(directory), shell = True)
+            check_output(['plutil', '-convert', 'xml1', '{}/config.plist'.format(directory)])
             print('OK')
 
 

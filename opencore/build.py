@@ -522,7 +522,7 @@ class OpenCoreBuild:
         file = '{}/EFI/OC/config.plist'.format(self.directory)
         if path.isfile(file) and LooseVersion(self.version) > LooseVersion('0.6.5'):
             print('  - validating config.plist...')
-            check_output(['./ocvalidate', file])
+            print(check_output(['./ocvalidate', file]))
 
 
     def unhexlify(self, string):

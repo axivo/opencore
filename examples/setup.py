@@ -42,10 +42,6 @@ if __name__ == '__main__':
             }
         },
         'Kernel': {
-            'Emulate': {
-                'Cpuid1Data': build.unhexlify('00 00 00 00 00 00 00 00 00 00 00 80 00 00 00 00'),
-                'Cpuid1Mask': build.unhexlify('00 00 00 00 00 00 00 00 00 00 00 80 00 00 00 00')
-            },
             'Quirks': {
                 'DisableLinkeditJettison': True,
                 'SetApfsTrimTimeout': 9999999

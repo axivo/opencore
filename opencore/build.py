@@ -230,7 +230,7 @@ class OpenCoreBuild:
                     'ChassisVersion': '',
                     'FirmwareFeatures': Data(''),
                     'FirmwareFeaturesMask': Data(''),
-                    'PlatformFeature': 0,
+                    'PlatformFeature': 4294967295,
                     'ProcessorType': 0,
                     'SmcVersion': Data(''),
                     'SystemFamily': '',

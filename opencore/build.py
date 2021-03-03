@@ -9,7 +9,7 @@ from multiprocessing import cpu_count
 from os import chmod, listdir, makedirs, path, remove, stat, walk
 from plistlib import Data, writePlist
 from shutil import copy2, rmtree
-from subprocess import CalledProcessError, check_output
+from subprocess import check_output
 from urllib2 import URLError, urlopen
 from zipfile import BadZipfile, ZipFile
 
@@ -209,7 +209,6 @@ class OpenCoreBuild:
                     'FirmwareFeaturesMask': Data(''),
                     'MLB': '',
                     'ROM': Data(''),
-                    'SystemSerialNumber': '',
                     'SystemUUID': ''
                 },
                 'SMBIOS': {
@@ -263,7 +262,6 @@ class OpenCoreBuild:
                     'AudioSupport': False,
                     'MinimumVolume': 0,
                     'PlayChime': 'Auto',
-                    'ResetTrafficClass': False,
                     'SetupDelay': 0,
                     'VolumeAmplifier': 0
                 },
@@ -272,6 +270,7 @@ class OpenCoreBuild:
                 'Input': {
                     'KeyFiltering': False,
                     'KeyForgetThreshold': 0,
+                    'KeyMergeThreshold': 0,
                     'KeySupport': False,
                     'KeySupportMode': 'Auto',
                     'KeySwap': False,
@@ -284,7 +283,6 @@ class OpenCoreBuild:
                     'ConsoleMode': '',
                     'DirectGopRendering': False,
                     'ForceResolution': False,
-                    'GopPassThrough': False,
                     'IgnoreTextInGraphics': False,
                     'ProvideConsoleGop': False,
                     'ReconnectOnResChange': False,
@@ -315,7 +313,6 @@ class OpenCoreBuild:
                     'UnicodeCollation': False
                 },
                 'Quirks': {
-                    'ActivateHpetSupport': False,
                     'DisableSecurityPolicy': False,
                     'ExitBootServicesDelay': 0,
                     'IgnoreInvalidFlexRatio': False,
@@ -327,7 +324,7 @@ class OpenCoreBuild:
                 'ReservedMemory': []
             }
         }
-        self.version = '0.6.7'
+        self.version = '0.6.6'
 
 
     def configure_kexts(self, kexts=[]):
@@ -487,12 +484,9 @@ class OpenCoreBuild:
             print('OK')
 
         print('  - copying OcBinaryData files...'),
-        try:
-            check_output(['git', 'submodule', 'update', '--init', '--remote', '--merge'])
-        except CalledProcessError as e:
-            print(e.output)
         source = 'files/OcBinaryData'
         destination = '{}/EFI/OC'.format(self.directory)
+        check_output(['git', 'submodule', 'update', '--init', '--remote', '--merge'])
         self.copy_tree('{}/Drivers'.format(source), '{}/Drivers'.format(destination))
         self.copy_tree('{}/Resources'.format(source), '{}/Resources'.format(destination))
         print('OK')
@@ -523,10 +517,7 @@ class OpenCoreBuild:
                 if j == '.DS_Store':
                     remove(path.join(root, j))
                 chmod(path.join(root, j), 0o644)
-        try:
-            check_output(['xattr', '-rc', self.directory])
-        except CalledProcessError as e:
-            print(e.output)
+        check_output(['xattr', '-rc', self.directory])
         print('OK')
         file = '{}/EFI/OC/config.plist'.format(self.directory)
         if path.isfile(file) and LooseVersion(self.version) > LooseVersion('0.6.5'):
@@ -584,10 +575,7 @@ class OpenCoreBuild:
             if not path.isdir(directory):
                 makedirs(directory)
             writePlist(self.settings, '{}/config.plist'.format(directory))
-            try:
-                check_output(['plutil', '-convert', 'xml1', '{}/config.plist'.format(directory)])
-            except CalledProcessError as e:
-                print(e.output)
+            check_output(['plutil', '-convert', 'xml1', '{}/config.plist'.format(directory)])
             print('OK')
 
 

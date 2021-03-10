@@ -97,7 +97,6 @@ if __name__ == '__main__':
                 'OpenRuntime.efi'
             ],
             'Output': {
-                'DirectGopRendering': True,
                 'ProvideConsoleGop': True,
                 'Resolution': 'Max'
             },

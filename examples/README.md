@@ -8,7 +8,7 @@ The setup file used in this example implements the following customizations:
 - Software Updates enabled (VMM flag set to On with `Cpuid1Mask`)
 - Night Shift enabled
 
-For various setting changes, consult the OpenCore [documentation](../../../../acidanthera/OpenCorePkg/tree/master/Docs) and the [wiki](../wiki).
+For various setting changes, consult the OpenCore [documentation](../../../../acidanthera/OpenCorePkg/tree/master/Docs) and the [wiki](../../../wiki).
 
 For example, if you don't have a Pulse RX580 GPU, add the `DirectGopRendering` key into configuration and set its value to `True` (defaults to failsafe `False` value):
 

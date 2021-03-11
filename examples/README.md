@@ -13,10 +13,11 @@ For various setting changes, consult the OpenCore [documentation](../../../../ac
 For example, if you don't have a Pulse RX580 GPU, add the `DirectGopRendering` key into configuration and set its value to `True` (defaults to failsafe `False` value):
 
 ```python
-        'UEFI': {
-                'DirectGopRendering': True,
-                'ProvideConsoleGop': True,
-                'Resolution': 'Max'
-            }
-        }
+'UEFI': {
+    'Output': {
+        'DirectGopRendering': True,
+        'ProvideConsoleGop': True,
+        'Resolution': 'Max'
+    }
+}
 ```

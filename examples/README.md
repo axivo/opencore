@@ -14,6 +14,7 @@ For example, if you don't have a Pulse RX580 GPU, add the `DirectGopRendering` k
 
 ```python
         'UEFI': {
+            'Output': {
                 'DirectGopRendering': True,
                 'ProvideConsoleGop': True,
                 'Resolution': 'Max'

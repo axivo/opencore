@@ -10,7 +10,7 @@ The setup file used in this example implements the following customizations:
 
 For various setting changes, consult the OpenCore [documentation](../../../../acidanthera/OpenCorePkg/tree/master/Docs) and the [wiki](../../../wiki).
 
-For example, if you don't have a Pulse RX580 GPU, add the `DirectGopRendering` key into configuration and set its value to `True` (defaults to failsafe `False` value):
+For example, if you have a Radeon VII or 5700 XT GPU installed instead of a Pulse RX580, add the `DirectGopRendering` key into configuration and set its value to `True` (defaults to failsafe `False` value):
 
 ```python
         'UEFI': {

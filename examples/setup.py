@@ -70,7 +70,7 @@ if __name__ == '__main__':
             'Add': {
                 '4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14': {
                     'DefaultBackgroundColor': build.unhexlify('00 00 00 00'),
-                    'UIScale': build.unhexlify('02')
+                    'UIScale': build.unhexlify('01')
                 }
             },
             'Delete': {

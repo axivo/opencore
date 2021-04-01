@@ -59,6 +59,7 @@ if __name__ == '__main__':
                 'ShowPicker': False
             },
             'Security': {
+                'AllowSetDefault': True,
                 'BlacklistAppleUpdate': True,
                 'ExposeSensitiveData': 3,
                 'ScanPolicy': 0,

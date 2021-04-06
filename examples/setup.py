@@ -8,7 +8,7 @@ if __name__ == '__main__':
         {
             'project': 'Lilu',
             'repo': 'acidanthera',
-            'version': '1.5.1'
+            'version': '1.5.2'
         },
         {
             'project': 'NightShiftEnabler',
@@ -18,7 +18,7 @@ if __name__ == '__main__':
         {
             'project': 'WhateverGreen',
             'repo': 'acidanthera',
-            'version': '1.4.8'
+            'version': '1.4.9'
         }
     ]
     build = OpenCoreBuild('Volumes/EFI', kexts)
@@ -91,6 +91,10 @@ if __name__ == '__main__':
             'UpdateSMBIOS': True
         },
         'UEFI': {
+            'AppleInput': {
+                'AppleEvent': 'Builtin',
+                'CustomDelays': 'Disabled'
+            },
             'ConnectDrivers': True,
             'Drivers': [
                 'ExFatDxeLegacy.efi',

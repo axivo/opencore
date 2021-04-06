@@ -53,6 +53,7 @@ class OpenCoreBuild:
                     'DiscardHibernateMap': False,
                     'EnableSafeModeSlide': False,
                     'EnableWriteUnprotector': False,
+                    'ForceBooterSignature': False,
                     'ForceExitBootServices': False,
                     'ProtectMemoryRegions': False,
                     'ProtectSecureBoot': True,
@@ -256,6 +257,14 @@ class OpenCoreBuild:
                     'MinDate': 0,
                     'MinVersion': 0
                 },
+                'AppleInput': {
+                    'AppleEvent': 'Auto',
+                    'CustomDelays': 'Auto',
+                    'KeyInitialDelay': 0,
+                    'KeySubsequentDelay': 0,
+                    'PointerSpeedDiv': 1,
+                    'PointerSpeedMul': 1
+                },
                 'Audio': {
                     'AudioCodec': 0,
                     'AudioDevice': '',
@@ -298,7 +307,6 @@ class OpenCoreBuild:
                     'AppleAudio': False,
                     'AppleBootPolicy': False,
                     'AppleDebugLog': False,
-                    'AppleEvent': False,
                     'AppleFramebufferInfo': False,
                     'AppleImageConversion': False,
                     'AppleImg4Verification': False,
@@ -327,7 +335,7 @@ class OpenCoreBuild:
                 'ReservedMemory': []
             }
         }
-        self.version = '0.6.7'
+        self.version = '0.6.8'
 
 
     def configure_kexts(self, kexts=[]):

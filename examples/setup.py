@@ -92,8 +92,7 @@ if __name__ == '__main__':
         },
         'UEFI': {
             'AppleInput': {
-                'AppleEvent': 'Builtin',
-                'CustomDelays': 'Disabled'
+                'AppleEvent': 'Builtin'
             },
             'ConnectDrivers': True,
             'Drivers': [

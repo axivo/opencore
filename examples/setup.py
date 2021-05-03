@@ -8,7 +8,7 @@ if __name__ == '__main__':
         {
             'project': 'Lilu',
             'repo': 'acidanthera',
-            'version': '1.5.2'
+            'version': '1.5.3'
         },
         {
             'project': 'NightShiftEnabler',

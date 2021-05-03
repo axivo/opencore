@@ -259,7 +259,7 @@ class OpenCoreBuild:
                 },
                 'AppleInput': {
                     'AppleEvent': 'Auto',
-                    'CustomDelays': 'Auto',
+                    'CustomDelays': False,
                     'KeyInitialDelay': 0,
                     'KeySubsequentDelay': 0,
                     'PointerSpeedDiv': 1,
@@ -324,10 +324,13 @@ class OpenCoreBuild:
                 },
                 'Quirks': {
                     'ActivateHpetSupport': False,
+                    'EnableVectorAcceleration': False,
                     'DisableSecurityPolicy': False,
                     'ExitBootServicesDelay': 0,
+                    'ForgeUefiSupport': False,
                     'IgnoreInvalidFlexRatio': False,
                     'ReleaseUsbOwnership': False,
+                    'ReloadOptionRoms': False,
                     'RequestBootVarRouting': False,
                     'TscSyncTimeout': 0,
                     'UnblockFsConnect': False
@@ -335,7 +338,7 @@ class OpenCoreBuild:
                 'ReservedMemory': []
             }
         }
-        self.version = '0.6.8'
+        self.version = '0.6.9'
 
 
     def configure_kexts(self, kexts=[]):

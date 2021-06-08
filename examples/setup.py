@@ -18,7 +18,7 @@ if __name__ == '__main__':
         {
             'project': 'WhateverGreen',
             'repo': 'acidanthera',
-            'version': '1.4.9'
+            'version': '1.5.0'
         }
     ]
     build = OpenCoreBuild('Volumes/EFI', kexts)

@@ -99,6 +99,7 @@ class OpenCoreBuild:
                     'LegacyCommpage': False,
                     'PanicNoKextDump': False,
                     'PowerTimeoutKernelPanic': False,
+                    'ProvideCurrentCpuInfo': False,
                     'SetApfsTrimTimeout': -1,
                     'ThirdPartyDrives': False,
                     'XhciPortLimit': False
@@ -140,6 +141,7 @@ class OpenCoreBuild:
                 'Security': {
                     'AllowNvramReset': False,
                     'AllowSetDefault': False,
+                    'AllowToggleSip': False,
                     'ApECID': 0,
                     'AuthRestart': False,
                     'BlacklistAppleUpdate': False,
@@ -183,7 +185,7 @@ class OpenCoreBuild:
                     'SystemUUID': ''
                 },
                 'Generic': {
-                    'AdviseWindows': False,
+                    'AdviseFeatures': False,
                     'MaxBIOSVersion': False,
                     'MLB': '',
                     'ProcessorType': 0,
@@ -293,7 +295,7 @@ class OpenCoreBuild:
                     'ConsoleMode': '',
                     'DirectGopRendering': False,
                     'ForceResolution': False,
-                    'GopPassThrough': False,
+                    'GopPassThrough': 'Disabled',
                     'IgnoreTextInGraphics': False,
                     'ProvideConsoleGop': False,
                     'ReconnectOnResChange': False,
@@ -307,6 +309,7 @@ class OpenCoreBuild:
                     'AppleAudio': False,
                     'AppleBootPolicy': False,
                     'AppleDebugLog': False,
+                    'AppleEg2Info': False,
                     'AppleFramebufferInfo': False,
                     'AppleImageConversion': False,
                     'AppleImg4Verification': False,
@@ -338,7 +341,7 @@ class OpenCoreBuild:
                 'ReservedMemory': []
             }
         }
-        self.version = '0.6.9'
+        self.version = '0.7.0'
 
 
     def configure_kexts(self, kexts=[]):

@@ -8,7 +8,7 @@ if __name__ == '__main__':
         {
             'project': 'Lilu',
             'repo': 'acidanthera',
-            'version': '1.5.3'
+            'version': '1.5.4'
         },
         {
             'project': 'NightShiftEnabler',
@@ -18,7 +18,7 @@ if __name__ == '__main__':
         {
             'project': 'WhateverGreen',
             'repo': 'acidanthera',
-            'version': '1.5.0'
+            'version': '1.5.1'
         }
     ]
     build = OpenCoreBuild('Volumes/EFI', kexts)

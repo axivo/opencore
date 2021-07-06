@@ -11,9 +11,9 @@ if __name__ == '__main__':
             'version': '1.5.4'
         },
         {
-            'project': 'NightShiftEnabler',
-            'repo': 'cdf',
-            'version': '1.1.0'
+            'project': 'SidecarFixup',
+            'repo': 'acidanthera',
+            'version': '1.0.2'
         },
         {
             'project': 'WhateverGreen',

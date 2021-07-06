@@ -38,7 +38,8 @@ class OpenCoreBuild:
                     'NormalizeHeaders': False,
                     'RebaseRegions': False,
                     'ResetHwSig': False,
-                    'ResetLogoStatus': False
+                    'ResetLogoStatus': False,
+                    'SyncTableIds': False
                 }
             },
             'Booter': {
@@ -105,6 +106,7 @@ class OpenCoreBuild:
                     'XhciPortLimit': False
                 },
                 'Scheme': {
+                    'CustomKernel': False,
                     'FuzzyMatch': False,
                     'KernelArch': 'Auto',
                     'KernelCache': 'Auto'
@@ -341,7 +343,7 @@ class OpenCoreBuild:
                 'ReservedMemory': []
             }
         }
-        self.version = '0.7.0'
+        self.version = '0.7.1'
 
 
     def configure_kexts(self, kexts=[]):

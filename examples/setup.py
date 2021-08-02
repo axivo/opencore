@@ -84,9 +84,7 @@ if __name__ == '__main__':
         'PlatformInfo': {
             'SMBIOS': {
                 'BIOSVersion': '9999.0.0.0.0',
-                'BoardProduct': 'Mac-7BA5B2D9E42DDD94',
-                'FirmwareFeatures': build.unhexlify('03 54 0C E0'),
-                'FirmwareFeaturesMask': build.unhexlify('3F FF 1F FF')
+                'BoardProduct': 'Mac-7BA5B2D9E42DDD94'
             },
             'UpdateSMBIOS': True
         },

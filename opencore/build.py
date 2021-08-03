@@ -264,8 +264,9 @@ class OpenCoreBuild:
                 'AppleInput': {
                     'AppleEvent': 'Auto',
                     'CustomDelays': False,
-                    'KeyInitialDelay': 0,
-                    'KeySubsequentDelay': 0,
+                    'KeyInitialDelay': 50,
+                    'KeySubsequentDelay': 5,
+                    'GraphicsInputMirroring': False,
                     'PointerSpeedDiv': 1,
                     'PointerSpeedMul': 1
                 },
@@ -343,7 +344,7 @@ class OpenCoreBuild:
                 'ReservedMemory': []
             }
         }
-        self.version = '0.7.1'
+        self.version = '0.7.2'
 
 
     def configure_kexts(self, kexts=[]):

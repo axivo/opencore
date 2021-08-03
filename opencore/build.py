@@ -357,7 +357,6 @@ class OpenCoreBuild:
         result = []
         if cpu_count > 15:
             kexts.append('AppleMCEReporterDisabler')
-        kexts.sort()
         for i in kexts:
             kext = {
                 'Arch': 'x86_64',

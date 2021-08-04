@@ -495,13 +495,6 @@ class OpenCoreBuild:
             rmtree('{}/{}'.format(self.directory, i))
         print('OK')
 
-        if cpu_count() > 15:
-            print('  - installing AppleMCEReporterDisabler kext...'),
-            source = 'files/AppleMCEReporterDisabler.kext'
-            destination = '{}/EFI/OC/Kexts/AppleMCEReporterDisabler.kext'.format(self.directory)
-            self.copy_tree(source, destination)
-            print('OK')
-
         print('  - copying OcBinaryData files...'),
         try:
             check_output(['git', 'submodule', 'update', '--init', '--remote', '--merge'])
@@ -615,5 +608,12 @@ class OpenCoreBuild:
         :return: Nothing
         """
         self.install_opencore(self.version, debug)
+        if cpu_count > 15:
+            kext = {
+                'project': 'AppleMCEReporterDisabler',
+                'repo': 'acidanthera',
+                'version': '1.0.0'
+            }
+            self.kexts.append(kext)
         for i in self.kexts:
             self.install_kext(i['repo'], i['project'], i['version'], debug)

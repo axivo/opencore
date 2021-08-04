@@ -356,7 +356,7 @@ class OpenCoreBuild:
         """
         result = []
         if cpu_count > 15:
-            kexts.append('AppleMCEReporterDisabler')
+            kexts.insert(0, 'AppleMCEReporterDisabler')
         for i in kexts:
             kext = {
                 'Arch': 'x86_64',
@@ -614,6 +614,6 @@ class OpenCoreBuild:
                 'repo': 'acidanthera',
                 'version': '1.0.0'
             }
-            self.kexts.append(kext)
+            self.kexts.insert(0, kext)
         for i in self.kexts:
             self.install_kext(i['repo'], i['project'], i['version'], debug)

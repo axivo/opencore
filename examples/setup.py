@@ -16,6 +16,11 @@ if __name__ == '__main__':
             'version': '1.0.3'
         },
         {
+            'project': 'latebloom',
+            'repo': 'macrumors',
+            'version': '0.19'
+        },
+        {
             'project': 'WhateverGreen',
             'repo': 'acidanthera',
             'version': '1.5.2'

@@ -5,7 +5,8 @@ The setup file used in this example implements the following customizations:
 - OpenCanopy implementation on a black boot screen
 - Pulse RX580 GPU hardware acceleration support, through iMac Pro hybridization (system specific device path)
 - NVMe external disks displayed as internal disks (system specific device path)
-- Night Shift enabled with `SidecarFixup` Lilu plugin
+- Night Shift enabled with `FeatureUnlock` Lilu plugin
+- Experimental `Latebloom` fix for macOS Big Sur 11.3+ race condition
 - Software Updates enabled
 
 ## Quick Setting Changes

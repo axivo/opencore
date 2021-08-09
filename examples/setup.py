@@ -6,6 +6,11 @@ from opencore.build import OpenCoreBuild
 if __name__ == '__main__':
     kexts = [
         {
+            'project': 'latebloom',
+            'repo': 'macrumors',
+            'version': '0.19'
+        },
+        {
             'project': 'Lilu',
             'repo': 'acidanthera',
             'version': '1.5.5'
@@ -14,11 +19,6 @@ if __name__ == '__main__':
             'project': 'FeatureUnlock',
             'repo': 'acidanthera',
             'version': '1.0.3'
-        },
-        {
-            'project': 'latebloom',
-            'repo': 'macrumors',
-            'version': '0.19'
         },
         {
             'project': 'WhateverGreen',
@@ -61,7 +61,7 @@ if __name__ == '__main__':
                 'HideAuxiliary': True,
                 'PollAppleHotKeys': True,
                 'PickerMode': 'External',
-                'ShowPicker': False
+                'ShowPicker': True
             },
             'Security': {
                 'AllowSetDefault': True,

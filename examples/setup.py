@@ -68,7 +68,6 @@ if __name__ == '__main__':
                 'BlacklistAppleUpdate': True,
                 'ExposeSensitiveData': 3,
                 'ScanPolicy': 0,
-                'SecureBootModel': 'Disabled',
                 'Vault': 'Optional'
             }
         },

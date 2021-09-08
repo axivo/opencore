@@ -333,6 +333,7 @@ class OpenCoreBuild:
                     'EnableVectorAcceleration': False,
                     'DisableSecurityPolicy': False,
                     'ExitBootServicesDelay': 0,
+                    'ForceOcWriteFlash': False,
                     'ForgeUefiSupport': False,
                     'IgnoreInvalidFlexRatio': False,
                     'ReleaseUsbOwnership': False,
@@ -344,7 +345,7 @@ class OpenCoreBuild:
                 'ReservedMemory': []
             }
         }
-        self.version = '0.7.2'
+        self.version = '0.7.3'
 
 
     def configure_kexts(self, kexts=[]):

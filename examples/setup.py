@@ -8,12 +8,12 @@ if __name__ == '__main__':
         {
             'project': 'latebloom',
             'repo': 'macrumors',
-            'version': '0.19'
+            'version': '0.20'
         },
         {
             'project': 'Lilu',
             'repo': 'acidanthera',
-            'version': '1.5.5'
+            'version': '1.5.6'
         },
         {
             'project': 'FeatureUnlock',
@@ -23,7 +23,7 @@ if __name__ == '__main__':
         {
             'project': 'WhateverGreen',
             'repo': 'acidanthera',
-            'version': '1.5.2'
+            'version': '1.5.3'
         }
     ]
     build = OpenCoreBuild('Volumes/EFI', kexts)

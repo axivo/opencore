@@ -98,9 +98,16 @@ if __name__ == '__main__':
             },
             'ConnectDrivers': True,
             'Drivers': [
-                'ExFatDxeLegacy.efi',
-                'OpenCanopy.efi',
-                'OpenRuntime.efi'
+                {
+                    'Path': 'OpenCanopy.efi',
+                    'Enabled': True,
+                    'Arguments': ''
+                },
+                {
+                    'Path': 'OpenRuntime.efi',
+                    'Enabled': True,
+                    'Arguments': ''
+                }
             ],
             'Output': {
                 'ProvideConsoleGop': True,

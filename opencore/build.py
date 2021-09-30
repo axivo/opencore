@@ -360,7 +360,7 @@ class OpenCoreBuild:
             kexts.insert(0, 'AppleMCEReporterDisabler')
         if kexts:
             for i in kexts:
-                kext = {
+                properties = {
                     'Arch': 'x86_64',
                     'BundlePath': '{}.kext'.format(i),
                     'Comment': '',
@@ -371,8 +371,8 @@ class OpenCoreBuild:
                     'PlistPath': 'Contents/Info.plist'
                 }
                 if i == 'AppleMCEReporterDisabler':
-                    kext['ExecutablePath'] = ''
-                result.append(dict(kext))
+                    properties['ExecutablePath'] = ''
+                result.append(dict(properties))
 
         return result
 
@@ -387,7 +387,25 @@ class OpenCoreBuild:
         result = []
         if patches:
             for i in patches:
-                result.append(dict(i))
+                properties = {
+                    'Arch': 'x86_64',
+                    'Base': '',
+                    'Comment': '',
+                    'Count': 1,
+                    'Enabled': True,
+                    'Find': Data(''),
+                    'Identifier': '',
+                    'Limit': 0,
+                    'Mask': Data(''),
+                    'MaxKernel': '',
+                    'MinKernel': '',
+                    'Replace': Data(''),
+                    'ReplaceMask': Data(''),
+                    'Skip': 0
+                }
+                for key, value in i.items():
+                    properties[key] = value
+                result.append(dict(properties))
 
         return result
 

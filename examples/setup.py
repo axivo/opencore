@@ -4,12 +4,8 @@ from opencore.build import OpenCoreBuild
 
 
 if __name__ == '__main__':
-    kexts = [
-        {
-            'project': 'latebloom',
-            'repo': 'macrumors',
-            'version': '0.20'
-        },
+    build = OpenCoreBuild('Volumes/EFI')
+    build.kexts = [
         {
             'project': 'Lilu',
             'repo': 'acidanthera',
@@ -26,7 +22,40 @@ if __name__ == '__main__':
             'version': '1.5.3'
         }
     ]
-    build = OpenCoreBuild('Volumes/EFI', kexts)
+    build.patches = [
+        {
+            'Arch': 'x86_64',
+            'Base': '_early_random',
+            'Comment': '',
+            'Count': 1,
+            'Enabled': True,
+            'Find': build.unhexlify('00 74 23 48 8B'),
+            'Identifier': 'kernel',
+            'Limit': 800,
+            'Mask': build.unhexlify(''),
+            'MaxKernel': '',
+            'MinKernel': '20.4.0',
+            'Replace': build.unhexlify('00 EB 23 48 8B'),
+            'ReplaceMask': build.unhexlify(''),
+            'Skip': 0
+        },
+        {
+            'Arch': 'x86_64',
+            'Base': '_register_and_init_prng',
+            'Comment': '',
+            'Count': 1,
+            'Enabled': True,
+            'Find': build.unhexlify('BA 48 01 00 00 31 F6'),
+            'Identifier': 'kernel',
+            'Limit': 256,
+            'Mask': build.unhexlify(''),
+            'MaxKernel': '',
+            'MinKernel': '20.4.0',
+            'Replace': build.unhexlify('BA 48 01 00 00 EB 05'),
+            'ReplaceMask': build.unhexlify(''),
+            'Skip': 0
+        }
+    ]
     build.write_tree()
 
     settings = {
@@ -47,6 +76,8 @@ if __name__ == '__main__':
             }
         },
         'Kernel': {
+            'Add': build.configure_kexts([i['project'] for i in build.kexts]),
+            'Patch': build.configure_patches(build.patches),
             'Quirks': {
                 'DisableLinkeditJettison': True,
                 'SetApfsTrimTimeout': 9999999

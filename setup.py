@@ -4,8 +4,9 @@ from opencore.build import OpenCoreBuild
 
 
 if __name__ == '__main__':
-    kexts = []
-    build = OpenCoreBuild('Volumes/EFI', kexts)
+    build = OpenCoreBuild('Volumes/EFI')
+    build.kexts = []
+    build.patches = []
     build.write_tree()
 
     settings = {}

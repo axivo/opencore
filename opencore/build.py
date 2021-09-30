@@ -18,16 +18,16 @@ class OpenCoreBuild:
     """
     OpenCoreBuild generates the EFI tree and config.plist file.
     """
-    def __init__(self, directory, kexts=[]):
+    def __init__(self, directory):
         """
         Constructs a new 'OpenCoreBuild' object.
 
         :param directory: Path of the build directory
-        :param kexts: List of kexts to be installed
         :return: Nothing
         """
         self.directory = directory
-        self.kexts = kexts
+        self.kexts = []
+        self.patches = []
         self.settings = {
             'ACPI': {
                 'Add': [],
@@ -72,7 +72,7 @@ class OpenCoreBuild:
                 'Delete': {}
             },
             'Kernel': {
-                'Add': self.configure_kexts([i['project'] for i in self.kexts]),
+                'Add': [],
                 'Block': [],
                 'Emulate': {
                     'Cpuid1Data': self.unhexlify('00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00'),
@@ -350,28 +350,44 @@ class OpenCoreBuild:
 
     def configure_kexts(self, kexts=[]):
         """
-        Configures the kext settings.
+        Inserts kexts into kernel 'Add' data settings.
 
         :param kexts: List of kexts to be configured
-        :return: Kext dictionaries
+        :return: List of Kext dictionaries
         """
         result = []
-        if cpu_count > 15:
+        if 'AppleMCEReporterDisabler' not in kexts and cpu_count > 15:
             kexts.insert(0, 'AppleMCEReporterDisabler')
-        for i in kexts:
-            kext = {
-                'Arch': 'x86_64',
-                'BundlePath': '{}.kext'.format(i),
-                'Comment': '',
-                'Enabled': True,
-                'ExecutablePath': 'Contents/MacOS/{}'.format(i),
-                'MaxKernel': '',
-                'MinKernel': '',
-                'PlistPath': 'Contents/Info.plist'
-            }
-            if i == 'AppleMCEReporterDisabler':
-                kext['ExecutablePath'] = ''
-            result.append(dict(kext))
+        if kexts:
+            for i in kexts:
+                kext = {
+                    'Arch': 'x86_64',
+                    'BundlePath': '{}.kext'.format(i),
+                    'Comment': '',
+                    'Enabled': True,
+                    'ExecutablePath': 'Contents/MacOS/{}'.format(i),
+                    'MaxKernel': '',
+                    'MinKernel': '',
+                    'PlistPath': 'Contents/Info.plist'
+                }
+                if i == 'AppleMCEReporterDisabler':
+                    kext['ExecutablePath'] = ''
+                result.append(dict(kext))
+
+        return result
+
+
+    def configure_patches(self, patches=[]):
+        """
+        Inserts patches into kernel 'Patch' data settings.
+
+        :param patches: List of patches to be applied
+        :return: List of Patch dictionaries
+        """
+        result = []
+        if patches:
+            for i in patches:
+                result.append(dict(i))
 
         return result
 
@@ -541,7 +557,10 @@ class OpenCoreBuild:
         file = '{}/EFI/OC/config.plist'.format(self.directory)
         if path.isfile(file) and LooseVersion(self.version) > LooseVersion('0.6.5'):
             print('  - validating config.plist...')
-            print(check_output(['./ocvalidate', file]))
+            try:
+                print(check_output(['./ocvalidate', file]))
+            except CalledProcessError as e:
+                print(e.output)
 
 
     def unhexlify(self, string):

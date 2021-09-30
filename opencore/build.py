@@ -352,8 +352,8 @@ class OpenCoreBuild:
         """
         Inserts kexts into kernel 'Add' data settings.
 
-        :param kexts: List of kexts to be configured
-        :return: List of Kext dictionaries
+        :param kexts: List of kext properties to be applied
+        :return: List of dictionaries
         """
         result = []
         if 'AppleMCEReporterDisabler' not in kexts and cpu_count > 15:
@@ -381,8 +381,8 @@ class OpenCoreBuild:
         """
         Inserts patches into kernel 'Patch' data settings.
 
-        :param patches: List of patches to be applied
-        :return: List of Patch dictionaries
+        :param patches: List of patch properties to be applied
+        :return: List of dictionaries
         """
         result = []
         if patches:

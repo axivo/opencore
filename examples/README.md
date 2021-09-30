@@ -6,7 +6,7 @@ The setup file used in this example implements the following customizations:
 - Pulse RX580 GPU hardware acceleration support, through iMac Pro hybridization (system specific device path)
 - NVMe external disks displayed as internal disks (system specific device path)
 - Night Shift enabled with `FeatureUnlock` Lilu plugin
-- SurPlus patch, enabling the `rdrand` CPU instruction
+- [SurPlus patch](../../../../reenigneorcim/SurPlus), enabling the `rdrand` CPU instruction
 - Software updates enabled
 
 ## Quick Setting Changes

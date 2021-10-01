@@ -372,7 +372,7 @@ class OpenCoreBuild:
                 }
                 if i == 'AppleMCEReporterDisabler':
                     properties['ExecutablePath'] = ''
-                result.append(dict(properties))
+                result.append(properties)
 
         return result
 
@@ -405,7 +405,7 @@ class OpenCoreBuild:
                 }
                 for key, value in i.items():
                     properties[key] = value
-                result.append(dict(properties))
+                result.append(properties)
 
         return result
 

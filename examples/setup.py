@@ -60,8 +60,6 @@ if __name__ == '__main__':
             }
         },
         'Kernel': {
-            'Add': build.configure_kexts([i['project'] for i in build.kexts]),
-            'Patch': build.configure_patches(build.patches),
             'Quirks': {
                 'DisableLinkeditJettison': True,
                 'SetApfsTrimTimeout': 9999999

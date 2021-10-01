@@ -605,6 +605,11 @@ class OpenCoreBuild:
         :return: Dictionary of settings
         """
         for key, value in settings.iteritems():
+            if key == 'Kernel':
+                kexts = self.configure_kexts([i['project'] for i in self.kexts])
+                settings[key].update({'Add': kexts})
+                patches = self.configure_patches(self.patches)
+                settings[key].update({'Patch': patches})
             if isinstance(value, Mapping):
                 result[key] = self.update_settings(result.get(key, {}), value)
             else:

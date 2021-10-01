@@ -362,10 +362,10 @@ class OpenCoreBuild:
             for i in kexts:
                 properties = {
                     'Arch': 'x86_64',
-                    'BundlePath': '{}.kext'.format(i),
+                    'BundlePath': '{0}.kext'.format(i),
                     'Comment': '',
                     'Enabled': True,
-                    'ExecutablePath': 'Contents/MacOS/{}'.format(i),
+                    'ExecutablePath': 'Contents/MacOS/{0}'.format(i),
                     'MaxKernel': '',
                     'MinKernel': '',
                     'PlistPath': 'Contents/Info.plist'
@@ -475,21 +475,21 @@ class OpenCoreBuild:
         :param debug: Install DEBUG release
         :return: Nothing
         """
-        directory = '{}/EFI/OC/Kexts'.format(self.directory)
+        directory = '{0}/EFI/OC/Kexts'.format(self.directory)
         release_type = 'DEBUG' if debug else 'RELEASE'
-        release = '{}-{}-{}.zip'.format(project, version, release_type)
-        url = 'https://github.com/{}/{}/releases'.format(repo, project)
-        file = 'files/{}'.format(release)
+        release = '{0}-{1}-{2}.zip'.format(project, version, release_type)
+        url = 'https://github.com/{0}/{1}/releases'.format(repo, project)
+        file = 'files/{0}'.format(release)
         local = True
         if not path.isfile(file):
-            file = '{}/download/{}/{}'.format(url, version, release)
+            file = '{0}/download/{1}/{2}'.format(url, version, release)
             local = False
 
-        self.print_bold('* {} {}'.format(project, version))
+        self.print_bold('* {0} {1}'.format(project, version))
         self.extract_files(file, directory, local)
         for i in ['app', 'dsl', 'dSYM']:
             try:
-                files = glob('{}/*.{}'.format(directory, i))
+                files = glob('{0}/*.{1}'.format(directory, i))
             except OSError:
                 raise
             else:
@@ -506,28 +506,28 @@ class OpenCoreBuild:
         :return: Nothing
         """
         release_type = 'DEBUG' if debug else 'RELEASE'
-        release = 'OpenCore-{}-{}.zip'.format(version, release_type)
+        release = 'OpenCore-{0}-{1}.zip'.format(version, release_type)
         url = 'https://github.com/acidanthera/OpenCorePkg/releases'
-        file = 'files/{}'.format(release)
+        file = 'files/{0}'.format(release)
         local = True
         if not path.isfile(file):
-            file = '{}/download/{}/{}'.format(url, version, release)
+            file = '{0}/download/{1}/{2}'.format(url, version, release)
             local = False
 
-        self.print_bold('* OpenCore {}'.format(version))
+        self.print_bold('* OpenCore {0}'.format(version))
         if path.isdir(self.directory):
             print('  - cleaning directory...'),
             rmtree(self.directory)
             print('OK')
         self.extract_files(file, self.directory, local)
         print('  - cleaning directory...'),
-        source = '{}/X64/EFI'.format(self.directory)
-        destination = '{}/EFI'.format(self.directory)
+        source = '{0}/X64/EFI'.format(self.directory)
+        destination = '{0}/EFI'.format(self.directory)
         self.copy_tree(source, destination)
-        copy2('{}/Utilities//ocvalidate/ocvalidate'.format(self.directory), './')
+        copy2('{0}/Utilities//ocvalidate/ocvalidate'.format(self.directory), './')
         chmod('./ocvalidate', 0o755)
         for i in ['Docs', 'IA32', 'Utilities', 'X64']:
-            rmtree('{}/{}'.format(self.directory, i))
+            rmtree('{0}/{1}'.format(self.directory, i))
         print('OK')
 
         print('  - copying OcBinaryData files...'),
@@ -536,9 +536,9 @@ class OpenCoreBuild:
         except CalledProcessError as e:
             print(e.output)
         source = 'files/OcBinaryData'
-        destination = '{}/EFI/OC'.format(self.directory)
-        self.copy_tree('{}/Drivers'.format(source), '{}/Drivers'.format(destination))
-        self.copy_tree('{}/Resources'.format(source), '{}/Resources'.format(destination))
+        destination = '{0}/EFI/OC'.format(self.directory)
+        self.copy_tree('{0}/Drivers'.format(source), '{0}/Drivers'.format(destination))
+        self.copy_tree('{0}/Resources'.format(source), '{0}/Resources'.format(destination))
         print('OK')
 
 
@@ -549,7 +549,7 @@ class OpenCoreBuild:
         :param string: String to print in bold
         :return: Nothing
         """
-        print('\033[1m{}\033[0m'.format(string))
+        print('\033[1m{0}\033[0m'.format(string))
 
 
     def run_misc_tasks(self):
@@ -572,7 +572,7 @@ class OpenCoreBuild:
         except CalledProcessError as e:
             print(e.output)
         print('OK')
-        file = '{}/EFI/OC/config.plist'.format(self.directory)
+        file = '{0}/EFI/OC/config.plist'.format(self.directory)
         if path.isfile(file) and LooseVersion(self.version) > LooseVersion('0.6.5'):
             print('  - validating config.plist...')
             try:
@@ -632,12 +632,12 @@ class OpenCoreBuild:
         else:
             self.print_bold('* OpenCore Configuration')
             print('  - generating config.plist...'),
-            directory = '{}/EFI/OC'.format(self.directory)
+            directory = '{0}/EFI/OC'.format(self.directory)
             if not path.isdir(directory):
                 makedirs(directory)
-            writePlist(self.settings, '{}/config.plist'.format(directory))
+            writePlist(self.settings, '{0}/config.plist'.format(directory))
             try:
-                check_output(['plutil', '-convert', 'xml1', '{}/config.plist'.format(directory)])
+                check_output(['plutil', '-convert', 'xml1', '{0}/config.plist'.format(directory)])
             except CalledProcessError as e:
                 print(e.output)
             print('OK')

@@ -112,14 +112,16 @@ if __name__ == '__main__':
             'ConnectDrivers': True,
             'Drivers': [
                 {
-                    'Path': 'OpenCanopy.efi',
+                    'Arguments': '',
+                    'Comment': '',
                     'Enabled': True,
-                    'Arguments': ''
+                    'Path': 'OpenCanopy.efi'
                 },
                 {
-                    'Path': 'OpenRuntime.efi',
+                    'Arguments': '',
+                    'Comment': '',
                     'Enabled': True,
-                    'Arguments': ''
+                    'Path': 'OpenRuntime.efi'
                 }
             ],
             'Output': {

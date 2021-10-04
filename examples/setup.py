@@ -19,7 +19,7 @@ if __name__ == '__main__':
         {
             'project': 'WhateverGreen',
             'repo': 'acidanthera',
-            'version': '1.5.3'
+            'version': '1.5.4'
         }
     ]
     build.patches = [

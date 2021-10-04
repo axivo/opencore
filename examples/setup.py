@@ -4,12 +4,8 @@ from opencore.build import OpenCoreBuild
 
 
 if __name__ == '__main__':
-    kexts = [
-        {
-            'project': 'latebloom',
-            'repo': 'macrumors',
-            'version': '0.20'
-        },
+    build = OpenCoreBuild('Volumes/EFI')
+    build.kexts = [
         {
             'project': 'Lilu',
             'repo': 'acidanthera',
@@ -23,10 +19,27 @@ if __name__ == '__main__':
         {
             'project': 'WhateverGreen',
             'repo': 'acidanthera',
-            'version': '1.5.3'
+            'version': '1.5.4'
         }
     ]
-    build = OpenCoreBuild('Volumes/EFI', kexts)
+    build.patches = [
+        {
+            'Base': '_early_random',
+            'Find': build.unhexlify('00 74 23 48 8B'),
+            'Identifier': 'kernel',
+            'Limit': 800,
+            'MinKernel': '20.4.0',
+            'Replace': build.unhexlify('00 EB 23 48 8B')
+        },
+        {
+            'Base': '_register_and_init_prng',
+            'Find': build.unhexlify('BA 48 01 00 00 31 F6'),
+            'Identifier': 'kernel',
+            'Limit': 256,
+            'MinKernel': '20.4.0',
+            'Replace': build.unhexlify('BA 48 01 00 00 EB 05')
+        }
+    ]
     build.write_tree()
 
     settings = {
@@ -99,14 +112,16 @@ if __name__ == '__main__':
             'ConnectDrivers': True,
             'Drivers': [
                 {
-                    'Path': 'OpenCanopy.efi',
+                    'Arguments': '',
+                    'Comment': '',
                     'Enabled': True,
-                    'Arguments': ''
+                    'Path': 'OpenCanopy.efi'
                 },
                 {
-                    'Path': 'OpenRuntime.efi',
+                    'Arguments': '',
+                    'Comment': '',
                     'Enabled': True,
-                    'Arguments': ''
+                    'Path': 'OpenRuntime.efi'
                 }
             ],
             'Output': {

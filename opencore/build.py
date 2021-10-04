@@ -18,16 +18,16 @@ class OpenCoreBuild:
     """
     OpenCoreBuild generates the EFI tree and config.plist file.
     """
-    def __init__(self, directory, kexts=[]):
+    def __init__(self, directory):
         """
         Constructs a new 'OpenCoreBuild' object.
 
         :param directory: Path of the build directory
-        :param kexts: List of kexts to be installed
         :return: Nothing
         """
         self.directory = directory
-        self.kexts = kexts
+        self.kexts = []
+        self.patches = []
         self.settings = {
             'ACPI': {
                 'Add': [],
@@ -72,7 +72,7 @@ class OpenCoreBuild:
                 'Delete': {}
             },
             'Kernel': {
-                'Add': self.configure_kexts([i['project'] for i in self.kexts]),
+                'Add': [],
                 'Block': [],
                 'Emulate': {
                     'Cpuid1Data': self.unhexlify('00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00'),
@@ -345,33 +345,67 @@ class OpenCoreBuild:
                 'ReservedMemory': []
             }
         }
-        self.version = '0.7.3'
+        self.version = '0.7.4'
 
 
     def configure_kexts(self, kexts=[]):
         """
-        Configures the kext settings.
+        Inserts kexts into kernel 'Add' data settings.
 
-        :param kexts: List of kexts to be configured
-        :return: Kext dictionaries
+        :param kexts: List of kext properties to be applied
+        :return: List of dictionaries
         """
         result = []
-        if cpu_count > 15:
+        if 'AppleMCEReporterDisabler' not in kexts and cpu_count > 15:
             kexts.insert(0, 'AppleMCEReporterDisabler')
-        for i in kexts:
-            kext = {
-                'Arch': 'x86_64',
-                'BundlePath': '{}.kext'.format(i),
-                'Comment': '',
-                'Enabled': True,
-                'ExecutablePath': 'Contents/MacOS/{}'.format(i),
-                'MaxKernel': '',
-                'MinKernel': '',
-                'PlistPath': 'Contents/Info.plist'
-            }
-            if i == 'AppleMCEReporterDisabler':
-                kext['ExecutablePath'] = ''
-            result.append(dict(kext))
+        if kexts:
+            for i in kexts:
+                properties = {
+                    'Arch': 'x86_64',
+                    'BundlePath': '{0}.kext'.format(i),
+                    'Comment': '',
+                    'Enabled': True,
+                    'ExecutablePath': 'Contents/MacOS/{0}'.format(i),
+                    'MaxKernel': '',
+                    'MinKernel': '',
+                    'PlistPath': 'Contents/Info.plist'
+                }
+                if i == 'AppleMCEReporterDisabler':
+                    properties['ExecutablePath'] = ''
+                result.append(properties)
+
+        return result
+
+
+    def configure_patches(self, patches=[]):
+        """
+        Inserts patches into kernel 'Patch' data settings.
+
+        :param patches: List of patch properties to be applied
+        :return: List of dictionaries
+        """
+        result = []
+        if patches:
+            for i in patches:
+                properties = {
+                    'Arch': 'x86_64',
+                    'Base': '',
+                    'Comment': '',
+                    'Count': 1,
+                    'Enabled': True,
+                    'Find': Data(''),
+                    'Identifier': '',
+                    'Limit': 0,
+                    'Mask': Data(''),
+                    'MaxKernel': '',
+                    'MinKernel': '',
+                    'Replace': Data(''),
+                    'ReplaceMask': Data(''),
+                    'Skip': 0
+                }
+                for key, value in i.items():
+                    properties[key] = value
+                result.append(properties)
 
         return result
 
@@ -441,21 +475,21 @@ class OpenCoreBuild:
         :param debug: Install DEBUG release
         :return: Nothing
         """
-        directory = '{}/EFI/OC/Kexts'.format(self.directory)
+        directory = '{0}/EFI/OC/Kexts'.format(self.directory)
         release_type = 'DEBUG' if debug else 'RELEASE'
-        release = '{}-{}-{}.zip'.format(project, version, release_type)
-        url = 'https://github.com/{}/{}/releases'.format(repo, project)
-        file = 'files/{}'.format(release)
+        release = '{0}-{1}-{2}.zip'.format(project, version, release_type)
+        url = 'https://github.com/{0}/{1}/releases'.format(repo, project)
+        file = 'files/{0}'.format(release)
         local = True
         if not path.isfile(file):
-            file = '{}/download/{}/{}'.format(url, version, release)
+            file = '{0}/download/{1}/{2}'.format(url, version, release)
             local = False
 
-        self.print_bold('* {} {}'.format(project, version))
+        self.print_bold('* {0} {1}'.format(project, version))
         self.extract_files(file, directory, local)
         for i in ['app', 'dsl', 'dSYM']:
             try:
-                files = glob('{}/*.{}'.format(directory, i))
+                files = glob('{0}/*.{1}'.format(directory, i))
             except OSError:
                 raise
             else:
@@ -472,28 +506,28 @@ class OpenCoreBuild:
         :return: Nothing
         """
         release_type = 'DEBUG' if debug else 'RELEASE'
-        release = 'OpenCore-{}-{}.zip'.format(version, release_type)
+        release = 'OpenCore-{0}-{1}.zip'.format(version, release_type)
         url = 'https://github.com/acidanthera/OpenCorePkg/releases'
-        file = 'files/{}'.format(release)
+        file = 'files/{0}'.format(release)
         local = True
         if not path.isfile(file):
-            file = '{}/download/{}/{}'.format(url, version, release)
+            file = '{0}/download/{1}/{2}'.format(url, version, release)
             local = False
 
-        self.print_bold('* OpenCore {}'.format(version))
+        self.print_bold('* OpenCore {0}'.format(version))
         if path.isdir(self.directory):
             print('  - cleaning directory...'),
             rmtree(self.directory)
             print('OK')
         self.extract_files(file, self.directory, local)
         print('  - cleaning directory...'),
-        source = '{}/X64/EFI'.format(self.directory)
-        destination = '{}/EFI'.format(self.directory)
+        source = '{0}/X64/EFI'.format(self.directory)
+        destination = '{0}/EFI'.format(self.directory)
         self.copy_tree(source, destination)
-        copy2('{}/Utilities//ocvalidate/ocvalidate'.format(self.directory), './')
+        copy2('{0}/Utilities//ocvalidate/ocvalidate'.format(self.directory), './')
         chmod('./ocvalidate', 0o755)
         for i in ['Docs', 'IA32', 'Utilities', 'X64']:
-            rmtree('{}/{}'.format(self.directory, i))
+            rmtree('{0}/{1}'.format(self.directory, i))
         print('OK')
 
         print('  - copying OcBinaryData files...'),
@@ -502,9 +536,9 @@ class OpenCoreBuild:
         except CalledProcessError as e:
             print(e.output)
         source = 'files/OcBinaryData'
-        destination = '{}/EFI/OC'.format(self.directory)
-        self.copy_tree('{}/Drivers'.format(source), '{}/Drivers'.format(destination))
-        self.copy_tree('{}/Resources'.format(source), '{}/Resources'.format(destination))
+        destination = '{0}/EFI/OC'.format(self.directory)
+        self.copy_tree('{0}/Drivers'.format(source), '{0}/Drivers'.format(destination))
+        self.copy_tree('{0}/Resources'.format(source), '{0}/Resources'.format(destination))
         print('OK')
 
 
@@ -515,7 +549,7 @@ class OpenCoreBuild:
         :param string: String to print in bold
         :return: Nothing
         """
-        print('\033[1m{}\033[0m'.format(string))
+        print('\033[1m{0}\033[0m'.format(string))
 
 
     def run_misc_tasks(self):
@@ -538,10 +572,13 @@ class OpenCoreBuild:
         except CalledProcessError as e:
             print(e.output)
         print('OK')
-        file = '{}/EFI/OC/config.plist'.format(self.directory)
+        file = '{0}/EFI/OC/config.plist'.format(self.directory)
         if path.isfile(file) and LooseVersion(self.version) > LooseVersion('0.6.5'):
             print('  - validating config.plist...')
-            print(check_output(['./ocvalidate', file]))
+            try:
+                print(check_output(['./ocvalidate', file]))
+            except CalledProcessError as e:
+                print(e.output)
 
 
     def unhexlify(self, string):
@@ -568,6 +605,11 @@ class OpenCoreBuild:
         :return: Dictionary of settings
         """
         for key, value in settings.iteritems():
+            if key == 'Kernel':
+                kexts = self.configure_kexts([i['project'] for i in self.kexts])
+                settings[key].update({'Add': kexts})
+                patches = self.configure_patches(self.patches)
+                settings[key].update({'Patch': patches})
             if isinstance(value, Mapping):
                 result[key] = self.update_settings(result.get(key, {}), value)
             else:
@@ -590,12 +632,12 @@ class OpenCoreBuild:
         else:
             self.print_bold('* OpenCore Configuration')
             print('  - generating config.plist...'),
-            directory = '{}/EFI/OC'.format(self.directory)
+            directory = '{0}/EFI/OC'.format(self.directory)
             if not path.isdir(directory):
                 makedirs(directory)
-            writePlist(self.settings, '{}/config.plist'.format(directory))
+            writePlist(self.settings, '{0}/config.plist'.format(directory))
             try:
-                check_output(['plutil', '-convert', 'xml1', '{}/config.plist'.format(directory)])
+                check_output(['plutil', '-convert', 'xml1', '{0}/config.plist'.format(directory)])
             except CalledProcessError as e:
                 print(e.output)
             print('OK')

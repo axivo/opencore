@@ -6,12 +6,12 @@ The setup file used in this example implements the following customizations:
 - Pulse RX580 GPU hardware acceleration support, through iMac Pro hybridization (system specific device path)
 - NVMe external disks displayed as internal disks (system specific device path)
 - Night Shift enabled with `FeatureUnlock` Lilu plugin
-- Experimental `Latebloom` fix for macOS Big Sur 11.3+ race condition
-- Software Updates enabled
+- [SurPlus patch](../../../../../reenigneorcim/SurPlus), emulating the `rdrand` CPU instruction
+- Software updates enabled
 
 ## Quick Setting Changes
 
-For various setting changes, consult the OpenCore [documentation](../../../../acidanthera/OpenCorePkg/tree/master/Docs) and the [wiki](../../../wiki).
+For various setting changes, consult the OpenCore [documentation](../../../../../acidanthera/OpenCorePkg/tree/master/Docs) and the [wiki](../../../wiki).
 
 If you want to enable the mouse functionality into OpenCanopy, add the `PickerAttributes` key into configuration and set its value to `16` (defaults to failsafe `0` value):
 

@@ -72,6 +72,7 @@ if __name__ == '__main__':
             'Boot': {
                 'ConsoleAttributes': 15,
                 'HideAuxiliary': True,
+                'LauncherOption': 'Full',
                 'PollAppleHotKeys': True,
                 'PickerMode': 'External',
                 'ShowPicker': True

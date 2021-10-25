@@ -12,9 +12,9 @@ if __name__ == '__main__':
             'version': '1.5.6'
         },
         {
-            'project': 'FeatureUnlock',
-            'repo': 'acidanthera',
-            'version': '1.0.3'
+            'project': 'NightShiftEnabler',
+            'repo': 'cdf',
+            'version': '1.1.1'
         },
         {
             'project': 'WhateverGreen',

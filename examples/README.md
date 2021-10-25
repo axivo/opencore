@@ -7,7 +7,6 @@ The setup file used in this example implements the following customizations:
 - NVMe external disks displayed as internal disks (system specific device path)
 - Night Shift enabled with `FeatureUnlock` Lilu plugin
 - [SurPlus patch](../../../../../reenigneorcim/SurPlus), emulating the `rdrand` CPU instruction
-- Software updates enabled
 
 ## Quick Setting Changes
 

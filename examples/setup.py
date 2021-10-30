@@ -71,6 +71,7 @@ if __name__ == '__main__':
                 'LauncherOption': 'Full',
                 'PollAppleHotKeys': True,
                 'PickerMode': 'External',
+                'PickerVariant': 'Default',
                 'ShowPicker': True
             },
             'Security': {

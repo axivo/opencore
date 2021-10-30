@@ -62,6 +62,7 @@ class OpenCoreBuild:
                     'ProvideCustomSlide': False,
                     'ProvideMaxSlide': 0,
                     'RebuildAppleMemoryMap': False,
+                    'ResizeAppleGpuBars': -1,
                     'SetupVirtualMap': False,
                     'SignalAppleOS': False,
                     'SyncRuntimePermissions': False
@@ -75,8 +76,8 @@ class OpenCoreBuild:
                 'Add': [],
                 'Block': [],
                 'Emulate': {
-                    'Cpuid1Data': self.unhexlify('00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00'),
-                    'Cpuid1Mask': self.unhexlify('00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00'),
+                    'Cpuid1Data': Data(''),
+                    'Cpuid1Mask': Data(''),
                     'DummyPowerManagement': False,
                     'MaxKernel': '',
                     'MinKernel': ''
@@ -339,6 +340,7 @@ class OpenCoreBuild:
                     'ReleaseUsbOwnership': False,
                     'ReloadOptionRoms': False,
                     'RequestBootVarRouting': False,
+                    'ResizeGpuBars': -1,
                     'TscSyncTimeout': 0,
                     'UnblockFsConnect': False
                 },

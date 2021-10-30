@@ -17,7 +17,6 @@ If you want to enable the mouse functionality into OpenCanopy, add the `PickerAt
 ```python
         'Misc': {
             'Boot': {
-                'ConsoleAttributes': 15,
                 'HideAuxiliary': True,
                 'PollAppleHotKeys': True,
                 'PickerAttributes': 16,

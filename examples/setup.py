@@ -48,7 +48,7 @@ if __name__ == '__main__':
         'DeviceProperties': {
             'Add': {
                 'PciRoot(0x0)/Pci(0x3,0x0)/Pci(0x0,0x0)': {
-                    'rebuild-device-tree': 1,
+                    'rebuild-device-tree': 0,
                     'unfairgva': 1
                 },
                 'PciRoot(0x0)/Pci(0x7,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)': {

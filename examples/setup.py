@@ -25,6 +25,7 @@ if __name__ == '__main__':
     build.patches = [
         {
             'Base': '_early_random',
+            'Comment': 'SurPlus 1',
             'Find': build.unhexlify('00 74 23 48 8B'),
             'Identifier': 'kernel',
             'Limit': 800,
@@ -33,11 +34,30 @@ if __name__ == '__main__':
         },
         {
             'Base': '_register_and_init_prng',
+            'Comment': 'SurPlus 2',
             'Find': build.unhexlify('BA 48 01 00 00 31 F6'),
             'Identifier': 'kernel',
             'Limit': 256,
             'MinKernel': '20.4.0',
             'Replace': build.unhexlify('BA 48 01 00 00 EB 05')
+        },
+        {
+            'Base': '_work_interval_port_type_render_server',
+            'Comment': 'MonteRand 1',
+            'Find': build.unhexlify('0F C7 F1 73 FB 21 F1 39 D1 73 F5 89 C9 48 8B 94 CD D0 FD FF FF'),
+            'Identifier': 'kernel',
+            'Limit': 3900,
+            'MinKernel': '21.2.0',
+            'Replace': build.unhexlify('31 C9 90 90 90 21 F1 39 D1 73 F5 89 C9 48 8B 94 CD D0 FD FF FF')
+        },
+        {
+            'Base': '_panic_with_thread_context',
+            'Comment': 'MonteRand 2',
+            'Find': build.unhexlify('0F C7 F2 73 FB 83 E2 0F 83 FA 07 77 F3 0F B7 34 41'),
+            'Identifier': 'kernel',
+            'Limit': 10100,
+            'MinKernel': '21.2.0',
+            'Replace': build.unhexlify('31 D2 90 90 90 83 E2 0F 83 FA 07 77 F3 0F B7 34 41')
         }
     ]
     build.write_tree()

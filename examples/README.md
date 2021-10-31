@@ -20,6 +20,7 @@ If you want to enable the mouse functionality into OpenCanopy, add the `PickerAt
                 'HideAuxiliary': True,
                 'LauncherOption': 'Full',
                 'PollAppleHotKeys': True,
+                'PickerAttributes': 16,
                 'PickerMode': 'External',
                 'PickerVariant': 'Default',
                 'ShowPicker': True

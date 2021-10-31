@@ -18,12 +18,12 @@ If you want to enable the mouse functionality into OpenCanopy, add the `PickerAt
         'Misc': {
             'Boot': {
                 'HideAuxiliary': True,
+                'LauncherOption': 'Full',
                 'PollAppleHotKeys': True,
-                'PickerAttributes': 16,
                 'PickerMode': 'External',
-                'ShowPicker': False
+                'PickerVariant': 'Default',
+                'ShowPicker': True
             }
-        }
 ```
 
 If you're using a non-HiDPI display, set the `UIScale` value to `02`. The following settings need to be added into configuration, above `PlatformInfo` section:

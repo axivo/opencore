@@ -9,7 +9,7 @@ if __name__ == '__main__':
         {
             'project': 'Lilu',
             'repo': 'acidanthera',
-            'version': '1.5.6'
+            'version': '1.5.7'
         },
         {
             'project': 'NightShiftEnabler',
@@ -19,7 +19,7 @@ if __name__ == '__main__':
         {
             'project': 'WhateverGreen',
             'repo': 'acidanthera',
-            'version': '1.5.4'
+            'version': '1.5.5'
         }
     ]
     build.patches = [

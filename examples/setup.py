@@ -9,22 +9,23 @@ if __name__ == '__main__':
         {
             'project': 'Lilu',
             'repo': 'acidanthera',
-            'version': '1.5.6'
+            'version': '1.5.7'
         },
         {
-            'project': 'FeatureUnlock',
-            'repo': 'acidanthera',
-            'version': '1.0.3'
+            'project': 'NightShiftEnabler',
+            'repo': 'cdf',
+            'version': '1.1.1'
         },
         {
             'project': 'WhateverGreen',
             'repo': 'acidanthera',
-            'version': '1.5.4'
+            'version': '1.5.5'
         }
     ]
     build.patches = [
         {
             'Base': '_early_random',
+            'Comment': 'SurPlus 1',
             'Find': build.unhexlify('00 74 23 48 8B'),
             'Identifier': 'kernel',
             'Limit': 800,
@@ -33,6 +34,7 @@ if __name__ == '__main__':
         },
         {
             'Base': '_register_and_init_prng',
+            'Comment': 'SurPlus 2',
             'Find': build.unhexlify('BA 48 01 00 00 31 F6'),
             'Identifier': 'kernel',
             'Limit': 256,
@@ -46,10 +48,8 @@ if __name__ == '__main__':
         'DeviceProperties': {
             'Add': {
                 'PciRoot(0x0)/Pci(0x3,0x0)/Pci(0x0,0x0)': {
-                    'agdpmod': build.unhexlify('70 69 6B 65 72 61 00'),
-                    'rebuild-device-tree': build.unhexlify('00'),
-                    'shikigva': build.unhexlify('50'),
-                    'unfairgva': build.unhexlify('01 00 00 00')
+                    'rebuild-device-tree': 0,
+                    'unfairgva': 1
                 },
                 'PciRoot(0x0)/Pci(0x7,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)': {
                     'built-in': build.unhexlify('00')
@@ -63,17 +63,15 @@ if __name__ == '__main__':
             'Quirks': {
                 'DisableLinkeditJettison': True,
                 'SetApfsTrimTimeout': 9999999
-            },
-            'Scheme': {
-                'KernelArch': 'x86_64'
             }
         },
         'Misc': {
             'Boot': {
-                'ConsoleAttributes': 15,
                 'HideAuxiliary': True,
+                'LauncherOption': 'Full',
                 'PollAppleHotKeys': True,
                 'PickerMode': 'External',
+                'PickerVariant': 'Default',
                 'ShowPicker': True
             },
             'Security': {
@@ -84,25 +82,15 @@ if __name__ == '__main__':
                 'Vault': 'Optional'
             }
         },
-        'NVRAM': {
-            'Add': {
-                '4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14': {
-                    'DefaultBackgroundColor': build.unhexlify('00 00 00 00'),
-                    'UIScale': build.unhexlify('01')
-                }
-            },
-            'Delete': {
-                '4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14': [
-                    'DefaultBackgroundColor',
-                    'UIScale'
-                ]
-            }
-        },
         'PlatformInfo': {
-            'SMBIOS': {
-                'BIOSVersion': '9999.0.0.0.0',
-                'BoardProduct': 'Mac-7BA5B2D9E42DDD94'
+            'PlatformNVRAM': {
+                'FirmwareFeatures': build.unhexlify('03 54 0C C0 08 00 00 00'),
+                'FirmwareFeaturesMask': build.unhexlify('3F FF 1F FF 08 00 00 00')
             },
+            'SMBIOS': {
+                'BoardProduct': 'Mac-27AD2F918AE68F61'
+            },
+            'UpdateNVRAM': True,
             'UpdateSMBIOS': True
         },
         'UEFI': {
@@ -129,7 +117,6 @@ if __name__ == '__main__':
                 'Resolution': 'Max'
             },
             'ProtocolOverrides': {
-                'AppleBootPolicy': True,
                 'AppleUserInterfaceTheme': True
             },
             'Quirks': {

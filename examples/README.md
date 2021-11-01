@@ -5,9 +5,8 @@ The setup file used in this example implements the following customizations:
 - OpenCanopy implementation on a black boot screen
 - Pulse RX580 GPU hardware acceleration support, through iMac Pro hybridization (system specific device path)
 - NVMe external disks displayed as internal disks (system specific device path)
-- Night Shift enabled with `FeatureUnlock` Lilu plugin
-- [SurPlus patch](../../../../../reenigneorcim/SurPlus), emulating the `rdrand` CPU instruction
-- Software updates enabled
+- Night Shift enabled with `NightShiftEnabler` Lilu plugin
+- [SurPlus patch](../../../../../reenigneorcim/SurPlus), avoiding `CoreCrypto` being used before `zalloc` is fully initialized
 
 ## Quick Setting Changes
 
@@ -18,17 +17,17 @@ If you want to enable the mouse functionality into OpenCanopy, add the `PickerAt
 ```python
         'Misc': {
             'Boot': {
-                'ConsoleAttributes': 15,
                 'HideAuxiliary': True,
+                'LauncherOption': 'Full',
                 'PollAppleHotKeys': True,
                 'PickerAttributes': 16,
                 'PickerMode': 'External',
-                'ShowPicker': False
+                'PickerVariant': 'Default',
+                'ShowPicker': True
             }
-        }
 ```
 
-If you're using a non-HiDPI display, set the `UIScale` value to `02`:
+If you're using a non-HiDPI display, set the `UIScale` value to `02`. The following settings need to be added into configuration, above `PlatformInfo` section:
 
 ```python
         'NVRAM': {
@@ -37,8 +36,15 @@ If you're using a non-HiDPI display, set the `UIScale` value to `02`:
                     'DefaultBackgroundColor': build.unhexlify('00 00 00 00'),
                     'UIScale': build.unhexlify('02')
                 }
+            },
+            'Delete': {
+                '4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14': [
+                    'DefaultBackgroundColor',
+                    'UIScale'
+                ]
             }
-        }
+        },
+        'PlatformInfo': {
 ```
 
 If you have a Radeon VII or 5700 XT GPU installed instead of a Pulse RX580, add the `DirectGopRendering` key into configuration and set its value to `True` (defaults to failsafe `False` value):

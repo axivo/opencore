@@ -302,10 +302,12 @@ class OpenCoreBuild:
                     'GopPassThrough': 'Disabled',
                     'IgnoreTextInGraphics': False,
                     'ProvideConsoleGop': False,
+                    'ReconnectGraphicsOnConnect': False,
                     'ReconnectOnResChange': False,
                     'ReplaceTabWithSpace': False,
                     'Resolution': '',
                     'SanitiseClearScreen': False,
+                    'UIScale': -1,
                     'TextRenderer': 'BuiltinGraphics',
                     'UgaPassThrough': False
                 },
@@ -332,6 +334,7 @@ class OpenCoreBuild:
                 'Quirks': {
                     'ActivateHpetSupport': False,
                     'EnableVectorAcceleration': False,
+                    'EnableVmx': False,
                     'DisableSecurityPolicy': False,
                     'ExitBootServicesDelay': 0,
                     'ForceOcWriteFlash': False,
@@ -347,7 +350,7 @@ class OpenCoreBuild:
                 'ReservedMemory': []
             }
         }
-        self.version = '0.7.5'
+        self.version = '0.7.6'
 
 
     def configure_kexts(self, kexts=[]):

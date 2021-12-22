@@ -22,26 +22,6 @@ if __name__ == '__main__':
             'version': '1.5.5'
         }
     ]
-    build.patches = [
-        {
-            'Base': '_early_random',
-            'Comment': 'SurPlus 1',
-            'Find': build.unhexlify('00 74 23 48 8B'),
-            'Identifier': 'kernel',
-            'Limit': 800,
-            'MinKernel': '20.4.0',
-            'Replace': build.unhexlify('00 EB 23 48 8B')
-        },
-        {
-            'Base': '_register_and_init_prng',
-            'Comment': 'SurPlus 2',
-            'Find': build.unhexlify('BA 48 01 00 00 31 F6'),
-            'Identifier': 'kernel',
-            'Limit': 256,
-            'MinKernel': '20.4.0',
-            'Replace': build.unhexlify('BA 48 01 00 00 EB 05')
-        }
-    ]
     build.write_tree()
 
     settings = {

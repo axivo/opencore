@@ -9,17 +9,17 @@ if __name__ == '__main__':
         {
             'project': 'Lilu',
             'repo': 'acidanthera',
-            'version': '1.5.8'
+            'version': '1.5.9'
         },
         {
-            'project': 'NightShiftEnabler',
-            'repo': 'cdf',
-            'version': '1.1.1'
+            'project': 'FeatureUnlock',
+            'repo': 'acidanthera',
+            'version': '1.0.5'
         },
         {
             'project': 'WhateverGreen',
             'repo': 'acidanthera',
-            'version': '1.5.5'
+            'version': '1.5.6'
         }
     ]
     build.write_tree()

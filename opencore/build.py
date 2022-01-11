@@ -268,19 +268,24 @@ class OpenCoreBuild:
                     'KeyInitialDelay': 50,
                     'KeySubsequentDelay': 5,
                     'GraphicsInputMirroring': False,
+                    'PointerPollMask': -1,
+                    'PointerPollMax': 0,
+                    'PointerPollMin': 0,
                     'PointerSpeedDiv': 1,
                     'PointerSpeedMul': 1
                 },
                 'Audio': {
                     'AudioCodec': 0,
                     'AudioDevice': '',
-                    'AudioOut': 0,
+                    'AudioOutMask': -1,
                     'AudioSupport': False,
-                    'MinimumVolume': 0,
+                    'DisconnectHda': False,
+                    'MaximumGain': -15,
+                    'MinimumAssistGain': -30,
+                    'MinimumAudibleGain': -128,
                     'PlayChime': 'Auto',
                     'ResetTrafficClass': False,
-                    'SetupDelay': 0,
-                    'VolumeAmplifier': 0
+                    'SetupDelay': 0
                 },
                 'ConnectDrivers': False,
                 'Drivers': [],
@@ -350,7 +355,7 @@ class OpenCoreBuild:
                 'ReservedMemory': []
             }
         }
-        self.version = '0.7.6'
+        self.version = '0.7.7'
 
 
     def configure_kexts(self, kexts=[]):

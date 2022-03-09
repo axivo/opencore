@@ -14,12 +14,12 @@ if __name__ == '__main__':
         {
             'project': 'FeatureUnlock',
             'repo': 'acidanthera',
-            'version': '1.0.6'
+            'version': '1.0.7'
         },
         {
             'project': 'WhateverGreen',
             'repo': 'acidanthera',
-            'version': '1.5.7'
+            'version': '1.5.8'
         }
     ]
     build.write_tree()
@@ -52,7 +52,8 @@ if __name__ == '__main__':
                 'PollAppleHotKeys': True,
                 'PickerMode': 'External',
                 'PickerVariant': 'Default',
-                'ShowPicker': True
+                'ShowPicker': True,
+                'Timeout': 10
             },
             'Security': {
                 'AllowSetDefault': True,

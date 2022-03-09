@@ -63,18 +63,6 @@ if __name__ == '__main__':
                 'Vault': 'Optional'
             }
         },
-        'NVRAM': {
-            'Add': {
-                '7C436110-AB2A-4BBB-A880-FE41995C9F82': {
-                    'boot-args': '-no_compat_check'
-                }
-            },
-            'Delete': {
-                '7C436110-AB2A-4BBB-A880-FE41995C9F82': [
-                    'boot-args'
-                ]
-            }
-        },
         'PlatformInfo': {
             'PlatformNVRAM': {
                 'FirmwareFeatures': build.unhexlify('03 54 0C C0 08 00 00 00'),

@@ -136,6 +136,7 @@ class OpenCoreBuild:
                     'DisableWatchDog': False,
                     'DisplayDelay': 0,
                     'DisplayLevel': 0,
+                    'LogModules': '*',
                     'SerialInit': False,
                     'SysReport': False,
                     'Target': 0

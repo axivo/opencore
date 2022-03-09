@@ -52,7 +52,8 @@ if __name__ == '__main__':
                 'PollAppleHotKeys': True,
                 'PickerMode': 'External',
                 'PickerVariant': 'Default',
-                'ShowPicker': True
+                'ShowPicker': True,
+                'Timeout': 10
             },
             'Security': {
                 'AllowSetDefault': True,

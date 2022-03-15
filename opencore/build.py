@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 from binascii import Error, unhexlify
 from collections import Mapping

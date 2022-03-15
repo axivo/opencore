@@ -367,22 +367,21 @@ class OpenCoreBuild:
         :return: List of dictionaries
         """
         result = []
-        if 'AppleMCEReporterDisabler' not in kexts and cpu_count > 15:
-            kexts.insert(0, 'AppleMCEReporterDisabler')
         if kexts:
             for i in kexts:
                 properties = {
                     'Arch': 'x86_64',
-                    'BundlePath': '{0}.kext'.format(i),
+                    'BundlePath': '{0}.kext'.format(i['project']),
                     'Comment': '',
                     'Enabled': True,
-                    'ExecutablePath': 'Contents/MacOS/{0}'.format(i),
+                    'ExecutablePath': 'Contents/MacOS/{0}'.format(i['project']),
                     'MaxKernel': '',
                     'MinKernel': '',
                     'PlistPath': 'Contents/Info.plist'
                 }
-                if i == 'AppleMCEReporterDisabler':
-                    properties['ExecutablePath'] = ''
+                if 'properties' in i:
+                    for key, value in i['properties'].items():
+                        properties[key] = value
                 result.append(properties)
 
         return result
@@ -617,7 +616,7 @@ class OpenCoreBuild:
         """
         for key, value in settings.iteritems():
             if key == 'Kernel':
-                kexts = self.configure_kexts([i['project'] for i in self.kexts])
+                kexts = self.configure_kexts(self.kexts)
                 settings[key].update({'Add': kexts})
                 patches = self.configure_patches(self.patches)
                 settings[key].update({'Patch': patches})
@@ -665,6 +664,9 @@ class OpenCoreBuild:
         if cpu_count > 15:
             kext = {
                 'project': 'AppleMCEReporterDisabler',
+                'properties': {
+                    'ExecutablePath': ''
+                },
                 'repo': 'acidanthera',
                 'version': '1.0.0'
             }

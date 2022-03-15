@@ -7,6 +7,15 @@ if __name__ == '__main__':
     build = OpenCoreBuild('Volumes/EFI')
     build.kexts = [
         {
+            'project': 'ASPP-Override',
+            'properties': {
+                'ExecutablePath': '',
+                'MinKernel': '21.4.0'
+            },
+            'repo': 'dortania',
+            'version': '1.0.1'
+        },
+        {
             'project': 'Lilu',
             'repo': 'acidanthera',
             'version': '1.6.0'

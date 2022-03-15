@@ -3,12 +3,19 @@
 The following file references are used:
 
 - [AppleMCEReporterDisabler](../../../../../acidanthera/bugtracker/issues/424#issuecomment-535624313)
+- [ASPP-Override](../../../../../dortania/OpenCore-Legacy-Patcher/tree/main/payloads/Kexts/Misc) (required for macOS Monterey 12.3+)
 - [OcBinaryData](../../../../../acidanthera/OcBinaryData)
 
-Original AppleMCEReporterDisabler kext is zipped with the following command:
+Original `AppleMCEReporterDisabler` kext is zipped with the following command:
 
 ```sh
 ~$ zip -rX AppleMCEReporterDisabler-1.0.0-RELEASE.zip AppleMCEReporterDisabler.kext
+```
+
+Original `ASPP-Override` kext is zipped with the following command:
+
+```sh
+~$ zip -rX ASPP-Override-1.0.1-RELEASE.zip ASPP-Override.kext
 ```
 
 OcBinaryData files are automatically refreshed, when `install_opencore()` function is executed. The commands listed below are detailed for general learning purpose only, they are automatically executed as part of the `OpenCoreBuild` class.

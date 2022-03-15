@@ -10,7 +10,7 @@ from os import chmod, listdir, makedirs, path, remove, stat, walk
 from plistlib import Data, writePlist
 from shutil import copy2, rmtree
 from subprocess import CalledProcessError, check_output
-from urllib2 import URLError, urlopen
+from urllib.request import URLError, urlopen
 from zipfile import BadZipfile, ZipFile
 
 

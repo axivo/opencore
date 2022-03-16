@@ -602,7 +602,7 @@ class OpenCoreBuild:
         :param settings: Settings to update
         :return: Dictionary of settings
         """
-        for key, value in settings.items():
+        for key, value in iter(settings.items()):
             if key == 'Kernel':
                 kexts = self.configure_kexts(self.kexts)
                 settings[key].update({'Add': kexts})

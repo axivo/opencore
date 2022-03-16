@@ -3,10 +3,9 @@
 The setup file used in this example implements the following customizations:
 
 - OpenCanopy implementation on a black boot screen
-- Pulse RX580 GPU hardware acceleration support, through iMac Pro hybridization (system specific device path)
+- Pulse RX580 GPU hardware acceleration support, through Mac Pro hybridization (system specific device path)
 - NVMe external disks displayed as internal disks (system specific device path)
-- Night Shift enabled with `NightShiftEnabler` Lilu plugin
-- [SurPlus patch](../../../../../reenigneorcim/SurPlus), avoiding `CoreCrypto` being used before `zalloc` is fully initialized
+- Night Shift enabled with `FeatureUnlock` Lilu plugin
 
 ## Quick Setting Changes
 

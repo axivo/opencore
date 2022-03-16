@@ -631,12 +631,13 @@ class OpenCoreBuild:
             self.print_bold('* OpenCore Configuration')
             print('  - generating config.plist...', end=' ')
             directory = '{0}/EFI/OC'.format(self.directory)
+            file = '{0}/config.plist'.format(directory)
             if not path.isdir(directory):
                 makedirs(directory)
-            with open('{0}/config.plist'.format(directory), 'wb') as file:
-                dump(self.settings, file, fmt=FMT_XML, sort_keys=True)
+            with open(file, 'wb') as plist:
+                dump(self.settings, plist, fmt=FMT_XML, sort_keys=True)
             try:
-                check_output(['plutil', '-convert', 'xml1', '{0}/config.plist'.format(directory)], encoding='UTF-8')
+                check_output(['plutil', '-convert', 'xml1', file], encoding='UTF-8')
             except CalledProcessError as e:
                 print(e.output)
             print('OK')

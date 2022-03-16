@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 from opencore.build import OpenCoreBuild
 
@@ -62,7 +62,7 @@ if __name__ == '__main__':
                 'PickerMode': 'External',
                 'PickerVariant': 'Default',
                 'ShowPicker': True,
-                'Timeout': 10
+                'Timeout': 15
             },
             'Security': {
                 'AllowSetDefault': True,

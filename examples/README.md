@@ -17,13 +17,18 @@ If you want to enable the mouse functionality into OpenCanopy, add the `PickerAt
 ```python
         'Misc': {
             'Boot': {
-                'HideAuxiliary': True,
-                'LauncherOption': 'Full',
                 'PollAppleHotKeys': True,
-                'PickerAttributes': 16,
-                'PickerMode': 'External',
-                'PickerVariant': 'Default',
-                'ShowPicker': True
+                'PickerAttributes': 16
+            }
+```
+
+If you want to increase the OpenCanopy piker timeout, add the `Timeout` key into configuration and set its value to `15` (defaults to failsafe `5` value):
+
+```python
+        'Misc': {
+            'Boot': {
+                'ShowPicker': True,
+                'Timeout': 15
             }
 ```
 

@@ -5,12 +5,11 @@ from collections import Mapping
 from distutils.version import LooseVersion
 from glob import glob
 from io import BytesIO
-from multiprocessing import cpu_count
 from os import chmod, listdir, makedirs, path, remove, stat, walk
-from plistlib import Data, writePlist
+from plistlib import dump, FMT_XML
 from shutil import copy2, rmtree
 from subprocess import CalledProcessError, check_output
-from urllib.request import URLError, urlopen
+from urllib.request import URLError, urlretrieve
 from zipfile import BadZipfile, ZipFile
 
 
@@ -76,8 +75,8 @@ class OpenCoreBuild:
                 'Add': [],
                 'Block': [],
                 'Emulate': {
-                    'Cpuid1Data': Data(''),
-                    'Cpuid1Mask': Data(''),
+                    'Cpuid1Data': b'',
+                    'Cpuid1Mask': b'',
                     'DummyPowerManagement': False,
                     'MaxKernel': '',
                     'MinKernel': ''
@@ -153,8 +152,8 @@ class OpenCoreBuild:
                     'EnablePassword': False,
                     'ExposeSensitiveData': 6,
                     'HaltLevel': 2147483648,
-                    'PasswordHash': Data(''),
-                    'PasswordSalt': Data(''),
+                    'PasswordHash': b'',
+                    'PasswordSalt': b'',
                     'ScanPolicy': 17760515,
                     'SecureBootModel': 'Default',
                     'Vault': 'Secure'
@@ -175,14 +174,14 @@ class OpenCoreBuild:
                 'DataHub': {
                     'ARTFrequency': 0,
                     'BoardProduct': '',
-                    'BoardRevision': Data(''),
+                    'BoardRevision': b'',
                     'DevicePathsSupported': 0,
                     'FSBFrequency': 0,
                     'InitialTSC': 0,
                     'PlatformName': '',
-                    'SmcBranch': Data(''),
-                    'SmcPlatform': Data(''),
-                    'SmcRevision': Data(''),
+                    'SmcBranch': b'',
+                    'SmcPlatform': b'',
+                    'SmcRevision': b'',
                     'StartupPowerEvents': 0,
                     'SystemProductName': '',
                     'SystemSerialNumber': '',
@@ -193,7 +192,7 @@ class OpenCoreBuild:
                     'MaxBIOSVersion': False,
                     'MLB': '',
                     'ProcessorType': 0,
-                    'ROM': Data(''),
+                    'ROM': b'',
                     'SpoofVendor': False,
                     'SystemMemoryStatus': 'Auto',
                     'SystemProductName': '',
@@ -212,10 +211,10 @@ class OpenCoreBuild:
                 },
                 'PlatformNVRAM': {
                     'BID': '',
-                    'FirmwareFeatures': Data(''),
-                    'FirmwareFeaturesMask': Data(''),
+                    'FirmwareFeatures': b'',
+                    'FirmwareFeaturesMask': b'',
                     'MLB': '',
-                    'ROM': Data(''),
+                    'ROM': b'',
                     'SystemSerialNumber': '',
                     'SystemUUID': ''
                 },
@@ -235,11 +234,11 @@ class OpenCoreBuild:
                     'ChassisSerialNumber': '',
                     'ChassisType': 0,
                     'ChassisVersion': '',
-                    'FirmwareFeatures': Data(''),
-                    'FirmwareFeaturesMask': Data(''),
+                    'FirmwareFeatures': b'',
+                    'FirmwareFeaturesMask': b'',
                     'PlatformFeature': -1,
                     'ProcessorType': 0,
-                    'SmcVersion': Data(''),
+                    'SmcVersion': b'',
                     'SystemFamily': '',
                     'SystemManufacturer': '',
                     'SystemProductName': '',
@@ -403,14 +402,14 @@ class OpenCoreBuild:
                     'Comment': '',
                     'Count': 1,
                     'Enabled': True,
-                    'Find': Data(''),
+                    'Find': b'',
                     'Identifier': '',
                     'Limit': 0,
-                    'Mask': Data(''),
+                    'Mask': b'',
                     'MaxKernel': '',
                     'MinKernel': '',
-                    'Replace': Data(''),
-                    'ReplaceMask': Data(''),
+                    'Replace': b'',
+                    'ReplaceMask': b'',
                     'Skip': 0
                 }
                 for key, value in i.items():
@@ -449,30 +448,19 @@ class OpenCoreBuild:
         :param local: Local file will be extracted
         :return: Nothing
         """
-        if local:
+        if not local:
             try:
-                response = open(file)
-            except IOError:
-                raise
-        else:
-            try:
-                print('  - downloading component...'),
-                response = urlopen(file)
+                print('  - downloading component...', end=' ')
+                file, _ = urlretrieve(file)
             except URLError:
                 raise
             else:
                 print('OK')
 
-        try:
-            print('  - building files structure...'),
-            zipfile = ZipFile(BytesIO(response.read()))
-        except BadZipfile:
-            raise
-        else:
-            for i in zipfile.namelist():
-                zipfile.extract(i, directory)
-            zipfile.close()
-            print('OK')
+        print('  - building files structure...', end=' '),
+        with ZipFile(file, 'r') as zip:
+            zip.extractall(directory)
+        print('OK')
 
 
     def install_kext(self, repo, project, version, debug=False):
@@ -526,11 +514,11 @@ class OpenCoreBuild:
 
         self.print_bold('* OpenCore {0}'.format(version))
         if path.isdir(self.directory):
-            print('  - cleaning directory...'),
+            print('  - cleaning directory...', end=' ')
             rmtree(self.directory)
             print('OK')
         self.extract_files(file, self.directory, local)
-        print('  - cleaning directory...'),
+        print('  - cleaning directory...', end=' ')
         source = '{0}/X64/EFI'.format(self.directory)
         destination = '{0}/EFI'.format(self.directory)
         self.copy_tree(source, destination)
@@ -540,9 +528,9 @@ class OpenCoreBuild:
             rmtree('{0}/{1}'.format(self.directory, i))
         print('OK')
 
-        print('  - copying OcBinaryData files...'),
+        print('  - copying OcBinaryData files...', end=' ')
         try:
-            check_output(['git', 'submodule', 'update', '--init', '--remote', '--merge'])
+            check_output(['git', 'submodule', 'update', '--init', '--remote', '--merge'], encoding='UTF-8')
         except CalledProcessError as e:
             print(e.output)
         source = 'files/OcBinaryData'
@@ -569,7 +557,7 @@ class OpenCoreBuild:
         :return: Nothing
         """
         self.print_bold('* Miscellaneous Tasks')
-        print('  - fixing file permissions...'),
+        print('  - fixing file permissions...', end=' ')
         for root, directories, files in walk(self.directory):
             for i in directories:
                 chmod(path.join(root, i), 0o755)
@@ -578,7 +566,7 @@ class OpenCoreBuild:
                     remove(path.join(root, j))
                 chmod(path.join(root, j), 0o644)
         try:
-            check_output(['xattr', '-rc', self.directory])
+            check_output(['xattr', '-rc', self.directory], encoding='UTF-8')
         except CalledProcessError as e:
             print(e.output)
         print('OK')
@@ -586,7 +574,7 @@ class OpenCoreBuild:
         if path.isfile(file) and LooseVersion(self.version) > LooseVersion('0.6.5'):
             print('  - validating config.plist...')
             try:
-                print(check_output(['./ocvalidate', file]))
+                print(check_output(['./ocvalidate', file], encoding='UTF-8'))
             except CalledProcessError as e:
                 print(e.output)
 
@@ -603,7 +591,7 @@ class OpenCoreBuild:
         except Error:
             raise
 
-        return Data(result)
+        return bytes(result)
 
 
     def update_settings(self, result, settings):
@@ -614,7 +602,7 @@ class OpenCoreBuild:
         :param settings: Settings to update
         :return: Dictionary of settings
         """
-        for key, value in settings.iteritems():
+        for key, value in settings.items():
             if key == 'Kernel':
                 kexts = self.configure_kexts(self.kexts)
                 settings[key].update({'Add': kexts})
@@ -641,13 +629,14 @@ class OpenCoreBuild:
             raise
         else:
             self.print_bold('* OpenCore Configuration')
-            print('  - generating config.plist...'),
+            print('  - generating config.plist...', end=' ')
             directory = '{0}/EFI/OC'.format(self.directory)
             if not path.isdir(directory):
                 makedirs(directory)
-            writePlist(self.settings, '{0}/config.plist'.format(directory))
+            with open('{0}/config.plist'.format(directory), 'wb') as file:
+                dump(self.settings, file, fmt=FMT_XML, sort_keys=True)
             try:
-                check_output(['plutil', '-convert', 'xml1', '{0}/config.plist'.format(directory)])
+                check_output(['plutil', '-convert', 'xml1', '{0}/config.plist'.format(directory)], encoding='UTF-8')
             except CalledProcessError as e:
                 print(e.output)
             print('OK')
@@ -661,7 +650,8 @@ class OpenCoreBuild:
         :return: Nothing
         """
         self.install_opencore(self.version, debug)
-        if cpu_count > 15:
+        cpu_count = check_output(['sysctl', '-n', 'hw.ncpu'], encoding='UTF-8')
+        if int(cpu_count) > 15:
             kext = {
                 'project': 'AppleMCEReporterDisabler',
                 'properties': {

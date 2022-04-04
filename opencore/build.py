@@ -94,6 +94,7 @@ class OpenCoreBuild:
                     'DisableRtcChecksum': False,
                     'ExtendBTFeatureFlags': False,
                     'ExternalDiskIcons': False,
+                    'ForceAquantiaEthernet': False,
                     'ForceSecureBootScheme': False,
                     'IncreasePciBarSize': False,
                     'LapicKernelPanic': False,

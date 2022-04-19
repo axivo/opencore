@@ -23,7 +23,7 @@ if __name__ == '__main__':
         {
             'project': 'FeatureUnlock',
             'repo': 'acidanthera',
-            'version': '1.0.7'
+            'version': '1.0.8'
         },
         {
             'project': 'WhateverGreen',
@@ -51,7 +51,7 @@ if __name__ == '__main__':
         'Kernel': {
             'Quirks': {
                 'DisableLinkeditJettison': True,
-                'SetApfsTrimTimeout': 9999999
+                'SetApfsTrimTimeout': 0
             }
         },
         'Misc': {

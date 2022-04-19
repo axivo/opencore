@@ -88,12 +88,14 @@ class OpenCoreBuild:
                     'AppleXcpmCfgLock': False,
                     'AppleXcpmExtraMsrs': False,
                     'AppleXcpmForceBoost': False,
+                    'CustomPciSerialDevice': False,
                     'CustomSMBIOSGuid': False,
                     'DisableIoMapper': False,
                     'DisableLinkeditJettison': False,
                     'DisableRtcChecksum': False,
                     'ExtendBTFeatureFlags': False,
                     'ExternalDiskIcons': False,
+                    'ForceAquantiaEthernet': False,
                     'ForceSecureBootScheme': False,
                     'IncreasePciBarSize': False,
                     'LapicKernelPanic': False,
@@ -136,7 +138,6 @@ class OpenCoreBuild:
                     'DisplayDelay': 0,
                     'DisplayLevel': 0,
                     'LogModules': '*',
-                    'SerialInit': False,
                     'SysReport': False,
                     'Target': 0
                 },
@@ -157,6 +158,10 @@ class OpenCoreBuild:
                     'ScanPolicy': 17760515,
                     'SecureBootModel': 'Default',
                     'Vault': 'Secure'
+                },
+                'Serial': {
+                    'Init': False,
+                    'Override': False
                 },
                 'Tools': []
             },
@@ -355,7 +360,7 @@ class OpenCoreBuild:
                 'ReservedMemory': []
             }
         }
-        self.version = '0.7.9'
+        self.version = '0.8.0'
 
 
     def configure_kexts(self, kexts=[]):

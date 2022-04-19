@@ -50,8 +50,7 @@ if __name__ == '__main__':
         },
         'Kernel': {
             'Quirks': {
-                'DisableLinkeditJettison': True,
-                'SetApfsTrimTimeout': 9999999
+                'DisableLinkeditJettison': True
             }
         },
         'Misc': {

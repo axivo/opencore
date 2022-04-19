@@ -88,6 +88,7 @@ class OpenCoreBuild:
                     'AppleXcpmCfgLock': False,
                     'AppleXcpmExtraMsrs': False,
                     'AppleXcpmForceBoost': False,
+                    'CustomPciSerialDevice': False,
                     'CustomSMBIOSGuid': False,
                     'DisableIoMapper': False,
                     'DisableLinkeditJettison': False,
@@ -137,7 +138,6 @@ class OpenCoreBuild:
                     'DisplayDelay': 0,
                     'DisplayLevel': 0,
                     'LogModules': '*',
-                    'SerialInit': False,
                     'SysReport': False,
                     'Target': 0
                 },
@@ -158,6 +158,10 @@ class OpenCoreBuild:
                     'ScanPolicy': 17760515,
                     'SecureBootModel': 'Default',
                     'Vault': 'Secure'
+                },
+                'Serial': {
+                    'Init': False,
+                    'Override': False
                 },
                 'Tools': []
             },

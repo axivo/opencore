@@ -143,9 +143,7 @@ class OpenCoreBuild:
                 },
                 'Entries': [],
                 'Security': {
-                    'AllowNvramReset': False,
                     'AllowSetDefault': False,
-                    'AllowToggleSip': False,
                     'ApECID': 0,
                     'AuthRestart': False,
                     'BlacklistAppleUpdate': False,
@@ -360,7 +358,7 @@ class OpenCoreBuild:
                 'ReservedMemory': []
             }
         }
-        self.version = '0.8.0'
+        self.version = '0.8.1'
 
 
     def configure_kexts(self, kexts=[]):

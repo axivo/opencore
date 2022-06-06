@@ -28,7 +28,7 @@ if __name__ == '__main__':
         {
             'project': 'WhateverGreen',
             'repo': 'acidanthera',
-            'version': '1.5.8'
+            'version': '1.5.9'
         }
     ]
     build.write_tree()

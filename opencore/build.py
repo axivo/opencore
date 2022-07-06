@@ -358,7 +358,7 @@ class OpenCoreBuild:
                 'ReservedMemory': []
             }
         }
-        self.version = '0.8.1'
+        self.version = '0.8.2'
 
 
     def configure_kexts(self, kexts=[]):

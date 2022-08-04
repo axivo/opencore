@@ -166,7 +166,6 @@ class OpenCoreBuild:
             'NVRAM': {
                 'Add': {},
                 'Delete': {},
-                'LegacyEnable': False,
                 'LegacyOverwrite': False,
                 'LegacySchema': {},
                 'WriteFlash': False
@@ -358,7 +357,7 @@ class OpenCoreBuild:
                 'ReservedMemory': []
             }
         }
-        self.version = '0.8.2'
+        self.version = '0.8.3'
 
 
     def configure_kexts(self, kexts=[]):

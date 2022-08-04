@@ -18,7 +18,7 @@ if __name__ == '__main__':
         {
             'project': 'Lilu',
             'repo': 'acidanthera',
-            'version': '1.6.1'
+            'version': '1.6.2'
         },
         {
             'project': 'FeatureUnlock',
@@ -28,7 +28,7 @@ if __name__ == '__main__':
         {
             'project': 'WhateverGreen',
             'repo': 'acidanthera',
-            'version': '1.6.0'
+            'version': '1.6.1'
         }
     ]
     build.write_tree()
@@ -93,12 +93,14 @@ if __name__ == '__main__':
                     'Arguments': '',
                     'Comment': '',
                     'Enabled': True,
+                    'LoadEarly': False,
                     'Path': 'OpenCanopy.efi'
                 },
                 {
                     'Arguments': '',
                     'Comment': '',
                     'Enabled': True,
+                    'LoadEarly': False,
                     'Path': 'OpenRuntime.efi'
                 }
             ],

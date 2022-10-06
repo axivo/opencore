@@ -314,7 +314,7 @@ class OpenCoreBuild:
                     'ReplaceTabWithSpace': False,
                     'Resolution': '',
                     'SanitiseClearScreen': False,
-                    'UIScale': -1,
+                    'UIScale': 0,
                     'TextRenderer': 'BuiltinGraphics',
                     'UgaPassThrough': False
                 },

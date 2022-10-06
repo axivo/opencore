@@ -106,7 +106,8 @@ if __name__ == '__main__':
             ],
             'Output': {
                 'ProvideConsoleGop': True,
-                'Resolution': 'Max'
+                'Resolution': 'Max',
+                'UIScale': 1
             },
             'ProtocolOverrides': {
                 'AppleUserInterfaceTheme': True

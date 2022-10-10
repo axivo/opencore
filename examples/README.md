@@ -31,26 +31,6 @@ If you want to increase the OpenCanopy piker timeout, add the `Timeout` key into
             }
 ```
 
-If you're using a non-HiDPI display, set the `UIScale` value to `02`. The following settings need to be added into configuration, above `PlatformInfo` section:
-
-```python
-        'NVRAM': {
-            'Add': {
-                '4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14': {
-                    'DefaultBackgroundColor': build.unhexlify('00 00 00 00'),
-                    'UIScale': build.unhexlify('02')
-                }
-            },
-            'Delete': {
-                '4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14': [
-                    'DefaultBackgroundColor',
-                    'UIScale'
-                ]
-            }
-        },
-        'PlatformInfo': {
-```
-
 If you have a Radeon VII or 5700 XT GPU installed instead of a Pulse RX580, add the `DirectGopRendering` key into configuration and set its value to `True` (defaults to failsafe `False` value):
 
 ```python

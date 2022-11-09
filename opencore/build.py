@@ -274,7 +274,10 @@ class OpenCoreBuild:
                     'PointerPollMax': 0,
                     'PointerPollMin': 0,
                     'PointerSpeedDiv': 1,
-                    'PointerSpeedMul': 1
+                    'PointerSpeedMul': 1,
+                    'PointerDwellClickTimeout': 0,
+                    'PointerDwellDoubleClickTimeout': 0,
+                    'PointerDwellRadius': 0
                 },
                 'Audio': {
                     'AudioCodec': 0,
@@ -357,7 +360,7 @@ class OpenCoreBuild:
                 'ReservedMemory': []
             }
         }
-        self.version = '0.8.5'
+        self.version = '0.8.6'
 
 
     def configure_kexts(self, kexts=[]):

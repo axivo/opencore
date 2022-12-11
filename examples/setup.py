@@ -23,12 +23,12 @@ if __name__ == '__main__':
         {
             'project': 'FeatureUnlock',
             'repo': 'acidanthera',
-            'version': '1.1.0'
+            'version': '1.1.1'
         },
         {
             'project': 'WhateverGreen',
             'repo': 'acidanthera',
-            'version': '1.6.1'
+            'version': '1.6.2'
         }
     ]
     build.write_tree()

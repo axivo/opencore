@@ -119,6 +119,7 @@ class OpenCoreBuild:
                 'Boot': {
                     'ConsoleAttributes': 0,
                     'HibernateMode': 'None',
+                    'HibernateSkipsPicker': False,
                     'HideAuxiliary': False,
                     'LauncherOption': 'Disabled',
                     'LauncherPath': 'Default',
@@ -360,7 +361,7 @@ class OpenCoreBuild:
                 'ReservedMemory': []
             }
         }
-        self.version = '0.8.6'
+        self.version = '0.8.7'
 
 
     def configure_kexts(self, kexts=[]):

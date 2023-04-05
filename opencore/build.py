@@ -310,6 +310,7 @@ class OpenCoreBuild:
                     'ConsoleMode': '',
                     'DirectGopRendering': False,
                     'ForceResolution': False,
+                    'GopBurstMode': False,
                     'GopPassThrough': 'Disabled',
                     'IgnoreTextInGraphics': False,
                     'ProvideConsoleGop': False,
@@ -362,7 +363,7 @@ class OpenCoreBuild:
                 'ReservedMemory': []
             }
         }
-        self.version = '0.9.0'
+        self.version = '0.9.1'
 
 
     def configure_kexts(self, kexts=[]):

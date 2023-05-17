@@ -91,6 +91,7 @@ class OpenCoreBuild:
                     'CustomPciSerialDevice': False,
                     'CustomSMBIOSGuid': False,
                     'DisableIoMapper': False,
+                    'DisableIoMapperMapping': False,
                     'DisableLinkeditJettison': False,
                     'DisableRtcChecksum': False,
                     'ExtendBTFeatureFlags': False,
@@ -313,12 +314,14 @@ class OpenCoreBuild:
                     'GopBurstMode': False,
                     'GopPassThrough': 'Disabled',
                     'IgnoreTextInGraphics': False,
+                    'InitialMode': 'Auto',
                     'ProvideConsoleGop': False,
                     'ReconnectGraphicsOnConnect': False,
                     'ReconnectOnResChange': False,
                     'ReplaceTabWithSpace': False,
                     'Resolution': '',
                     'SanitiseClearScreen': False,
+                    'TextRenderer': 'BuiltinGraphics',
                     'UIScale': 0,
                     'TextRenderer': 'BuiltinGraphics',
                     'UgaPassThrough': False
@@ -363,7 +366,7 @@ class OpenCoreBuild:
                 'ReservedMemory': []
             }
         }
-        self.version = '0.9.1'
+        self.version = '0.9.2'
 
 
     def configure_kexts(self, kexts=[]):

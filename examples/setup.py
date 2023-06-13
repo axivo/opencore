@@ -18,17 +18,17 @@ if __name__ == '__main__':
         {
             'project': 'Lilu',
             'repo': 'acidanthera',
-            'version': '1.6.5'
+            'version': '1.6.6'
         },
         {
             'project': 'FeatureUnlock',
             'repo': 'acidanthera',
-            'version': '1.1.4'
+            'version': '1.1.5'
         },
         {
             'project': 'WhateverGreen',
             'repo': 'acidanthera',
-            'version': '1.6.4'
+            'version': '1.6.5'
         }
     ]
     build.write_tree()

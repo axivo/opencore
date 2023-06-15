@@ -308,6 +308,7 @@ class OpenCoreBuild:
                 },
                 'Output': {
                     'ClearScreenOnModeSwitch': False,
+                    'ConsoleFont': '',
                     'ConsoleMode': '',
                     'DirectGopRendering': False,
                     'ForceResolution': False,
@@ -344,6 +345,7 @@ class OpenCoreBuild:
                     'FirmwareVolume': False,
                     'HashServices': False,
                     'OSInfo': False,
+                    'PciIo': False,
                     'UnicodeCollation': False
                 },
                 'Quirks': {
@@ -366,7 +368,7 @@ class OpenCoreBuild:
                 'ReservedMemory': []
             }
         }
-        self.version = '0.9.2'
+        self.version = '0.9.3'
 
 
     def configure_kexts(self, kexts=[]):

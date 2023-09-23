@@ -122,6 +122,7 @@ class OpenCoreBuild:
                     'HibernateMode': 'None',
                     'HibernateSkipsPicker': False,
                     'HideAuxiliary': False,
+                    'InstanceIdentifier': '',
                     'LauncherOption': 'Disabled',
                     'LauncherPath': 'Default',
                     'PickerAttributes': 0,
@@ -362,13 +363,14 @@ class OpenCoreBuild:
                     'RequestBootVarRouting': False,
                     'ResizeGpuBars': -1,
                     'ResizeUsePciRbIo': False,
+                    'ShimRetainProtocol': False,
                     'TscSyncTimeout': 0,
                     'UnblockFsConnect': False
                 },
                 'ReservedMemory': []
             }
         }
-        self.version = '0.9.3'
+        self.version = '0.9.5'
 
 
     def configure_kexts(self, kexts=[]):

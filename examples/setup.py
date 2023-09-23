@@ -18,7 +18,7 @@ if __name__ == '__main__':
         {
             'project': 'Lilu',
             'repo': 'acidanthera',
-            'version': '1.6.6'
+            'version': '1.6.7'
         },
         {
             'project': 'FeatureUnlock',
@@ -28,7 +28,7 @@ if __name__ == '__main__':
         {
             'project': 'WhateverGreen',
             'repo': 'acidanthera',
-            'version': '1.6.5'
+            'version': '1.6.6'
         }
     ]
     build.write_tree()

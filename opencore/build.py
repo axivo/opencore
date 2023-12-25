@@ -53,6 +53,7 @@ class OpenCoreBuild:
                     'DiscardHibernateMap': False,
                     'EnableSafeModeSlide': False,
                     'EnableWriteUnprotector': False,
+                    'FixupAppleEfiImages': False,
                     'ForceBooterSignature': False,
                     'ForceExitBootServices': False,
                     'ProtectMemoryRegions': False,
@@ -370,7 +371,7 @@ class OpenCoreBuild:
                 'ReservedMemory': []
             }
         }
-        self.version = '0.9.5'
+        self.version = '0.9.7'
 
 
     def configure_kexts(self, kexts=[]):
